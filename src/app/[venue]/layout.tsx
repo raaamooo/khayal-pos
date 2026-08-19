@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { getVenueBySlug } from "@/lib/venue";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/context/LanguageContext";
-import Background3D from "@/components/Background3D";
 
 /**
  * Venue-scoped layout.
@@ -44,7 +43,6 @@ export default async function VenueLayout({
           theme={venue.theme}
           defaultLanguage={venue.defaultLanguage}
         >
-          <Background3D />
           {children}
         </ThemeProvider>
       </LanguageProvider>
