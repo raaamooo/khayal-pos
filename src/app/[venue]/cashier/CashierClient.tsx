@@ -1,12 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { closeSessionAndCheckout, getCashierSessions } from "../admin-actions";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Badge } from "@/components/ui/Badge";
-import { Receipt, ArrowsClockwise, CaretDown, CaretUp, Printer, CheckCircle } from "@phosphor-icons/react";
+import { 
+  Receipt, 
+  ArrowsClockwise, 
+  CaretDown, 
+  CaretUp, 
+  Printer, 
+  CheckCircle,
+  Users,
+  CreditCard
+} from "@phosphor-icons/react";
+import ThermalReceiptModal, { CashierSessionData } from "@/components/pos/ThermalReceiptModal";
+import { playTick, playSuccess } from "@/lib/sound";
 import styles from "./cashier.module.css";
 
 export default function CashierClient({
@@ -20,32 +31,44 @@ export default function CashierClient({
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [processingId, setProcessingId] = useState<string | null>(null);
-  const [printedSessionId, setPrintedSessionId] = useState<string | null>(null);
+  const [receiptModalSession, setReceiptModalSession] = useState<CashierSessionData | null>(null);
 
-  const refreshSessions = async () => {
-    setIsRefreshing(true);
+  const refreshSessions = async (silent = false) => {
+    if (!silent) setIsRefreshing(true);
     try {
       const fresh = await getCashierSessions(venueId);
       setSessions(fresh);
     } finally {
-      setIsRefreshing(false);
+      if (!silent) setIsRefreshing(false);
     }
   };
 
-  const handlePrintAndClose = async (sessionId: string) => {
+  // SSE Listener for real-time bill arrival when waiter completes delivery
+  useEffect(() => {
+    const eventSource = new EventSource(`/api/venues/khayal/stream`);
+    eventSource.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.type === "new-order" || data.type === "order-status-change") {
+          refreshSessions(true);
+        }
+      } catch (e) {
+        console.error("Failed to parse SSE event", e);
+      }
+    };
+    return () => eventSource.close();
+  }, []);
+
+  const handleConfirmClose = async (sessionId: string) => {
+    playSuccess();
     setProcessingId(sessionId);
     try {
-      // Trigger print
-      window.print();
-      setPrintedSessionId(sessionId);
-
-      // Close session in DB
       await closeSessionAndCheckout(venueId, sessionId);
-      await refreshSessions();
+      await refreshSessions(true);
+      setReceiptModalSession(null);
       setExpandedId(null);
     } finally {
       setProcessingId(null);
-      setTimeout(() => setPrintedSessionId(null), 3000);
     }
   };
 
@@ -60,7 +83,7 @@ export default function CashierClient({
             <h1 className={styles.title}>Cashier Desk</h1>
             <p className={styles.subtitle}>
               {sessions.length === 0 
-                ? "No open bills" 
+                ? "No open bills • All tables settled" 
                 : `${sessions.length} active table session${sessions.length > 1 ? "s" : ""} pending checkout`}
             </p>
           </div>
@@ -69,7 +92,7 @@ export default function CashierClient({
         <Button 
           variant="secondary" 
           size="md"
-          onClick={refreshSessions}
+          onClick={() => refreshSessions(false)}
           isLoading={isRefreshing}
           leftIcon={<ArrowsClockwise weight="bold" size={18} />}
         >
@@ -111,7 +134,9 @@ export default function CashierClient({
                 grandTotal += lineTotal;
 
                 allItems.push({
-                  ...item,
+                  id: item.id,
+                  quantity: item.quantity,
+                  menuItem: item.menuItem,
                   lineTotal,
                   addOnsArr: addOns,
                   modifiersArr: modifiers,
@@ -120,6 +145,16 @@ export default function CashierClient({
             });
 
             grandTotal += totalTips;
+
+            const sessionData: CashierSessionData = {
+              id: session.id,
+              table: session.table,
+              startedAt: session.startedAt,
+              orders: allOrders,
+              allItems,
+              grandTotal,
+              totalTips,
+            };
 
             return (
               <Card key={session.id} className={styles.sessionCard}>
@@ -153,8 +188,8 @@ export default function CashierClient({
                 {isExpanded && (
                   <div className={styles.receiptBody}>
                     <div className={styles.receiptHeader}>
-                      <h3>Itemized Bill</h3>
-                      <p>{session.table.label} • Active Session</p>
+                      <h3>Itemized Bill Summary</h3>
+                      <p>{session.table.label} • Active Table Session</p>
                     </div>
 
                     <table className={styles.receiptTable}>
@@ -190,7 +225,7 @@ export default function CashierClient({
 
                     {totalTips > 0 && (
                       <div className={styles.receiptRow}>
-                        <span>Tip Amount</span>
+                        <span>Staff Tip</span>
                         <span>{totalTips} EGP</span>
                       </div>
                     )}
@@ -200,25 +235,54 @@ export default function CashierClient({
                       <span>{grandTotal} EGP</span>
                     </div>
 
-                    <Button
-                      variant="primary"
-                      size="lg"
-                      fullWidth
-                      className={styles.printBtn}
-                      isLoading={processingId === session.id}
-                      onClick={() => handlePrintAndClose(session.id)}
-                      leftIcon={<Printer size={20} weight="bold" />}
-                    >
-                      {processingId === session.id 
-                        ? "Printing Receipt & Closing Table..." 
-                        : "Print Receipt & Close Table"}
-                    </Button>
+                    {/* Action Row */}
+                    <div style={{ display: "flex", gap: "10px", marginTop: "12px" }}>
+                      <Button
+                        variant="secondary"
+                        size="lg"
+                        fullWidth
+                        onClick={() => {
+                          playTick();
+                          setReceiptModalSession(sessionData);
+                        }}
+                        leftIcon={<Users size={18} weight="bold" />}
+                      >
+                        Split Bill & Receipt
+                      </Button>
+
+                      <Button
+                        variant="primary"
+                        size="lg"
+                        fullWidth
+                        className={styles.printBtn}
+                        isLoading={processingId === session.id}
+                        onClick={() => {
+                          playTick();
+                          setReceiptModalSession(sessionData);
+                        }}
+                        leftIcon={<Printer size={20} weight="bold" />}
+                      >
+                        Print & Settle
+                      </Button>
+                    </div>
                   </div>
                 )}
               </Card>
             );
           })}
         </div>
+      )}
+
+      {/* ── Split-Billing & Thermal Receipt Modal ── */}
+      {receiptModalSession && (
+        <ThermalReceiptModal
+          session={receiptModalSession}
+          venueName="Khayal"
+          cashierName="Cashier Desk"
+          onConfirmClose={handleConfirmClose}
+          onClose={() => setReceiptModalSession(null)}
+          isProcessing={processingId === receiptModalSession.id}
+        />
       )}
     </div>
   );
