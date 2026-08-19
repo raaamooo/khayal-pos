@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { Package, Plus, CookingPot, ListBullets, WarningOctagon } from "@phosphor-icons/react";
+import { Package, Plus, CookingPot, ListBullets, WarningOctagon, WarningCircle, CheckCircle } from "@phosphor-icons/react";
 
 export default function InventoryClient({
   venueId,
@@ -73,23 +73,32 @@ export default function InventoryClient({
         <div className={styles.grid}>
           {ingredients.map((ing) => {
             const stockNum = Number(ing.stock);
-            const thresholdNum = Number(ing.lowThreshold);
+            const thresholdNum = Number(ing.lowThreshold) || 10;
             
             let badgeVariant: "success" | "warning" | "danger" = "success";
             let statusText = "In Stock";
             let isLow = false;
+            let isOut = false;
             
             if (stockNum <= 0) {
               badgeVariant = "danger";
               statusText = "Out of Stock";
+              isOut = true;
             } else if (stockNum <= thresholdNum) {
               badgeVariant = "warning";
               statusText = "Low Stock";
               isLow = true;
             }
 
+            // Gauge fill percentage calculation (healthy when >= 2x threshold)
+            const targetBase = thresholdNum * 2.5;
+            const gaugePercent = Math.min(100, Math.max(4, Math.round((stockNum / targetBase) * 100)));
+
             return (
-              <Card key={ing.id} className={`${styles.card} ${isLow ? styles.cardLowStock : ""}`}>
+              <Card 
+                key={ing.id} 
+                className={`${styles.card} ${isOut ? styles.cardOutOfStock : isLow ? styles.cardLowStock : ""}`}
+              >
                 <div className={styles.cardHeader}>
                   <h3 className={styles.itemName}>{ing.name}</h3>
                   <Badge variant={badgeVariant}>{statusText}</Badge>
@@ -98,7 +107,7 @@ export default function InventoryClient({
                 <div className={styles.cardBody}>
                   <div className={styles.stat}>
                     <span className={styles.statLabel}>Current Stock</span>
-                    <span className={`${styles.statValue} ${isLow ? styles.textWarning : ""}`}>
+                    <span className={`${styles.statValue} ${isOut ? styles.textDanger : isLow ? styles.textWarning : ""}`}>
                       {stockNum} <small>{ing.unit}</small>
                     </span>
                   </div>
@@ -107,6 +116,22 @@ export default function InventoryClient({
                     <span className={styles.statValueMuted}>
                       {thresholdNum} {ing.unit}
                     </span>
+                  </div>
+
+                  {/* Visual Stock Health Gauge */}
+                  <div className={styles.gaugeWrapper}>
+                    <div className={styles.gaugeHeader}>
+                      <span className={styles.gaugeLabel}>Supply Health</span>
+                      <span className={styles.gaugePercent}>{gaugePercent}%</span>
+                    </div>
+                    <div className={styles.gaugeTrack}>
+                      <div
+                        className={`${styles.gaugeFill} ${
+                          isOut ? styles.gaugeCritical : isLow ? styles.gaugeCaution : styles.gaugeHealthy
+                        }`}
+                        style={{ width: `${gaugePercent}%` }}
+                      />
+                    </div>
                   </div>
                 </div>
               </Card>

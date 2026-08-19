@@ -98,6 +98,52 @@
   /* ── Focus Ring & Glow ── */
   --focus-ring: 0 0 0 2px var(--background), 0 0 0 4px var(--primary-color);
   --glow-primary: 0 8px 24px -4px color-mix(in srgb, var(--primary-color) 35%, transparent);
+
+  /* ── Elevation Shadow Scale ── */
+  --shadow-xs:  0 1px 2px 0 rgba(0, 0, 0, 0.12);
+  --shadow-sm:  0 2px 6px -1px rgba(0, 0, 0, 0.18),
+               0 1px 2px -1px rgba(0, 0, 0, 0.10);
+  --shadow-md:  0 4px 12px -2px rgba(0, 0, 0, 0.22),
+               0 2px 4px -2px rgba(0, 0, 0, 0.12);
+  --shadow-lg:  0 8px 24px -4px rgba(0, 0, 0, 0.28),
+               0 4px 8px -4px rgba(0, 0, 0, 0.15);
+  --shadow-xl:  0 16px 40px -6px rgba(0, 0, 0, 0.35),
+               0 8px 16px -6px rgba(0, 0, 0, 0.18);
+  --shadow-2xl: 0 24px 56px -8px rgba(0, 0, 0, 0.45),
+               0 12px 24px -8px rgba(0, 0, 0, 0.22);
+
+  /* ── Glass-Morphism Presets ── */
+  --glass-blur:   blur(24px);
+  --glass-blur-heavy: blur(40px);
+  --glass-bg:     color-mix(in srgb, var(--background) 72%, transparent);
+  --glass-bg-light: color-mix(in srgb, var(--background) 58%, transparent);
+  --glass-border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  --glass-highlight: inset 0 1px 0 0 color-mix(in srgb, var(--text) 6%, transparent);
+
+  /* ── Named Gradient Library ── */
+  --gradient-primary:    linear-gradient(135deg, var(--primary-color), color-mix(in srgb, var(--primary-color) 70%, var(--accent-color)));
+  --gradient-accent:     linear-gradient(135deg, var(--accent-color), color-mix(in srgb, var(--accent-color) 65%, var(--primary-color)));
+  --gradient-success:    linear-gradient(135deg, #2E7D32, #43A047);
+  --gradient-danger:     linear-gradient(135deg, #C62828, #E53935);
+  --gradient-warning:    linear-gradient(135deg, #E65100, #FF8F00);
+  --gradient-surface:    linear-gradient(180deg, var(--color-surface-hover) 0%, var(--color-surface) 100%);
+
+  /* ── Stock Gauge Color Scale (for inventory health bars) ── */
+  --gauge-healthy:       #43A047;
+  --gauge-healthy-bg:    color-mix(in srgb, #43A047 20%, var(--background));
+  --gauge-caution:       #FF8F00;
+  --gauge-caution-bg:    color-mix(in srgb, #FF8F00 20%, var(--background));
+  --gauge-critical:      #E53935;
+  --gauge-critical-bg:   color-mix(in srgb, #E53935 20%, var(--background));
+  --gauge-empty:         color-mix(in srgb, var(--text) 8%, var(--background));
+  --gauge-track:         color-mix(in srgb, var(--text) 6%, var(--background));
+  --gauge-height:        6px;
+
+  /* ── Card Inset Highlight (premium top-edge glow) ── */
+  --card-highlight: inset 0 1px 0 0 color-mix(in srgb, var(--text) 5%, transparent);
+
+  /* ── Noise Texture (subtle grain for premium surfaces) ── */
+  --noise-texture: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
 }
 
 
@@ -313,4 +359,92 @@ textarea:focus-visible {
     box-shadow: 0 0 0 0 transparent;
     transform: translateY(0) scale(1);
   }
+}
+
+/* ── Premium Shimmer (for badges, table pills, loading surfaces) ── */
+@keyframes k-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Floating Idle (for empty-state icons, decorative elements) ── */
+@keyframes k-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+/* ── Dash March (animated dashed borders on "add new" cards) ── */
+@keyframes k-dash-march {
+  0%   { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 24; }
+}
+
+/* ── Border Dash Walk (CSS border version for dashed outlines) ── */
+@keyframes k-border-dash-walk {
+  0%   { background-position: 0 0, 100% 0, 0 100%, 0 0; }
+  100% { background-position: 24px 0, calc(100% - 24px) 0, 0 calc(100% - 24px), 0 24px; }
+}
+
+/* ── Glow Pulse (for urgent / live-status indicators) ── */
+@keyframes k-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 4px 0 currentColor;
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 12px 4px currentColor;
+    opacity: 0.7;
+  }
+}
+
+/* ── Status Dot Pulse (for live status badge indicators) ── */
+@keyframes k-dot-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.3;
+  }
+}
+
+/* ── Confetti Burst (for order success celebration) ── */
+@keyframes k-confetti-fall {
+  0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(60px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes k-confetti-burst {
+  0%   { transform: scale(0); opacity: 0; }
+  40%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Draw Check (for success checkmark stroke animation) ── */
+@keyframes k-draw-check {
+  0%   { stroke-dashoffset: 48; }
+  100% { stroke-dashoffset: 0; }
+}
+
+/* ── Shake (for error / validation feedback) ── */
+@keyframes k-shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-4px); }
+  40%      { transform: translateX(4px); }
+  60%      { transform: translateX(-3px); }
+  80%      { transform: translateX(2px); }
+}
+
+/* ── Gradient Shift (for animated gradient backgrounds) ── */
+@keyframes k-gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Spin (for loading spinners) ── */
+@keyframes k-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

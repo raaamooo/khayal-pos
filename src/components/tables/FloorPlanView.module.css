@@ -33,7 +33,7 @@
 .zoneStats {
   font-size: var(--text-xs);
   color: var(--color-text-muted);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* ── Tables Grid ── */
@@ -56,39 +56,41 @@
   position: relative;
   transition: all var(--transition-normal);
   -webkit-tap-highlight-color: transparent;
+  box-shadow: var(--shadow-sm), var(--card-highlight);
 }
 
 .tableCard:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   border-color: var(--color-border-hover);
-  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-md), var(--card-highlight);
 }
 
 /* ── Status Glows ── */
 .tableCard.calling {
   border-color: #ef4444 !important;
-  background: color-mix(in srgb, #ef4444 8%, var(--color-surface)) !important;
-  box-shadow: 0 0 24px -2px color-mix(in srgb, #ef4444 40%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, #ef4444 14%, var(--color-surface)), var(--color-surface)) !important;
+  box-shadow: 0 0 28px -2px color-mix(in srgb, #ef4444 45%, transparent), var(--card-highlight);
   animation: callGlow 1.8s infinite;
 }
 
 @keyframes callGlow {
   0%, 100% { box-shadow: 0 0 16px -2px color-mix(in srgb, #ef4444 35%, transparent); }
-  50% { box-shadow: 0 0 30px 2px color-mix(in srgb, #ef4444 60%, transparent); }
+  50% { box-shadow: 0 0 32px 4px color-mix(in srgb, #ef4444 65%, transparent); }
 }
 
 .tableCard.hasDelivery {
   border-color: var(--accent-color) !important;
-  box-shadow: 0 0 18px -2px color-mix(in srgb, var(--accent-color) 35%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-color) 12%, var(--color-surface)), var(--color-surface)) !important;
+  box-shadow: 0 0 22px -2px color-mix(in srgb, var(--accent-color) 40%, transparent), var(--card-highlight);
 }
 
 .tableCard.occupied {
-  border-color: color-mix(in srgb, #22c55e 35%, var(--color-border));
+  border-color: color-mix(in srgb, #22c55e 40%, var(--color-border));
 }
 
 .tableCard.available {
   border-style: dashed;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 /* ── Top Card Row ── */
@@ -107,24 +109,26 @@
 .tableNumber {
   font-family: var(--font-heading);
   font-size: var(--text-2xl);
-  font-weight: 800;
+  font-weight: 900;
   color: var(--text);
   letter-spacing: -0.02em;
 }
 
 .tableCard.calling .tableNumber {
   color: #ef4444;
+  text-shadow: 0 2px 10px color-mix(in srgb, #ef4444 40%, transparent);
 }
 
 .tableCard.hasDelivery .tableNumber {
   color: var(--accent-color);
+  text-shadow: 0 2px 10px color-mix(in srgb, var(--accent-color) 30%, transparent);
 }
 
 /* ── Service Calling Badge ── */
 .callingAlertTag {
-  background: #ef4444;
+  background: var(--gradient-danger);
   color: #ffffff;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: var(--radius-full);
   font-size: 11px;
   font-weight: 800;
@@ -133,6 +137,7 @@
   align-items: center;
   gap: 4px;
   animation: k-pulse-scale 1.2s infinite;
+  box-shadow: 0 2px 8px color-mix(in srgb, #ef4444 40%, transparent);
 }
 
 /* ── Table Info Details ── */
@@ -150,7 +155,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .tableBillSubtotal {
@@ -163,7 +168,7 @@
 /* ── Delivery Ready Alert Inside Table ── */
 .deliveryAlertPill {
   background: color-mix(in srgb, var(--accent-color) 15%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent-color) 35%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 40%, transparent);
   color: var(--accent-color);
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-sm);
@@ -173,6 +178,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  box-shadow: var(--shadow-xs);
 }
 
 /* ── Bottom Card Actions ── */
@@ -186,9 +192,9 @@
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   z-index: var(--z-modal);
 }
 
@@ -197,10 +203,12 @@
   bottom: 0;
   inset-inline: 0;
   z-index: calc(var(--z-modal) + 1);
-  background: var(--color-surface);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
   border-top: 1px solid var(--color-border);
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  box-shadow: 0 -16px 48px -8px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-2xl), var(--glass-highlight);
   max-height: 90vh;
   max-height: 90dvh;
   display: flex;
@@ -224,7 +232,7 @@
 .modalTableBigLabel {
   font-family: var(--font-heading);
   font-size: var(--text-2xl);
-  font-weight: 800;
+  font-weight: 900;
   color: var(--accent-color);
 }
 
@@ -255,7 +263,9 @@
   padding: var(--space-4) var(--space-5);
   padding-bottom: max(var(--space-4), env(safe-area-inset-bottom));
   border-top: 1px solid var(--color-border);
-  background: var(--color-surface-glass);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   display: flex;
   gap: var(--space-3);
 }

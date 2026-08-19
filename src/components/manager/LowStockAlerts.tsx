@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { 
-  WarningCircle, 
-  CheckCircle, 
-  Plus, 
   Package, 
-  ArrowsClockwise,
-  Check
+  Check, 
+  Plus, 
+  WarningCircle, 
+  CheckCircle,
+  Siren
 } from "@phosphor-icons/react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -91,20 +90,32 @@ export default function LowStockAlerts({
           </div>
 
           <Badge variant={categorized.critical.length > 0 ? "danger" : totalAlerts > 0 ? "warning" : "success"} size="md">
-            {categorized.critical.length > 0 
-              ? `🚨 ${categorized.critical.length} Critical Items` 
-              : totalAlerts > 0 
-              ? `⚠️ ${totalAlerts} Low Stock Warnings` 
-              : "✓ All Ingredients Healthy"}
+            {categorized.critical.length > 0 ? (
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                <Siren size={14} weight="fill" /> {categorized.critical.length} Critical Items
+              </span>
+            ) : totalAlerts > 0 ? (
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                <WarningCircle size={14} weight="fill" /> {totalAlerts} Low Stock Warnings
+              </span>
+            ) : (
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                <CheckCircle size={14} weight="fill" /> All Ingredients Healthy
+              </span>
+            )}
           </Badge>
         </div>
 
         <div className={styles.stockGrid}>
           {ingredients.map((ing) => {
             const stock = Number(ing.stock);
+            const threshold = ing.lowStockThreshold ? Number(ing.lowStockThreshold) : 10;
             const isCritical = stock <= 5;
-            const isWarning = !isCritical && stock <= (ing.lowStockThreshold || 10);
+            const isWarning = !isCritical && stock <= threshold;
             const isSuccess = justRestockedId === ing.id;
+
+            const targetBase = threshold * 2.5;
+            const gaugePercent = Math.min(100, Math.max(4, Math.round((stock / targetBase) * 100)));
 
             return (
               <div
@@ -125,6 +136,16 @@ export default function LowStockAlerts({
                   <span className={`${styles.ingStockNum} ${isCritical ? styles.criticalText : isWarning ? styles.warningText : ""}`}>
                     {stock} <small style={{ fontSize: "12px", opacity: 0.7 }}>{ing.unit}</small>
                   </span>
+                </div>
+
+                {/* Stock Gauge */}
+                <div className={styles.gaugeTrack}>
+                  <div
+                    className={`${styles.gaugeFill} ${
+                      isCritical ? styles.gaugeCritical : isWarning ? styles.gaugeCaution : styles.gaugeHealthy
+                    }`}
+                    style={{ width: `${gaugePercent}%` }}
+                  />
                 </div>
 
                 <div className={styles.restockBtnRow}>

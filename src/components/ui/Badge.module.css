@@ -9,23 +9,24 @@
   white-space: nowrap;
   letter-spacing: 0.02em;
   line-height: 1;
+  position: relative;
 }
 
 /* ── Sizes ── */
 .sm {
-  font-size: var(--text-xs);
-  padding: 0.2rem 0.55rem;
+  font-size: 0.6875rem; /* 11px — crisper at small badge size */
+  padding: 0.2rem 0.6rem;
 }
 
 .md {
-  font-size: var(--text-sm);
-  padding: 0.35rem 0.85rem;
+  font-size: var(--text-xs);
+  padding: 0.3rem 0.85rem;
 }
 
 /* ── Variants ── */
 .default {
   background-color: var(--color-surface-hover);
-  color: var(--text);
+  color: var(--color-text-subtle);
   border: 1px solid var(--color-border);
 }
 
@@ -57,4 +58,39 @@
   background-color: var(--color-info-surface);
   color: var(--color-info);
   border: 1px solid color-mix(in srgb, var(--color-info) 25%, transparent);
+}
+
+/* ── Live Dot Indicator (pulsing dot before badge text) ── */
+.live::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: currentColor;
+  animation: k-dot-pulse 1.5s ease-in-out infinite;
+  margin-inline-end: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Outline Variant (transparent bg + colored border) ── */
+.outline {
+  background-color: transparent;
+  color: var(--color-text-subtle);
+  border: 1px solid var(--color-border-hover);
+}
+
+.outline.primary {
+  color: var(--primary-color);
+  border-color: color-mix(in srgb, var(--primary-color) 40%, transparent);
+}
+
+.outline.success {
+  color: var(--color-success);
+  border-color: color-mix(in srgb, var(--color-success) 40%, transparent);
+}
+
+.outline.danger {
+  color: var(--color-danger);
+  border-color: color-mix(in srgb, var(--color-danger) 40%, transparent);
 }

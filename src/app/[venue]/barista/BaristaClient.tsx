@@ -15,9 +15,10 @@ import {
   Sparkle, 
   Flame, 
   WarningCircle, 
-  CheckCircle,
-  Lightning,
-  Funnel
+  Lightning, 
+  Drop,
+  Nut,
+  Siren
 } from "@phosphor-icons/react";
 import { playBell, playTick, playSuccess } from "@/lib/sound";
 import LanguageToggle from "@/components/ui/LanguageToggle";
@@ -228,26 +229,30 @@ export default function BaristaClient({
 
           <div className={styles.demandChips}>
             <span className={`${styles.demandChip} ${styles.highlight}`}>
-              ☕ {demandSummary.totalItems} Drink{demandSummary.totalItems !== 1 ? "s" : ""} Total
+              <Coffee size={14} weight="fill" />
+              <span>{demandSummary.totalItems} Drink{demandSummary.totalItems !== 1 ? "s" : ""} Total</span>
             </span>
             {demandSummary.totalShots > 0 && (
               <span className={styles.demandChip}>
-                ⚡ {demandSummary.totalShots} Espresso Shots
+                <Lightning size={14} weight="fill" />
+                <span>{demandSummary.totalShots} Espresso Shots</span>
               </span>
             )}
             {demandSummary.oatMilks > 0 && (
               <span className={styles.demandChip}>
-                🥛 {demandSummary.oatMilks} Oat Milk
+                <Drop size={14} weight="fill" />
+                <span>{demandSummary.oatMilks} Oat Milk</span>
               </span>
             )}
             {demandSummary.almondMilks > 0 && (
               <span className={styles.demandChip}>
-                🥜 {demandSummary.almondMilks} Almond Milk
+                <Nut size={14} weight="fill" />
+                <span>{demandSummary.almondMilks} Almond Milk</span>
               </span>
             )}
             {Object.entries(demandSummary.itemMap).map(([name, qty]) => (
               <span key={name} className={styles.demandChip}>
-                {qty}× {name}
+                <span>{qty}× {name}</span>
               </span>
             ))}
           </div>
@@ -283,7 +288,8 @@ export default function BaristaClient({
             className={`${styles.filterBtn} ${activeFilter === "rush" ? styles.active : ""}`}
             onClick={() => setActiveFilter("rush")}
           >
-            🚨 Rush (&gt;7m) ({orders.filter((o) => getUrgencyLevel(o.createdAt, currentTime).level === "rush").length})
+            <Siren size={14} weight="fill" style={{ verticalAlign: "-2px", marginInlineEnd: "4px" }} />
+            Rush (&gt;7m) ({orders.filter((o) => getUrgencyLevel(o.createdAt, currentTime).level === "rush").length})
           </button>
         </div>
       )}
@@ -410,7 +416,7 @@ export default function BaristaClient({
                           isLoading={processingId === order.id}
                           onClick={() => handleStartBrewing(order.id)}
                           className={styles.startBrewingBtn}
-                          leftIcon={<Flame size={16} weight="fill" />}
+                          leftIcon={<Flame size={18} weight="fill" />}
                         >
                           Start Brewing
                         </Button>

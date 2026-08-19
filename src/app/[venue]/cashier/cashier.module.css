@@ -25,15 +25,17 @@
 }
 
 .cashierIconBadge {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: var(--radius-md);
-  background: var(--color-primary-surface);
+  background: linear-gradient(135deg, var(--color-primary-surface), var(--color-surface));
   color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary-color) 30%, transparent);
+  box-shadow: 0 4px 16px -2px color-mix(in srgb, var(--primary-color) 25%, transparent),
+              var(--card-highlight);
 }
 
 .title {
@@ -49,6 +51,7 @@
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   margin: 0;
+  font-weight: 500;
 }
 
 .sessionGrid {
@@ -61,6 +64,14 @@
   padding: 0 !important;
   border-radius: var(--radius-lg) !important;
   overflow: hidden;
+  box-shadow: var(--shadow-md), var(--card-highlight);
+  border: 1.5px solid var(--color-border);
+  transition: all var(--transition-fast);
+}
+
+.sessionCard:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-lg), var(--card-highlight);
 }
 
 .sessionHeader {
@@ -88,11 +99,25 @@
   gap: var(--space-3);
 }
 
-.sessionTableLabel {
+.tableBadgeIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-surface);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
+}
+
+.tableLabel {
   font-family: var(--font-heading);
-  font-size: var(--text-xl);
-  font-weight: 800;
+  font-size: var(--text-2xl);
+  font-weight: 900;
   color: var(--accent-color);
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 10px color-mix(in srgb, var(--accent-color) 25%, transparent);
 }
 
 .sessionHeaderRight {
@@ -105,32 +130,35 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  gap: 1px;
 }
 
 .totalLabel {
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
 }
 
 .totalValue {
   font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: var(--text-xl);
+  font-weight: 900;
+  font-size: var(--text-2xl);
   color: var(--primary-color);
+  letter-spacing: -0.02em;
 }
 
 .caretBtn {
   color: var(--color-text-muted);
+  transition: transform var(--transition-fast);
 }
 
 /* ── Receipt View ── */
 .receiptBody {
   padding: var(--space-4) var(--space-6) var(--space-6);
   border-top: 1px dashed var(--color-border);
-  background-color: color-mix(in srgb, var(--text) 2%, var(--background));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--text) 2%, var(--background)) 0%, var(--background) 100%);
 }
 
 .receiptHeader {
@@ -143,12 +171,14 @@
   font-size: var(--text-lg);
   font-weight: 800;
   margin: 0;
+  letter-spacing: -0.01em;
 }
 
 .receiptHeader p {
   font-size: var(--text-xs);
   color: var(--color-text-muted);
   margin-top: 2px;
+  font-weight: 600;
 }
 
 .receiptTable {
@@ -162,7 +192,7 @@
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: var(--color-text-muted);
   border-bottom: 1px solid var(--color-border);
   padding: var(--space-2) 0;
@@ -179,25 +209,27 @@
 }
 
 .receiptItemName {
-  font-weight: 700;
+  font-weight: 800;
+  font-family: var(--font-heading);
 }
 
 .receiptAddOns {
   font-size: var(--text-xs);
   color: var(--color-text-muted);
   margin-top: 2px;
+  font-weight: 600;
 }
 
 .receiptQty {
   text-align: center;
   color: var(--color-text-muted);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .receiptPrice {
   text-align: end;
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .receiptRow {
@@ -206,6 +238,7 @@
   padding: var(--space-2) 0;
   font-size: var(--text-sm);
   color: var(--color-text-muted);
+  font-weight: 600;
 }
 
 .receiptGrandTotal {
@@ -217,12 +250,14 @@
   margin-bottom: var(--space-5);
   font-family: var(--font-heading);
   font-size: var(--text-2xl);
-  font-weight: 800;
+  font-weight: 900;
   color: var(--text);
+  letter-spacing: -0.02em;
 }
 
 .printBtn {
   min-height: 52px !important;
+  font-weight: 800 !important;
 }
 
 /* ═══════════════════════════════════════════════════

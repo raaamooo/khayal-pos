@@ -18,8 +18,8 @@ import {
   ArrowsClockwise, 
   BellRinging, 
   Check, 
-  Table as TableIcon,
-  SquaresFour
+  SquaresFour,
+  Siren
 } from "@phosphor-icons/react";
 import FloorPlanView from "@/components/tables/FloorPlanView";
 import LanguageToggle from "@/components/ui/LanguageToggle";
@@ -194,7 +194,11 @@ export default function WaiterClient({
           <SquaresFour size={20} weight="bold" />
           <span>Interactive Floor Plan</span>
           <Badge variant={calledTables.length > 0 ? "danger" : "default"} size="sm">
-            {calledTables.length > 0 ? `🚨 ${calledTables.length}` : tables.length}
+            {calledTables.length > 0 ? (
+              <span style={{ display: "inline-flex", alignItems: "center", gap: "3px" }}>
+                <Siren size={13} weight="fill" /> {calledTables.length}
+              </span>
+            ) : tables.length}
           </Badge>
         </button>
         <button
@@ -251,7 +255,7 @@ export default function WaiterClient({
                         <div className={styles.itemInfo}>
                           <span className={styles.itemName}>{item.menuItem.name}</span>
                           {item.modifiers && (item.modifiers as any[]).length > 0 && (
-                            <span className={styles.addOnSummary} style={{ color: "var(--primary-color)", fontWeight: 600 }}>
+                            <span className={styles.addOnSummary} style={{ color: "var(--primary-color)", fontWeight: 700 }}>
                               {(item.modifiers as any[]).map((m: any) => m.optionLabel || m.label).join(" • ")}
                             </span>
                           )}

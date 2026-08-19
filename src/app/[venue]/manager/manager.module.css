@@ -25,15 +25,17 @@
 }
 
 .managerIconBadge {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border-radius: var(--radius-md);
-  background: var(--color-primary-surface);
+  background: linear-gradient(135deg, var(--color-primary-surface), var(--color-surface));
   color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary-color) 30%, transparent);
+  box-shadow: 0 4px 16px -2px color-mix(in srgb, var(--primary-color) 25%, transparent),
+              var(--card-highlight);
 }
 
 .title {
@@ -49,6 +51,7 @@
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   margin: 0;
+  font-weight: 500;
 }
 
 /* ── Section Tabs ── */
@@ -62,6 +65,7 @@
   border: 1px solid var(--color-border);
   overflow-x: auto;
   scrollbar-width: none;
+  box-shadow: var(--shadow-xs);
 }
 
 .sectionTabs::-webkit-scrollbar {
@@ -75,11 +79,11 @@
   padding: var(--space-3) var(--space-4);
   color: var(--color-text-muted);
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 800;
   font-size: var(--text-sm);
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-base);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -88,17 +92,22 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.sectionTab.active {
-  background-color: var(--color-surface-active);
+.sectionTab:hover {
   color: var(--text);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  background-color: var(--color-surface-hover);
+}
+
+.sectionTab.active {
+  background: var(--color-surface-active);
+  color: var(--text);
+  box-shadow: var(--shadow-sm), var(--card-highlight);
 }
 
 .content {
   margin-top: var(--space-4);
 }
 
-/* ── Metrics ── */
+/* ── Metrics Grid ── */
 .metricGrid {
   display: grid;
   grid-template-columns: 1fr;
@@ -111,6 +120,15 @@
   flex-direction: column;
   gap: var(--space-2);
   padding: var(--space-5) !important;
+  border: 1.5px solid var(--color-border);
+  box-shadow: var(--shadow-md), var(--card-highlight);
+  transition: all var(--transition-fast);
+}
+
+.metricCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-lg), var(--card-highlight);
 }
 
 .metricCardPrimary {
@@ -118,8 +136,15 @@
   flex-direction: column;
   gap: var(--space-2);
   padding: var(--space-5) !important;
-  background-color: var(--color-primary-surface) !important;
-  border-color: color-mix(in srgb, var(--primary-color) 30%, transparent) !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary-color) 18%, var(--color-surface)), var(--color-surface)) !important;
+  border: 1.5px solid color-mix(in srgb, var(--primary-color) 40%, transparent) !important;
+  box-shadow: 0 8px 24px -4px color-mix(in srgb, var(--primary-color) 25%, transparent), var(--card-highlight) !important;
+  transition: all var(--transition-fast);
+}
+
+.metricCardPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -4px color-mix(in srgb, var(--primary-color) 35%, transparent), var(--card-highlight) !important;
 }
 
 .metricHeader {
@@ -129,29 +154,32 @@
 }
 
 .metricLabel {
-  font-size: var(--text-xs);
+  font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
 
 .metricValue {
   font-family: var(--font-heading);
   font-size: var(--text-3xl);
-  font-weight: 800;
+  font-weight: 900;
   color: var(--text);
   letter-spacing: -0.02em;
 }
 
 .metricValue small {
-  font-size: var(--text-base);
+  font-size: var(--text-sm);
   color: var(--color-text-muted);
+  font-weight: 700;
 }
 
-/* ── Chart ── */
+/* ── Chart Panel ── */
 .chartPanel {
   padding: var(--space-5) !important;
+  border: 1.5px solid var(--color-border);
+  box-shadow: var(--shadow-md), var(--card-highlight);
 }
 
 .panelHeading {
@@ -159,18 +187,20 @@
   font-size: var(--text-lg);
   font-weight: 800;
   margin-bottom: var(--space-4);
+  letter-spacing: -0.01em;
 }
 
 .mockChart {
   display: flex;
-  height: 48px;
+  height: 52px;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-xs);
 }
 
 .mockChartBarCash {
-  background-color: var(--color-success);
+  background: var(--gradient-success);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,11 +209,12 @@
   font-size: var(--text-xs);
   font-family: var(--font-heading);
   letter-spacing: 0.02em;
-  min-width: 60px;
+  min-width: 70px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .mockChartBarVisa {
-  background-color: var(--primary-color);
+  background: var(--gradient-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,12 +223,15 @@
   font-size: var(--text-xs);
   font-family: var(--font-heading);
   letter-spacing: 0.02em;
-  min-width: 60px;
+  min-width: 70px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* ── Tables ── */
 .tablePanel {
   padding: var(--space-5) !important;
+  border: 1.5px solid var(--color-border);
+  box-shadow: var(--shadow-md), var(--card-highlight);
 }
 
 .panelHeader {
@@ -221,7 +255,7 @@
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: var(--color-text-muted);
   border-bottom: 1px solid var(--color-border);
   padding: var(--space-3) var(--space-2);
@@ -234,36 +268,41 @@
 }
 
 .shortCode {
-  background-color: var(--color-surface-hover);
-  padding: 2px 6px;
+  background: var(--color-surface-hover);
+  padding: 3px 8px;
   border-radius: var(--radius-sm);
   font-family: monospace;
-  font-weight: 700;
+  font-weight: 800;
   font-size: var(--text-xs);
   color: var(--accent-color);
+  border: 1px solid var(--color-border);
 }
 
 .orderTotalCell {
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .orderTimeCell {
   color: var(--color-text-muted);
   font-size: var(--text-xs);
+  font-weight: 600;
 }
 
 .emailCell {
   color: var(--color-text-muted);
+  font-weight: 500;
 }
 
 /* ── Tip Split Panel ── */
 .tipSplitPanel {
   margin-top: var(--space-6);
-  background-color: var(--color-surface-active);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary-color) 10%, var(--color-surface)), var(--color-surface));
   padding: var(--space-5);
   border-radius: var(--radius-lg);
   border-inline-start: 4px solid var(--primary-color);
+  border: 1px solid color-mix(in srgb, var(--primary-color) 20%, var(--color-border));
+  box-shadow: var(--shadow-sm), var(--card-highlight);
 }
 
 .tipSplitHeader {
@@ -296,22 +335,26 @@
   font-size: 11px;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: 0.05em;
 }
 
 .tipSplitMetrics strong {
   font-family: var(--font-heading);
   font-size: var(--text-lg);
+  font-weight: 800;
 }
 
 .tipSplitPerPerson strong {
   color: var(--primary-color);
-  font-size: var(--text-xl);
+  font-size: var(--text-2xl);
+  font-weight: 900;
 }
 
 .tipSplitPerPerson small {
   font-size: var(--text-xs);
   color: var(--color-text-muted);
+  font-weight: 600;
 }
 
 /* ── QR Generator ── */
@@ -319,6 +362,7 @@
   margin-bottom: var(--space-6);
   color: var(--color-text-muted);
   font-size: var(--text-sm);
+  font-weight: 500;
 }
 
 .qrGrid {
@@ -336,36 +380,39 @@
   text-align: center;
   gap: var(--space-3);
   padding: var(--space-6) !important;
-  border-radius: var(--radius-lg) !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4) !important;
 }
 
 .qrVenueName {
   font-family: var(--font-heading);
   font-size: var(--text-xs);
-  font-weight: 800;
+  font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.14em;
   color: #666;
 }
 
 .qrTableLabel {
   font-family: var(--font-heading);
-  font-size: var(--text-2xl);
-  font-weight: 800;
+  font-size: var(--text-3xl);
+  font-weight: 900;
   margin: 0;
   color: #000;
+  letter-spacing: -0.02em;
 }
 
 .qrCodeWrapper {
   padding: var(--space-2);
   background-color: #fff;
   border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .qrInstruction {
   font-size: var(--text-xs);
-  font-weight: 600;
-  color: #555;
+  font-weight: 700;
+  color: #444;
 }
 
 @media print {

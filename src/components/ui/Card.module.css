@@ -4,11 +4,11 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   position: relative;
-  transition: border-color var(--transition-fast), 
-              transform var(--transition-fast), 
-              box-shadow var(--transition-fast);
-  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.25),
-              inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: border-color var(--transition-base),
+              transform var(--transition-base),
+              box-shadow var(--transition-base),
+              background-color var(--transition-fast);
+  box-shadow: var(--shadow-md), var(--card-highlight);
 }
 
 /* ── Paddings ── */
@@ -35,12 +35,41 @@
 }
 
 .interactive:hover {
-  border-color: var(--color-border-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px -6px rgba(0, 0, 0, 0.35),
-              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border-color: color-mix(in srgb, var(--primary-color) 30%, var(--color-border));
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg),
+              0 0 0 1px color-mix(in srgb, var(--primary-color) 12%, transparent),
+              var(--card-highlight);
 }
 
 .interactive:active {
-  transform: scale(0.99);
+  transform: translateY(-1px) scale(0.995);
+  box-shadow: var(--shadow-sm), var(--card-highlight);
+}
+
+/* ── Elevated Variant (stronger presence) ── */
+.elevated {
+  box-shadow: var(--shadow-lg), var(--card-highlight);
+  border-color: color-mix(in srgb, var(--text) 18%, transparent);
+}
+
+.elevated:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl),
+              0 0 0 1px color-mix(in srgb, var(--primary-color) 15%, transparent),
+              var(--card-highlight);
+}
+
+/* ── Glass Variant (frosted glass morphism) ── */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--shadow-md), var(--glass-highlight);
+}
+
+.glass:hover {
+  border-color: color-mix(in srgb, var(--text) 18%, transparent);
+  box-shadow: var(--shadow-lg), var(--glass-highlight);
 }

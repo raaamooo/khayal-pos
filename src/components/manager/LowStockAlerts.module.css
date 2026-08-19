@@ -14,7 +14,8 @@
   padding: var(--space-4) var(--space-5) !important;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);
+  box-shadow: var(--shadow-md), var(--card-highlight);
 }
 
 .alertHeader {
@@ -36,6 +37,7 @@
   font-size: var(--text-base);
   font-weight: 800;
   margin: 0;
+  letter-spacing: -0.01em;
 }
 
 .stockGrid {
@@ -45,23 +47,27 @@
 }
 
 .ingredientCard {
-  background: var(--color-surface-hover);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: var(--space-3);
+  padding: var(--space-3) var(--space-4);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
   transition: all var(--transition-fast);
+  box-shadow: var(--shadow-xs);
 }
 
 .ingredientCard.critical {
   border-color: #ef4444;
-  background: color-mix(in srgb, #ef4444 8%, var(--color-surface));
+  background: linear-gradient(180deg, color-mix(in srgb, #ef4444 12%, var(--color-surface)), var(--color-surface));
+  box-shadow: 0 0 16px -2px color-mix(in srgb, #ef4444 35%, transparent);
 }
 
 .ingredientCard.warning {
   border-color: #f59e0b;
+  background: linear-gradient(180deg, color-mix(in srgb, #f59e0b 10%, var(--color-surface)), var(--color-surface));
+  box-shadow: 0 0 14px -2px color-mix(in srgb, #f59e0b 25%, transparent);
 }
 
 .ingredientCard.healthy {
@@ -77,7 +83,7 @@
 .ingName {
   font-family: var(--font-heading);
   font-size: var(--text-sm);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .ingStockInfo {
@@ -86,12 +92,13 @@
   align-items: baseline;
   font-size: var(--text-xs);
   color: var(--color-text-muted);
+  font-weight: 600;
 }
 
 .ingStockNum {
   font-family: var(--font-heading);
   font-size: var(--text-lg);
-  font-weight: 800;
+  font-weight: 900;
   color: var(--text);
 }
 
@@ -101,6 +108,33 @@
 
 .warningText {
   color: #f59e0b !important;
+}
+
+/* ── Stock Gauge ── */
+.gaugeTrack {
+  height: 5px;
+  background: var(--gauge-track, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin: 2px 0 4px;
+}
+
+.gaugeFill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.5s ease-out;
+}
+
+.gaugeHealthy {
+  background: var(--gauge-healthy, #43A047);
+}
+
+.gaugeCaution {
+  background: var(--gauge-caution, #FF8F00);
+}
+
+.gaugeCritical {
+  background: var(--gauge-critical, #E53935);
 }
 
 .restockBtnRow {
