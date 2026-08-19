@@ -1,0 +1,60 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  font-family: var(--font-body);
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+/* ── Sizes ── */
+.sm {
+  font-size: var(--text-xs);
+  padding: 0.2rem 0.55rem;
+}
+
+.md {
+  font-size: var(--text-sm);
+  padding: 0.35rem 0.85rem;
+}
+
+/* ── Variants ── */
+.default {
+  background-color: var(--color-surface-hover);
+  color: var(--text);
+  border: 1px solid var(--color-border);
+}
+
+.primary {
+  background-color: var(--color-primary-surface);
+  color: var(--primary-color);
+  border: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
+}
+
+.success {
+  background-color: var(--color-success-surface);
+  color: var(--color-success);
+  border: 1px solid color-mix(in srgb, var(--color-success) 25%, transparent);
+}
+
+.warning {
+  background-color: var(--color-warning-surface);
+  color: var(--color-warning);
+  border: 1px solid color-mix(in srgb, var(--color-warning) 25%, transparent);
+}
+
+.danger {
+  background-color: var(--color-danger-surface);
+  color: var(--color-danger);
+  border: 1px solid color-mix(in srgb, var(--color-danger) 25%, transparent);
+}
+
+.info {
+  background-color: var(--color-info-surface);
+  color: var(--color-info);
+  border: 1px solid color-mix(in srgb, var(--color-info) 25%, transparent);
+}

@@ -1,0 +1,48 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--background);
+  font-family: var(--font-body);
+}
+
+.card {
+  text-align: center;
+  width: 100%;
+  max-width: 440px;
+}
+
+.code {
+  font-size: 6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 1rem 0;
+  font-family: var(--font-heading);
+}
+
+.message {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+}
+
+.linkWrapper {
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  outline: none;
+}

@@ -1,0 +1,222 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────────────────────
+// Venue — the root of every multi-tenant query
+// ─────────────────────────────────────────────
+
+model Venue {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  name            String
+  theme           Json
+  defaultLanguage String   @default("en") @map("default_language")
+  planTier        String   @default("trial") @map("plan_tier")
+  active          Boolean  @default(true)
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  // ── Relations (every tenant-scoped table references back here) ──
+  staffAccounts StaffAccount[]
+  tables        Table[]
+  tableSessions TableSession[]
+  categories    Category[]
+  menuItems     MenuItem[]
+  ingredients   Ingredient[]
+  recipeItems   RecipeItem[]
+  addOns        AddOn[]
+  orders        Order[]
+  orderItems    OrderItem[]
+
+  @@map("venues")
+}
+
+// ─────────────────────────────────────────────
+// Staff accounts — one role, one venue, enforced
+// ─────────────────────────────────────────────
+
+enum Role {
+  MANAGER
+  CASHIER
+  WAITER
+  BARISTA
+  INVENTORY
+}
+
+model StaffAccount {
+  id           String   @id @default(cuid())
+  venueId      String   @map("venue_id")
+  venue        Venue    @relation(fields: [venueId], references: [id])
+  email        String
+  passwordHash String   @map("password_hash")
+  name         String
+  role         Role
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@unique([venueId, email])
+  @@index([venueId])
+  @@map("staff_accounts")
+}
+
+// ─────────────────────────────────────────────
+// Tables & Sessions
+// ─────────────────────────────────────────────
+
+model Table {
+  id              String         @id @default(cuid())
+  venueId         String         @map("venue_id")
+  venue           Venue          @relation(fields: [venueId], references: [id])
+  label           String // e.g. "Table 5" or "Room 101"
+  qrToken         String         @unique @map("qr_token") // Physical sticker URL component
+  activeSessionId String?        @map("active_session_id")
+  waiterCalled    Boolean        @default(false) @map("waiter_called")
+  waiterCalledAt  DateTime?      @map("waiter_called_at")
+  sessions        TableSession[]
+  createdAt       DateTime       @default(now()) @map("created_at")
+
+  @@index([venueId])
+  @@map("tables")
+}
+
+model TableSession {
+  id        String    @id @default(cuid())
+  venueId   String    @map("venue_id")
+  venue     Venue     @relation(fields: [venueId], references: [id])
+  tableId   String    @map("table_id")
+  table     Table     @relation(fields: [tableId], references: [id])
+  startedAt DateTime  @default(now()) @map("started_at")
+  endedAt   DateTime? @map("ended_at")
+  orders    Order[]
+
+  @@index([venueId])
+  @@index([tableId])
+  @@map("table_sessions")
+}
+
+// ─────────────────────────────────────────────
+// Menu & Inventory
+// ─────────────────────────────────────────────
+
+model Category {
+  id         String     @id @default(cuid())
+  venueId    String     @map("venue_id")
+  venue      Venue      @relation(fields: [venueId], references: [id])
+  name       String
+  orderIndex Int        @default(0) @map("order_index")
+  items      MenuItem[]
+
+  @@index([venueId])
+  @@map("categories")
+}
+
+model MenuItem {
+  id          String       @id @default(cuid())
+  venueId     String       @map("venue_id")
+  venue       Venue        @relation(fields: [venueId], references: [id])
+  categoryId  String       @map("category_id")
+  category    Category     @relation(fields: [categoryId], references: [id])
+  name        String
+  description String?
+  price       Decimal
+  imageUrl    String?      @map("image_url")
+  outOfStock  Boolean      @default(false) @map("out_of_stock")
+  quizTags    Json?        @map("quiz_tags") // e.g. ["cold", "sweet", "fruity"]
+  orderItems  OrderItem[]
+  recipeItems RecipeItem[]
+
+  @@index([venueId])
+  @@index([categoryId])
+  @@map("menu_items")
+}
+
+model Ingredient {
+  id           String       @id @default(cuid())
+  venueId      String       @map("venue_id")
+  venue        Venue        @relation(fields: [venueId], references: [id])
+  name         String
+  unit         String // e.g. "liter", "gram", "count"
+  stock        Decimal      @default(0)
+  lowThreshold Decimal      @default(0) @map("low_threshold")
+  recipeItems  RecipeItem[]
+
+  @@index([venueId])
+  @@map("ingredients")
+}
+
+model RecipeItem {
+  id           String     @id @default(cuid())
+  venueId      String     @map("venue_id")
+  venue        Venue      @relation(fields: [venueId], references: [id])
+  menuItemId   String     @map("menu_item_id")
+  menuItem     MenuItem   @relation(fields: [menuItemId], references: [id])
+  ingredientId String     @map("ingredient_id")
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  quantityUsed Decimal    @map("quantity_used")
+
+  @@index([venueId])
+  @@index([menuItemId])
+  @@index([ingredientId])
+  @@map("recipe_items")
+}
+
+model AddOn {
+  id                String   @id @default(cuid())
+  venueId           String   @map("venue_id")
+  venue             Venue    @relation(fields: [venueId], references: [id])
+  name              String
+  price             Decimal
+  applicableItemIds String[] @map("applicable_item_ids") // Array of MenuItem IDs
+
+  @@index([venueId])
+  @@map("add_ons")
+}
+
+// ─────────────────────────────────────────────
+// Orders
+// ─────────────────────────────────────────────
+
+model Order {
+  id             String       @id @default(cuid())
+  venueId        String       @map("venue_id")
+  venue          Venue        @relation(fields: [venueId], references: [id])
+  tableSessionId String       @map("table_session_id")
+  tableSession   TableSession @relation(fields: [tableSessionId], references: [id])
+  customerName   String?      @map("customer_name")
+  notes          String?
+  paymentMethod  String       @map("payment_method") // "CASH" | "VISA"
+  tipAmount      Int          @default(0) @map("tip_amount") // In EGP
+  totalAmount    Decimal      @map("total_amount")
+  status         String       @default("PENDING") // PENDING, PREPARING, SERVED, CANCELLED
+  items          OrderItem[]
+  createdAt      DateTime     @default(now()) @map("created_at")
+
+  @@index([venueId])
+  @@index([tableSessionId])
+  @@map("orders")
+}
+
+model OrderItem {
+  id         String   @id @default(cuid())
+  venueId    String   @map("venue_id")
+  venue      Venue    @relation(fields: [venueId], references: [id])
+  orderId    String   @map("order_id")
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItemId String   @map("menu_item_id")
+  menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
+  quantity   Int
+  addOns     Json?    @map("add_ons") // Array of { id, name, price }
+
+  @@index([venueId])
+  @@index([orderId])
+  @@index([menuItemId])
+  @@map("order_items")
+}

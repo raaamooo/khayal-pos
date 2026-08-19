@@ -1,0 +1,131 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 1px solid transparent;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  letter-spacing: -0.01em;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.button:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+/* ── Sizes (designed for hand touch targets) ── */
+.sm {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  border-radius: var(--radius-sm);
+  min-height: 38px;
+}
+
+.md {
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-base);
+  border-radius: var(--radius-md);
+  min-height: var(--tap-min);
+}
+
+.lg {
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--text-lg);
+  border-radius: var(--radius-lg);
+  min-height: var(--tap-primary);
+}
+
+.icon {
+  padding: var(--space-2);
+  border-radius: var(--radius-full);
+  min-height: var(--tap-min);
+  min-width: var(--tap-min);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* ── Variants ── */
+.primary {
+  background: var(--primary-color);
+  color: var(--primary-contrast, #FAFAFA);
+  box-shadow: 0 4px 16px -2px color-mix(in srgb, var(--primary-color) 40%, transparent);
+}
+
+.primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--primary-color) 90%, #fff);
+  box-shadow: 0 6px 20px -2px color-mix(in srgb, var(--primary-color) 50%, transparent);
+}
+
+.secondary {
+  background: var(--color-surface);
+  color: var(--text);
+  border-color: var(--color-border);
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-hover);
+}
+
+.outline {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--color-border);
+}
+
+.outline:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+  border-color: var(--color-text-faint);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: transparent;
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.danger {
+  background: var(--color-danger);
+  color: #FAFAFA;
+}
+
+.danger:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-danger) 85%, #000);
+}
+
+/* ── Loading Spinner ── */
+.spinner {
+  display: inline-flex;
+  animation: spin 1s linear infinite;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.iconLeft, .iconRight {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

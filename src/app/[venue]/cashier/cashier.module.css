@@ -1,0 +1,269 @@
+.container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--background);
+  color: var(--text);
+  font-family: var(--font-body);
+  padding: var(--space-4);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.cashierIconBadge {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-surface);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.sessionGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.sessionCard {
+  padding: 0 !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden;
+}
+
+.sessionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: start;
+  cursor: pointer;
+  color: var(--text);
+  transition: background-color var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sessionHeader:hover {
+  background-color: var(--color-surface-hover);
+}
+
+.sessionHeaderLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sessionTableLabel {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+.sessionHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.sessionTotalGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.totalLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.totalValue {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--text-xl);
+  color: var(--primary-color);
+}
+
+.caretBtn {
+  color: var(--color-text-muted);
+}
+
+/* ── Receipt View ── */
+.receiptBody {
+  padding: var(--space-4) var(--space-6) var(--space-6);
+  border-top: 1px dashed var(--color-border);
+  background-color: color-mix(in srgb, var(--text) 2%, var(--background));
+}
+
+.receiptHeader {
+  text-align: center;
+  padding: var(--space-2) 0 var(--space-4) 0;
+}
+
+.receiptHeader h3 {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  margin: 0;
+}
+
+.receiptHeader p {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.receiptTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-3) 0;
+}
+
+.receiptTable th {
+  text-align: start;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-2) 0;
+}
+
+.receiptTable th:last-child {
+  text-align: end;
+}
+
+.receiptTable td {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: var(--text-sm);
+}
+
+.receiptItemName {
+  font-weight: 700;
+}
+
+.receiptAddOns {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.receiptQty {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.receiptPrice {
+  text-align: end;
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.receiptRow {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.receiptGrandTotal {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-4) 0;
+  border-top: 2px solid var(--primary-color);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-5);
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--text);
+}
+
+.printBtn {
+  min-height: 52px !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   PRINT STYLES
+   ═══════════════════════════════════════════════════ */
+@media print {
+  .header, .printBtn, .caretBtn {
+    display: none !important;
+  }
+  .container {
+    background: #fff !important;
+    color: #000 !important;
+    padding: 0 !important;
+  }
+  .sessionCard {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .receiptBody {
+    background: transparent !important;
+    padding: 0 !important;
+    border-top: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE (>= 680px)
+   ═══════════════════════════════════════════════════ */
+@media (min-width: 680px) {
+  .container {
+    padding: var(--space-6);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .title {
+    font-size: var(--text-3xl);
+  }
+
+  .sessionGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+}

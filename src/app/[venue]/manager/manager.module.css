@@ -1,0 +1,415 @@
+.container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--background);
+  color: var(--text);
+  font-family: var(--font-body);
+  padding: var(--space-4);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.managerIconBadge {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-surface);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ── Section Tabs ── */
+.sectionTabs {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+  background-color: var(--color-surface);
+  padding: var(--space-1);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.sectionTabs::-webkit-scrollbar {
+  display: none;
+}
+
+.sectionTab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-muted);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sectionTab.active {
+  background-color: var(--color-surface-active);
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.content {
+  margin-top: var(--space-4);
+}
+
+/* ── Metrics ── */
+.metricGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.metricCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5) !important;
+}
+
+.metricCardPrimary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5) !important;
+  background-color: var(--color-primary-surface) !important;
+  border-color: color-mix(in srgb, var(--primary-color) 30%, transparent) !important;
+}
+
+.metricHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.metricLabel {
+  font-size: var(--text-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+.metricValue {
+  font-family: var(--font-heading);
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.metricValue small {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+}
+
+/* ── Chart ── */
+.chartPanel {
+  padding: var(--space-5) !important;
+}
+
+.panelHeading {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  margin-bottom: var(--space-4);
+}
+
+.mockChart {
+  display: flex;
+  height: 48px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.mockChartBarCash {
+  background-color: var(--color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: var(--text-xs);
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+  min-width: 60px;
+}
+
+.mockChartBarVisa {
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-contrast, #fff);
+  font-weight: 800;
+  font-size: var(--text-xs);
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+  min-width: 60px;
+}
+
+/* ── Tables ── */
+.tablePanel {
+  padding: var(--space-5) !important;
+}
+
+.panelHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  text-align: start;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-3) var(--space-2);
+}
+
+.table td {
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--color-border-subtle);
+  font-size: var(--text-sm);
+}
+
+.shortCode {
+  background-color: var(--color-surface-hover);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-family: monospace;
+  font-weight: 700;
+  font-size: var(--text-xs);
+  color: var(--accent-color);
+}
+
+.orderTotalCell {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+.orderTimeCell {
+  color: var(--color-text-muted);
+  font-size: var(--text-xs);
+}
+
+.emailCell {
+  color: var(--color-text-muted);
+}
+
+/* ── Tip Split Panel ── */
+.tipSplitPanel {
+  margin-top: var(--space-6);
+  background-color: var(--color-surface-active);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  border-inline-start: 4px solid var(--primary-color);
+}
+
+.tipSplitHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.tipSplitHeader h4 {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 800;
+  margin: 0;
+}
+
+.tipSplitMetrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4);
+}
+
+.tipSplitMetrics div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tipSplitMetrics span {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  font-weight: 700;
+}
+
+.tipSplitMetrics strong {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+}
+
+.tipSplitPerPerson strong {
+  color: var(--primary-color);
+  font-size: var(--text-xl);
+}
+
+.tipSplitPerPerson small {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+/* ── QR Generator ── */
+.qrHeaderInfo {
+  margin-bottom: var(--space-6);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.qrGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-6);
+}
+
+.qrCard {
+  background-color: #FFFFFF !important;
+  color: #0A0A0B !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  padding: var(--space-6) !important;
+  border-radius: var(--radius-lg) !important;
+}
+
+.qrVenueName {
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #666;
+}
+
+.qrTableLabel {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  margin: 0;
+  color: #000;
+}
+
+.qrCodeWrapper {
+  padding: var(--space-2);
+  background-color: #fff;
+  border-radius: var(--radius-md);
+}
+
+.qrInstruction {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: #555;
+}
+
+@media print {
+  .header, .sectionTabs {
+    display: none !important;
+  }
+  .container {
+    background: #fff !important;
+    padding: 0 !important;
+  }
+  .qrGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2rem !important;
+  }
+  .qrCard {
+    page-break-inside: avoid;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE (>= 680px)
+   ═══════════════════════════════════════════════════ */
+@media (min-width: 680px) {
+  .container {
+    padding: var(--space-6);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .title {
+    font-size: var(--text-3xl);
+  }
+
+  .metricGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+@media (min-width: 1100px) {
+  .metricGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
