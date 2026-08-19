@@ -161,10 +161,23 @@ export default function BaristaClient({
                           </div>
                           <div className={styles.itemDetails}>
                             <span className={styles.itemName}>{item.menuItem.name}</span>
+                            
+                            {/* Selected Modifiers */}
+                            {item.modifiers && (item.modifiers as any[]).length > 0 && (
+                              <div className={styles.addOnsRow}>
+                                {(item.modifiers as any[]).map((m: any, i: number) => (
+                                  <Badge key={i} variant="primary" size="sm">
+                                    {m.optionLabel || m.label}
+                                  </Badge>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* Add-ons */}
                             {item.addOns && (item.addOns as any[]).length > 0 && (
                               <div className={styles.addOnsRow}>
                                 {(item.addOns as any[]).map((a: any, i: number) => (
-                                  <Badge key={i} variant="primary" size="sm">
+                                  <Badge key={i} variant="default" size="sm">
                                     + {a.name}
                                   </Badge>
                                 ))}

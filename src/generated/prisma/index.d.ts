@@ -59,6 +59,16 @@ export type RecipeItem = $Result.DefaultSelection<Prisma.$RecipeItemPayload>
  */
 export type AddOn = $Result.DefaultSelection<Prisma.$AddOnPayload>
 /**
+ * Model ModifierGroup
+ * 
+ */
+export type ModifierGroup = $Result.DefaultSelection<Prisma.$ModifierGroupPayload>
+/**
+ * Model ModifierOption
+ * 
+ */
+export type ModifierOption = $Result.DefaultSelection<Prisma.$ModifierOptionPayload>
+/**
  * Model Order
  * 
  */
@@ -299,6 +309,26 @@ export class PrismaClient<
     * ```
     */
   get addOn(): Prisma.AddOnDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.modifierGroup`: Exposes CRUD operations for the **ModifierGroup** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ModifierGroups
+    * const modifierGroups = await prisma.modifierGroup.findMany()
+    * ```
+    */
+  get modifierGroup(): Prisma.ModifierGroupDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.modifierOption`: Exposes CRUD operations for the **ModifierOption** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ModifierOptions
+    * const modifierOptions = await prisma.modifierOption.findMany()
+    * ```
+    */
+  get modifierOption(): Prisma.ModifierOptionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.order`: Exposes CRUD operations for the **Order** model.
@@ -775,6 +805,8 @@ export namespace Prisma {
     Ingredient: 'Ingredient',
     RecipeItem: 'RecipeItem',
     AddOn: 'AddOn',
+    ModifierGroup: 'ModifierGroup',
+    ModifierOption: 'ModifierOption',
     Order: 'Order',
     OrderItem: 'OrderItem'
   };
@@ -792,7 +824,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "venue" | "staffAccount" | "table" | "tableSession" | "category" | "menuItem" | "ingredient" | "recipeItem" | "addOn" | "order" | "orderItem"
+      modelProps: "venue" | "staffAccount" | "table" | "tableSession" | "category" | "menuItem" | "ingredient" | "recipeItem" | "addOn" | "modifierGroup" | "modifierOption" | "order" | "orderItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1462,6 +1494,154 @@ export namespace Prisma {
           }
         }
       }
+      ModifierGroup: {
+        payload: Prisma.$ModifierGroupPayload<ExtArgs>
+        fields: Prisma.ModifierGroupFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ModifierGroupFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierGroupPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ModifierGroupFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierGroupPayload>
+          }
+          findFirst: {
+            args: Prisma.ModifierGroupFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierGroupPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ModifierGroupFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierGroupPayload>
+          }
+          findMany: {
+            args: Prisma.ModifierGroupFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierGroupPayload>[]
+          }
+          create: {
+            args: Prisma.ModifierGroupCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierGroupPayload>
+          }
+          createMany: {
+            args: Prisma.ModifierGroupCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ModifierGroupCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierGroupPayload>[]
+          }
+          delete: {
+            args: Prisma.ModifierGroupDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierGroupPayload>
+          }
+          update: {
+            args: Prisma.ModifierGroupUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierGroupPayload>
+          }
+          deleteMany: {
+            args: Prisma.ModifierGroupDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ModifierGroupUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ModifierGroupUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierGroupPayload>[]
+          }
+          upsert: {
+            args: Prisma.ModifierGroupUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierGroupPayload>
+          }
+          aggregate: {
+            args: Prisma.ModifierGroupAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateModifierGroup>
+          }
+          groupBy: {
+            args: Prisma.ModifierGroupGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ModifierGroupGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ModifierGroupCountArgs<ExtArgs>
+            result: $Utils.Optional<ModifierGroupCountAggregateOutputType> | number
+          }
+        }
+      }
+      ModifierOption: {
+        payload: Prisma.$ModifierOptionPayload<ExtArgs>
+        fields: Prisma.ModifierOptionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ModifierOptionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierOptionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ModifierOptionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierOptionPayload>
+          }
+          findFirst: {
+            args: Prisma.ModifierOptionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierOptionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ModifierOptionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierOptionPayload>
+          }
+          findMany: {
+            args: Prisma.ModifierOptionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierOptionPayload>[]
+          }
+          create: {
+            args: Prisma.ModifierOptionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierOptionPayload>
+          }
+          createMany: {
+            args: Prisma.ModifierOptionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ModifierOptionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierOptionPayload>[]
+          }
+          delete: {
+            args: Prisma.ModifierOptionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierOptionPayload>
+          }
+          update: {
+            args: Prisma.ModifierOptionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierOptionPayload>
+          }
+          deleteMany: {
+            args: Prisma.ModifierOptionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ModifierOptionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ModifierOptionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierOptionPayload>[]
+          }
+          upsert: {
+            args: Prisma.ModifierOptionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ModifierOptionPayload>
+          }
+          aggregate: {
+            args: Prisma.ModifierOptionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateModifierOption>
+          }
+          groupBy: {
+            args: Prisma.ModifierOptionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ModifierOptionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ModifierOptionCountArgs<ExtArgs>
+            result: $Utils.Optional<ModifierOptionCountAggregateOutputType> | number
+          }
+        }
+      }
       Order: {
         payload: Prisma.$OrderPayload<ExtArgs>
         fields: Prisma.OrderFieldRefs
@@ -1742,6 +1922,8 @@ export namespace Prisma {
     ingredient?: IngredientOmit
     recipeItem?: RecipeItemOmit
     addOn?: AddOnOmit
+    modifierGroup?: ModifierGroupOmit
+    modifierOption?: ModifierOptionOmit
     order?: OrderOmit
     orderItem?: OrderItemOmit
   }
@@ -1832,6 +2014,7 @@ export namespace Prisma {
     ingredients: number
     recipeItems: number
     addOns: number
+    modifierGroups: number
     orders: number
     orderItems: number
   }
@@ -1845,6 +2028,7 @@ export namespace Prisma {
     ingredients?: boolean | VenueCountOutputTypeCountIngredientsArgs
     recipeItems?: boolean | VenueCountOutputTypeCountRecipeItemsArgs
     addOns?: boolean | VenueCountOutputTypeCountAddOnsArgs
+    modifierGroups?: boolean | VenueCountOutputTypeCountModifierGroupsArgs
     orders?: boolean | VenueCountOutputTypeCountOrdersArgs
     orderItems?: boolean | VenueCountOutputTypeCountOrderItemsArgs
   }
@@ -1914,6 +2098,13 @@ export namespace Prisma {
    */
   export type VenueCountOutputTypeCountAddOnsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AddOnWhereInput
+  }
+
+  /**
+   * VenueCountOutputType without action
+   */
+  export type VenueCountOutputTypeCountModifierGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ModifierGroupWhereInput
   }
 
   /**
@@ -2031,11 +2222,13 @@ export namespace Prisma {
   export type MenuItemCountOutputType = {
     orderItems: number
     recipeItems: number
+    modifierGroups: number
   }
 
   export type MenuItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orderItems?: boolean | MenuItemCountOutputTypeCountOrderItemsArgs
     recipeItems?: boolean | MenuItemCountOutputTypeCountRecipeItemsArgs
+    modifierGroups?: boolean | MenuItemCountOutputTypeCountModifierGroupsArgs
   }
 
   // Custom InputTypes
@@ -2061,6 +2254,13 @@ export namespace Prisma {
    */
   export type MenuItemCountOutputTypeCountRecipeItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RecipeItemWhereInput
+  }
+
+  /**
+   * MenuItemCountOutputType without action
+   */
+  export type MenuItemCountOutputTypeCountModifierGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ModifierGroupWhereInput
   }
 
 
@@ -2092,6 +2292,37 @@ export namespace Prisma {
    */
   export type IngredientCountOutputTypeCountRecipeItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RecipeItemWhereInput
+  }
+
+
+  /**
+   * Count Type ModifierGroupCountOutputType
+   */
+
+  export type ModifierGroupCountOutputType = {
+    options: number
+  }
+
+  export type ModifierGroupCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    options?: boolean | ModifierGroupCountOutputTypeCountOptionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ModifierGroupCountOutputType without action
+   */
+  export type ModifierGroupCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroupCountOutputType
+     */
+    select?: ModifierGroupCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ModifierGroupCountOutputType without action
+   */
+  export type ModifierGroupCountOutputTypeCountOptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ModifierOptionWhereInput
   }
 
 
@@ -2322,6 +2553,7 @@ export namespace Prisma {
     ingredients?: boolean | Venue$ingredientsArgs<ExtArgs>
     recipeItems?: boolean | Venue$recipeItemsArgs<ExtArgs>
     addOns?: boolean | Venue$addOnsArgs<ExtArgs>
+    modifierGroups?: boolean | Venue$modifierGroupsArgs<ExtArgs>
     orders?: boolean | Venue$ordersArgs<ExtArgs>
     orderItems?: boolean | Venue$orderItemsArgs<ExtArgs>
     _count?: boolean | VenueCountOutputTypeDefaultArgs<ExtArgs>
@@ -2370,6 +2602,7 @@ export namespace Prisma {
     ingredients?: boolean | Venue$ingredientsArgs<ExtArgs>
     recipeItems?: boolean | Venue$recipeItemsArgs<ExtArgs>
     addOns?: boolean | Venue$addOnsArgs<ExtArgs>
+    modifierGroups?: boolean | Venue$modifierGroupsArgs<ExtArgs>
     orders?: boolean | Venue$ordersArgs<ExtArgs>
     orderItems?: boolean | Venue$orderItemsArgs<ExtArgs>
     _count?: boolean | VenueCountOutputTypeDefaultArgs<ExtArgs>
@@ -2388,6 +2621,7 @@ export namespace Prisma {
       ingredients: Prisma.$IngredientPayload<ExtArgs>[]
       recipeItems: Prisma.$RecipeItemPayload<ExtArgs>[]
       addOns: Prisma.$AddOnPayload<ExtArgs>[]
+      modifierGroups: Prisma.$ModifierGroupPayload<ExtArgs>[]
       orders: Prisma.$OrderPayload<ExtArgs>[]
       orderItems: Prisma.$OrderItemPayload<ExtArgs>[]
     }
@@ -2802,6 +3036,7 @@ export namespace Prisma {
     ingredients<T extends Venue$ingredientsArgs<ExtArgs> = {}>(args?: Subset<T, Venue$ingredientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     recipeItems<T extends Venue$recipeItemsArgs<ExtArgs> = {}>(args?: Subset<T, Venue$recipeItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecipeItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     addOns<T extends Venue$addOnsArgs<ExtArgs> = {}>(args?: Subset<T, Venue$addOnsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AddOnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    modifierGroups<T extends Venue$modifierGroupsArgs<ExtArgs> = {}>(args?: Subset<T, Venue$modifierGroupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orders<T extends Venue$ordersArgs<ExtArgs> = {}>(args?: Subset<T, Venue$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orderItems<T extends Venue$orderItemsArgs<ExtArgs> = {}>(args?: Subset<T, Venue$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -3423,6 +3658,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AddOnScalarFieldEnum | AddOnScalarFieldEnum[]
+  }
+
+  /**
+   * Venue.modifierGroups
+   */
+  export type Venue$modifierGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupInclude<ExtArgs> | null
+    where?: ModifierGroupWhereInput
+    orderBy?: ModifierGroupOrderByWithRelationInput | ModifierGroupOrderByWithRelationInput[]
+    cursor?: ModifierGroupWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ModifierGroupScalarFieldEnum | ModifierGroupScalarFieldEnum[]
   }
 
   /**
@@ -8171,6 +8430,7 @@ export namespace Prisma {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     orderItems?: boolean | MenuItem$orderItemsArgs<ExtArgs>
     recipeItems?: boolean | MenuItem$recipeItemsArgs<ExtArgs>
+    modifierGroups?: boolean | MenuItem$modifierGroupsArgs<ExtArgs>
     _count?: boolean | MenuItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["menuItem"]>
 
@@ -8220,6 +8480,7 @@ export namespace Prisma {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
     orderItems?: boolean | MenuItem$orderItemsArgs<ExtArgs>
     recipeItems?: boolean | MenuItem$recipeItemsArgs<ExtArgs>
+    modifierGroups?: boolean | MenuItem$modifierGroupsArgs<ExtArgs>
     _count?: boolean | MenuItemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MenuItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8238,6 +8499,7 @@ export namespace Prisma {
       category: Prisma.$CategoryPayload<ExtArgs>
       orderItems: Prisma.$OrderItemPayload<ExtArgs>[]
       recipeItems: Prisma.$RecipeItemPayload<ExtArgs>[]
+      modifierGroups: Prisma.$ModifierGroupPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8647,6 +8909,7 @@ export namespace Prisma {
     category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     orderItems<T extends MenuItem$orderItemsArgs<ExtArgs> = {}>(args?: Subset<T, MenuItem$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     recipeItems<T extends MenuItem$recipeItemsArgs<ExtArgs> = {}>(args?: Subset<T, MenuItem$recipeItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecipeItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    modifierGroups<T extends MenuItem$modifierGroupsArgs<ExtArgs> = {}>(args?: Subset<T, MenuItem$modifierGroupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9131,6 +9394,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RecipeItemScalarFieldEnum | RecipeItemScalarFieldEnum[]
+  }
+
+  /**
+   * MenuItem.modifierGroups
+   */
+  export type MenuItem$modifierGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupInclude<ExtArgs> | null
+    where?: ModifierGroupWhereInput
+    orderBy?: ModifierGroupOrderByWithRelationInput | ModifierGroupOrderByWithRelationInput[]
+    cursor?: ModifierGroupWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ModifierGroupScalarFieldEnum | ModifierGroupScalarFieldEnum[]
   }
 
   /**
@@ -12503,6 +12790,2285 @@ export namespace Prisma {
 
 
   /**
+   * Model ModifierGroup
+   */
+
+  export type AggregateModifierGroup = {
+    _count: ModifierGroupCountAggregateOutputType | null
+    _avg: ModifierGroupAvgAggregateOutputType | null
+    _sum: ModifierGroupSumAggregateOutputType | null
+    _min: ModifierGroupMinAggregateOutputType | null
+    _max: ModifierGroupMaxAggregateOutputType | null
+  }
+
+  export type ModifierGroupAvgAggregateOutputType = {
+    maxSelections: number | null
+    orderIndex: number | null
+  }
+
+  export type ModifierGroupSumAggregateOutputType = {
+    maxSelections: number | null
+    orderIndex: number | null
+  }
+
+  export type ModifierGroupMinAggregateOutputType = {
+    id: string | null
+    venueId: string | null
+    menuItemId: string | null
+    name: string | null
+    required: boolean | null
+    maxSelections: number | null
+    orderIndex: number | null
+  }
+
+  export type ModifierGroupMaxAggregateOutputType = {
+    id: string | null
+    venueId: string | null
+    menuItemId: string | null
+    name: string | null
+    required: boolean | null
+    maxSelections: number | null
+    orderIndex: number | null
+  }
+
+  export type ModifierGroupCountAggregateOutputType = {
+    id: number
+    venueId: number
+    menuItemId: number
+    name: number
+    required: number
+    maxSelections: number
+    orderIndex: number
+    _all: number
+  }
+
+
+  export type ModifierGroupAvgAggregateInputType = {
+    maxSelections?: true
+    orderIndex?: true
+  }
+
+  export type ModifierGroupSumAggregateInputType = {
+    maxSelections?: true
+    orderIndex?: true
+  }
+
+  export type ModifierGroupMinAggregateInputType = {
+    id?: true
+    venueId?: true
+    menuItemId?: true
+    name?: true
+    required?: true
+    maxSelections?: true
+    orderIndex?: true
+  }
+
+  export type ModifierGroupMaxAggregateInputType = {
+    id?: true
+    venueId?: true
+    menuItemId?: true
+    name?: true
+    required?: true
+    maxSelections?: true
+    orderIndex?: true
+  }
+
+  export type ModifierGroupCountAggregateInputType = {
+    id?: true
+    venueId?: true
+    menuItemId?: true
+    name?: true
+    required?: true
+    maxSelections?: true
+    orderIndex?: true
+    _all?: true
+  }
+
+  export type ModifierGroupAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ModifierGroup to aggregate.
+     */
+    where?: ModifierGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModifierGroups to fetch.
+     */
+    orderBy?: ModifierGroupOrderByWithRelationInput | ModifierGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ModifierGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModifierGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModifierGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ModifierGroups
+    **/
+    _count?: true | ModifierGroupCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ModifierGroupAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ModifierGroupSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ModifierGroupMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ModifierGroupMaxAggregateInputType
+  }
+
+  export type GetModifierGroupAggregateType<T extends ModifierGroupAggregateArgs> = {
+        [P in keyof T & keyof AggregateModifierGroup]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateModifierGroup[P]>
+      : GetScalarType<T[P], AggregateModifierGroup[P]>
+  }
+
+
+
+
+  export type ModifierGroupGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ModifierGroupWhereInput
+    orderBy?: ModifierGroupOrderByWithAggregationInput | ModifierGroupOrderByWithAggregationInput[]
+    by: ModifierGroupScalarFieldEnum[] | ModifierGroupScalarFieldEnum
+    having?: ModifierGroupScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ModifierGroupCountAggregateInputType | true
+    _avg?: ModifierGroupAvgAggregateInputType
+    _sum?: ModifierGroupSumAggregateInputType
+    _min?: ModifierGroupMinAggregateInputType
+    _max?: ModifierGroupMaxAggregateInputType
+  }
+
+  export type ModifierGroupGroupByOutputType = {
+    id: string
+    venueId: string
+    menuItemId: string
+    name: string
+    required: boolean
+    maxSelections: number
+    orderIndex: number
+    _count: ModifierGroupCountAggregateOutputType | null
+    _avg: ModifierGroupAvgAggregateOutputType | null
+    _sum: ModifierGroupSumAggregateOutputType | null
+    _min: ModifierGroupMinAggregateOutputType | null
+    _max: ModifierGroupMaxAggregateOutputType | null
+  }
+
+  type GetModifierGroupGroupByPayload<T extends ModifierGroupGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ModifierGroupGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ModifierGroupGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ModifierGroupGroupByOutputType[P]>
+            : GetScalarType<T[P], ModifierGroupGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ModifierGroupSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    venueId?: boolean
+    menuItemId?: boolean
+    name?: boolean
+    required?: boolean
+    maxSelections?: boolean
+    orderIndex?: boolean
+    venue?: boolean | VenueDefaultArgs<ExtArgs>
+    menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+    options?: boolean | ModifierGroup$optionsArgs<ExtArgs>
+    _count?: boolean | ModifierGroupCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["modifierGroup"]>
+
+  export type ModifierGroupSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    venueId?: boolean
+    menuItemId?: boolean
+    name?: boolean
+    required?: boolean
+    maxSelections?: boolean
+    orderIndex?: boolean
+    venue?: boolean | VenueDefaultArgs<ExtArgs>
+    menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["modifierGroup"]>
+
+  export type ModifierGroupSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    venueId?: boolean
+    menuItemId?: boolean
+    name?: boolean
+    required?: boolean
+    maxSelections?: boolean
+    orderIndex?: boolean
+    venue?: boolean | VenueDefaultArgs<ExtArgs>
+    menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["modifierGroup"]>
+
+  export type ModifierGroupSelectScalar = {
+    id?: boolean
+    venueId?: boolean
+    menuItemId?: boolean
+    name?: boolean
+    required?: boolean
+    maxSelections?: boolean
+    orderIndex?: boolean
+  }
+
+  export type ModifierGroupOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "venueId" | "menuItemId" | "name" | "required" | "maxSelections" | "orderIndex", ExtArgs["result"]["modifierGroup"]>
+  export type ModifierGroupInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    venue?: boolean | VenueDefaultArgs<ExtArgs>
+    menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+    options?: boolean | ModifierGroup$optionsArgs<ExtArgs>
+    _count?: boolean | ModifierGroupCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ModifierGroupIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    venue?: boolean | VenueDefaultArgs<ExtArgs>
+    menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+  }
+  export type ModifierGroupIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    venue?: boolean | VenueDefaultArgs<ExtArgs>
+    menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+  }
+
+  export type $ModifierGroupPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ModifierGroup"
+    objects: {
+      venue: Prisma.$VenuePayload<ExtArgs>
+      menuItem: Prisma.$MenuItemPayload<ExtArgs>
+      options: Prisma.$ModifierOptionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      venueId: string
+      menuItemId: string
+      name: string
+      required: boolean
+      maxSelections: number
+      orderIndex: number
+    }, ExtArgs["result"]["modifierGroup"]>
+    composites: {}
+  }
+
+  type ModifierGroupGetPayload<S extends boolean | null | undefined | ModifierGroupDefaultArgs> = $Result.GetResult<Prisma.$ModifierGroupPayload, S>
+
+  type ModifierGroupCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ModifierGroupFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ModifierGroupCountAggregateInputType | true
+    }
+
+  export interface ModifierGroupDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ModifierGroup'], meta: { name: 'ModifierGroup' } }
+    /**
+     * Find zero or one ModifierGroup that matches the filter.
+     * @param {ModifierGroupFindUniqueArgs} args - Arguments to find a ModifierGroup
+     * @example
+     * // Get one ModifierGroup
+     * const modifierGroup = await prisma.modifierGroup.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ModifierGroupFindUniqueArgs>(args: SelectSubset<T, ModifierGroupFindUniqueArgs<ExtArgs>>): Prisma__ModifierGroupClient<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ModifierGroup that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ModifierGroupFindUniqueOrThrowArgs} args - Arguments to find a ModifierGroup
+     * @example
+     * // Get one ModifierGroup
+     * const modifierGroup = await prisma.modifierGroup.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ModifierGroupFindUniqueOrThrowArgs>(args: SelectSubset<T, ModifierGroupFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ModifierGroupClient<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ModifierGroup that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierGroupFindFirstArgs} args - Arguments to find a ModifierGroup
+     * @example
+     * // Get one ModifierGroup
+     * const modifierGroup = await prisma.modifierGroup.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ModifierGroupFindFirstArgs>(args?: SelectSubset<T, ModifierGroupFindFirstArgs<ExtArgs>>): Prisma__ModifierGroupClient<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ModifierGroup that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierGroupFindFirstOrThrowArgs} args - Arguments to find a ModifierGroup
+     * @example
+     * // Get one ModifierGroup
+     * const modifierGroup = await prisma.modifierGroup.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ModifierGroupFindFirstOrThrowArgs>(args?: SelectSubset<T, ModifierGroupFindFirstOrThrowArgs<ExtArgs>>): Prisma__ModifierGroupClient<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ModifierGroups that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierGroupFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ModifierGroups
+     * const modifierGroups = await prisma.modifierGroup.findMany()
+     * 
+     * // Get first 10 ModifierGroups
+     * const modifierGroups = await prisma.modifierGroup.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const modifierGroupWithIdOnly = await prisma.modifierGroup.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ModifierGroupFindManyArgs>(args?: SelectSubset<T, ModifierGroupFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ModifierGroup.
+     * @param {ModifierGroupCreateArgs} args - Arguments to create a ModifierGroup.
+     * @example
+     * // Create one ModifierGroup
+     * const ModifierGroup = await prisma.modifierGroup.create({
+     *   data: {
+     *     // ... data to create a ModifierGroup
+     *   }
+     * })
+     * 
+     */
+    create<T extends ModifierGroupCreateArgs>(args: SelectSubset<T, ModifierGroupCreateArgs<ExtArgs>>): Prisma__ModifierGroupClient<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ModifierGroups.
+     * @param {ModifierGroupCreateManyArgs} args - Arguments to create many ModifierGroups.
+     * @example
+     * // Create many ModifierGroups
+     * const modifierGroup = await prisma.modifierGroup.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ModifierGroupCreateManyArgs>(args?: SelectSubset<T, ModifierGroupCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ModifierGroups and returns the data saved in the database.
+     * @param {ModifierGroupCreateManyAndReturnArgs} args - Arguments to create many ModifierGroups.
+     * @example
+     * // Create many ModifierGroups
+     * const modifierGroup = await prisma.modifierGroup.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ModifierGroups and only return the `id`
+     * const modifierGroupWithIdOnly = await prisma.modifierGroup.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ModifierGroupCreateManyAndReturnArgs>(args?: SelectSubset<T, ModifierGroupCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ModifierGroup.
+     * @param {ModifierGroupDeleteArgs} args - Arguments to delete one ModifierGroup.
+     * @example
+     * // Delete one ModifierGroup
+     * const ModifierGroup = await prisma.modifierGroup.delete({
+     *   where: {
+     *     // ... filter to delete one ModifierGroup
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ModifierGroupDeleteArgs>(args: SelectSubset<T, ModifierGroupDeleteArgs<ExtArgs>>): Prisma__ModifierGroupClient<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ModifierGroup.
+     * @param {ModifierGroupUpdateArgs} args - Arguments to update one ModifierGroup.
+     * @example
+     * // Update one ModifierGroup
+     * const modifierGroup = await prisma.modifierGroup.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ModifierGroupUpdateArgs>(args: SelectSubset<T, ModifierGroupUpdateArgs<ExtArgs>>): Prisma__ModifierGroupClient<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ModifierGroups.
+     * @param {ModifierGroupDeleteManyArgs} args - Arguments to filter ModifierGroups to delete.
+     * @example
+     * // Delete a few ModifierGroups
+     * const { count } = await prisma.modifierGroup.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ModifierGroupDeleteManyArgs>(args?: SelectSubset<T, ModifierGroupDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ModifierGroups.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierGroupUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ModifierGroups
+     * const modifierGroup = await prisma.modifierGroup.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ModifierGroupUpdateManyArgs>(args: SelectSubset<T, ModifierGroupUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ModifierGroups and returns the data updated in the database.
+     * @param {ModifierGroupUpdateManyAndReturnArgs} args - Arguments to update many ModifierGroups.
+     * @example
+     * // Update many ModifierGroups
+     * const modifierGroup = await prisma.modifierGroup.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ModifierGroups and only return the `id`
+     * const modifierGroupWithIdOnly = await prisma.modifierGroup.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ModifierGroupUpdateManyAndReturnArgs>(args: SelectSubset<T, ModifierGroupUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ModifierGroup.
+     * @param {ModifierGroupUpsertArgs} args - Arguments to update or create a ModifierGroup.
+     * @example
+     * // Update or create a ModifierGroup
+     * const modifierGroup = await prisma.modifierGroup.upsert({
+     *   create: {
+     *     // ... data to create a ModifierGroup
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ModifierGroup we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ModifierGroupUpsertArgs>(args: SelectSubset<T, ModifierGroupUpsertArgs<ExtArgs>>): Prisma__ModifierGroupClient<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ModifierGroups.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierGroupCountArgs} args - Arguments to filter ModifierGroups to count.
+     * @example
+     * // Count the number of ModifierGroups
+     * const count = await prisma.modifierGroup.count({
+     *   where: {
+     *     // ... the filter for the ModifierGroups we want to count
+     *   }
+     * })
+    **/
+    count<T extends ModifierGroupCountArgs>(
+      args?: Subset<T, ModifierGroupCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ModifierGroupCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ModifierGroup.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierGroupAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ModifierGroupAggregateArgs>(args: Subset<T, ModifierGroupAggregateArgs>): Prisma.PrismaPromise<GetModifierGroupAggregateType<T>>
+
+    /**
+     * Group by ModifierGroup.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierGroupGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ModifierGroupGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ModifierGroupGroupByArgs['orderBy'] }
+        : { orderBy?: ModifierGroupGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ModifierGroupGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetModifierGroupGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ModifierGroup model
+   */
+  readonly fields: ModifierGroupFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ModifierGroup.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ModifierGroupClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    venue<T extends VenueDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VenueDefaultArgs<ExtArgs>>): Prisma__VenueClient<$Result.GetResult<Prisma.$VenuePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    menuItem<T extends MenuItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MenuItemDefaultArgs<ExtArgs>>): Prisma__MenuItemClient<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    options<T extends ModifierGroup$optionsArgs<ExtArgs> = {}>(args?: Subset<T, ModifierGroup$optionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModifierOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ModifierGroup model
+   */
+  interface ModifierGroupFieldRefs {
+    readonly id: FieldRef<"ModifierGroup", 'String'>
+    readonly venueId: FieldRef<"ModifierGroup", 'String'>
+    readonly menuItemId: FieldRef<"ModifierGroup", 'String'>
+    readonly name: FieldRef<"ModifierGroup", 'String'>
+    readonly required: FieldRef<"ModifierGroup", 'Boolean'>
+    readonly maxSelections: FieldRef<"ModifierGroup", 'Int'>
+    readonly orderIndex: FieldRef<"ModifierGroup", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ModifierGroup findUnique
+   */
+  export type ModifierGroupFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which ModifierGroup to fetch.
+     */
+    where: ModifierGroupWhereUniqueInput
+  }
+
+  /**
+   * ModifierGroup findUniqueOrThrow
+   */
+  export type ModifierGroupFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which ModifierGroup to fetch.
+     */
+    where: ModifierGroupWhereUniqueInput
+  }
+
+  /**
+   * ModifierGroup findFirst
+   */
+  export type ModifierGroupFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which ModifierGroup to fetch.
+     */
+    where?: ModifierGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModifierGroups to fetch.
+     */
+    orderBy?: ModifierGroupOrderByWithRelationInput | ModifierGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ModifierGroups.
+     */
+    cursor?: ModifierGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModifierGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModifierGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ModifierGroups.
+     */
+    distinct?: ModifierGroupScalarFieldEnum | ModifierGroupScalarFieldEnum[]
+  }
+
+  /**
+   * ModifierGroup findFirstOrThrow
+   */
+  export type ModifierGroupFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which ModifierGroup to fetch.
+     */
+    where?: ModifierGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModifierGroups to fetch.
+     */
+    orderBy?: ModifierGroupOrderByWithRelationInput | ModifierGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ModifierGroups.
+     */
+    cursor?: ModifierGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModifierGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModifierGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ModifierGroups.
+     */
+    distinct?: ModifierGroupScalarFieldEnum | ModifierGroupScalarFieldEnum[]
+  }
+
+  /**
+   * ModifierGroup findMany
+   */
+  export type ModifierGroupFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupInclude<ExtArgs> | null
+    /**
+     * Filter, which ModifierGroups to fetch.
+     */
+    where?: ModifierGroupWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModifierGroups to fetch.
+     */
+    orderBy?: ModifierGroupOrderByWithRelationInput | ModifierGroupOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ModifierGroups.
+     */
+    cursor?: ModifierGroupWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModifierGroups from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModifierGroups.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ModifierGroups.
+     */
+    distinct?: ModifierGroupScalarFieldEnum | ModifierGroupScalarFieldEnum[]
+  }
+
+  /**
+   * ModifierGroup create
+   */
+  export type ModifierGroupCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ModifierGroup.
+     */
+    data: XOR<ModifierGroupCreateInput, ModifierGroupUncheckedCreateInput>
+  }
+
+  /**
+   * ModifierGroup createMany
+   */
+  export type ModifierGroupCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ModifierGroups.
+     */
+    data: ModifierGroupCreateManyInput | ModifierGroupCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ModifierGroup createManyAndReturn
+   */
+  export type ModifierGroupCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * The data used to create many ModifierGroups.
+     */
+    data: ModifierGroupCreateManyInput | ModifierGroupCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ModifierGroup update
+   */
+  export type ModifierGroupUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ModifierGroup.
+     */
+    data: XOR<ModifierGroupUpdateInput, ModifierGroupUncheckedUpdateInput>
+    /**
+     * Choose, which ModifierGroup to update.
+     */
+    where: ModifierGroupWhereUniqueInput
+  }
+
+  /**
+   * ModifierGroup updateMany
+   */
+  export type ModifierGroupUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ModifierGroups.
+     */
+    data: XOR<ModifierGroupUpdateManyMutationInput, ModifierGroupUncheckedUpdateManyInput>
+    /**
+     * Filter which ModifierGroups to update
+     */
+    where?: ModifierGroupWhereInput
+    /**
+     * Limit how many ModifierGroups to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ModifierGroup updateManyAndReturn
+   */
+  export type ModifierGroupUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * The data used to update ModifierGroups.
+     */
+    data: XOR<ModifierGroupUpdateManyMutationInput, ModifierGroupUncheckedUpdateManyInput>
+    /**
+     * Filter which ModifierGroups to update
+     */
+    where?: ModifierGroupWhereInput
+    /**
+     * Limit how many ModifierGroups to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ModifierGroup upsert
+   */
+  export type ModifierGroupUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ModifierGroup to update in case it exists.
+     */
+    where: ModifierGroupWhereUniqueInput
+    /**
+     * In case the ModifierGroup found by the `where` argument doesn't exist, create a new ModifierGroup with this data.
+     */
+    create: XOR<ModifierGroupCreateInput, ModifierGroupUncheckedCreateInput>
+    /**
+     * In case the ModifierGroup was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ModifierGroupUpdateInput, ModifierGroupUncheckedUpdateInput>
+  }
+
+  /**
+   * ModifierGroup delete
+   */
+  export type ModifierGroupDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupInclude<ExtArgs> | null
+    /**
+     * Filter which ModifierGroup to delete.
+     */
+    where: ModifierGroupWhereUniqueInput
+  }
+
+  /**
+   * ModifierGroup deleteMany
+   */
+  export type ModifierGroupDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ModifierGroups to delete
+     */
+    where?: ModifierGroupWhereInput
+    /**
+     * Limit how many ModifierGroups to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ModifierGroup.options
+   */
+  export type ModifierGroup$optionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionInclude<ExtArgs> | null
+    where?: ModifierOptionWhereInput
+    orderBy?: ModifierOptionOrderByWithRelationInput | ModifierOptionOrderByWithRelationInput[]
+    cursor?: ModifierOptionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ModifierOptionScalarFieldEnum | ModifierOptionScalarFieldEnum[]
+  }
+
+  /**
+   * ModifierGroup without action
+   */
+  export type ModifierGroupDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierGroup
+     */
+    select?: ModifierGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierGroup
+     */
+    omit?: ModifierGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierGroupInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ModifierOption
+   */
+
+  export type AggregateModifierOption = {
+    _count: ModifierOptionCountAggregateOutputType | null
+    _avg: ModifierOptionAvgAggregateOutputType | null
+    _sum: ModifierOptionSumAggregateOutputType | null
+    _min: ModifierOptionMinAggregateOutputType | null
+    _max: ModifierOptionMaxAggregateOutputType | null
+  }
+
+  export type ModifierOptionAvgAggregateOutputType = {
+    priceAdjustment: Decimal | null
+    orderIndex: number | null
+  }
+
+  export type ModifierOptionSumAggregateOutputType = {
+    priceAdjustment: Decimal | null
+    orderIndex: number | null
+  }
+
+  export type ModifierOptionMinAggregateOutputType = {
+    id: string | null
+    modifierGroupId: string | null
+    label: string | null
+    priceAdjustment: Decimal | null
+    isDefault: boolean | null
+    orderIndex: number | null
+  }
+
+  export type ModifierOptionMaxAggregateOutputType = {
+    id: string | null
+    modifierGroupId: string | null
+    label: string | null
+    priceAdjustment: Decimal | null
+    isDefault: boolean | null
+    orderIndex: number | null
+  }
+
+  export type ModifierOptionCountAggregateOutputType = {
+    id: number
+    modifierGroupId: number
+    label: number
+    priceAdjustment: number
+    isDefault: number
+    orderIndex: number
+    _all: number
+  }
+
+
+  export type ModifierOptionAvgAggregateInputType = {
+    priceAdjustment?: true
+    orderIndex?: true
+  }
+
+  export type ModifierOptionSumAggregateInputType = {
+    priceAdjustment?: true
+    orderIndex?: true
+  }
+
+  export type ModifierOptionMinAggregateInputType = {
+    id?: true
+    modifierGroupId?: true
+    label?: true
+    priceAdjustment?: true
+    isDefault?: true
+    orderIndex?: true
+  }
+
+  export type ModifierOptionMaxAggregateInputType = {
+    id?: true
+    modifierGroupId?: true
+    label?: true
+    priceAdjustment?: true
+    isDefault?: true
+    orderIndex?: true
+  }
+
+  export type ModifierOptionCountAggregateInputType = {
+    id?: true
+    modifierGroupId?: true
+    label?: true
+    priceAdjustment?: true
+    isDefault?: true
+    orderIndex?: true
+    _all?: true
+  }
+
+  export type ModifierOptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ModifierOption to aggregate.
+     */
+    where?: ModifierOptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModifierOptions to fetch.
+     */
+    orderBy?: ModifierOptionOrderByWithRelationInput | ModifierOptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ModifierOptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModifierOptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModifierOptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ModifierOptions
+    **/
+    _count?: true | ModifierOptionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ModifierOptionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ModifierOptionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ModifierOptionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ModifierOptionMaxAggregateInputType
+  }
+
+  export type GetModifierOptionAggregateType<T extends ModifierOptionAggregateArgs> = {
+        [P in keyof T & keyof AggregateModifierOption]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateModifierOption[P]>
+      : GetScalarType<T[P], AggregateModifierOption[P]>
+  }
+
+
+
+
+  export type ModifierOptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ModifierOptionWhereInput
+    orderBy?: ModifierOptionOrderByWithAggregationInput | ModifierOptionOrderByWithAggregationInput[]
+    by: ModifierOptionScalarFieldEnum[] | ModifierOptionScalarFieldEnum
+    having?: ModifierOptionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ModifierOptionCountAggregateInputType | true
+    _avg?: ModifierOptionAvgAggregateInputType
+    _sum?: ModifierOptionSumAggregateInputType
+    _min?: ModifierOptionMinAggregateInputType
+    _max?: ModifierOptionMaxAggregateInputType
+  }
+
+  export type ModifierOptionGroupByOutputType = {
+    id: string
+    modifierGroupId: string
+    label: string
+    priceAdjustment: Decimal
+    isDefault: boolean
+    orderIndex: number
+    _count: ModifierOptionCountAggregateOutputType | null
+    _avg: ModifierOptionAvgAggregateOutputType | null
+    _sum: ModifierOptionSumAggregateOutputType | null
+    _min: ModifierOptionMinAggregateOutputType | null
+    _max: ModifierOptionMaxAggregateOutputType | null
+  }
+
+  type GetModifierOptionGroupByPayload<T extends ModifierOptionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ModifierOptionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ModifierOptionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ModifierOptionGroupByOutputType[P]>
+            : GetScalarType<T[P], ModifierOptionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ModifierOptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modifierGroupId?: boolean
+    label?: boolean
+    priceAdjustment?: boolean
+    isDefault?: boolean
+    orderIndex?: boolean
+    modifierGroup?: boolean | ModifierGroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["modifierOption"]>
+
+  export type ModifierOptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modifierGroupId?: boolean
+    label?: boolean
+    priceAdjustment?: boolean
+    isDefault?: boolean
+    orderIndex?: boolean
+    modifierGroup?: boolean | ModifierGroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["modifierOption"]>
+
+  export type ModifierOptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    modifierGroupId?: boolean
+    label?: boolean
+    priceAdjustment?: boolean
+    isDefault?: boolean
+    orderIndex?: boolean
+    modifierGroup?: boolean | ModifierGroupDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["modifierOption"]>
+
+  export type ModifierOptionSelectScalar = {
+    id?: boolean
+    modifierGroupId?: boolean
+    label?: boolean
+    priceAdjustment?: boolean
+    isDefault?: boolean
+    orderIndex?: boolean
+  }
+
+  export type ModifierOptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "modifierGroupId" | "label" | "priceAdjustment" | "isDefault" | "orderIndex", ExtArgs["result"]["modifierOption"]>
+  export type ModifierOptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modifierGroup?: boolean | ModifierGroupDefaultArgs<ExtArgs>
+  }
+  export type ModifierOptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modifierGroup?: boolean | ModifierGroupDefaultArgs<ExtArgs>
+  }
+  export type ModifierOptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    modifierGroup?: boolean | ModifierGroupDefaultArgs<ExtArgs>
+  }
+
+  export type $ModifierOptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ModifierOption"
+    objects: {
+      modifierGroup: Prisma.$ModifierGroupPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      modifierGroupId: string
+      label: string
+      priceAdjustment: Prisma.Decimal
+      isDefault: boolean
+      orderIndex: number
+    }, ExtArgs["result"]["modifierOption"]>
+    composites: {}
+  }
+
+  type ModifierOptionGetPayload<S extends boolean | null | undefined | ModifierOptionDefaultArgs> = $Result.GetResult<Prisma.$ModifierOptionPayload, S>
+
+  type ModifierOptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ModifierOptionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ModifierOptionCountAggregateInputType | true
+    }
+
+  export interface ModifierOptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ModifierOption'], meta: { name: 'ModifierOption' } }
+    /**
+     * Find zero or one ModifierOption that matches the filter.
+     * @param {ModifierOptionFindUniqueArgs} args - Arguments to find a ModifierOption
+     * @example
+     * // Get one ModifierOption
+     * const modifierOption = await prisma.modifierOption.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ModifierOptionFindUniqueArgs>(args: SelectSubset<T, ModifierOptionFindUniqueArgs<ExtArgs>>): Prisma__ModifierOptionClient<$Result.GetResult<Prisma.$ModifierOptionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ModifierOption that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ModifierOptionFindUniqueOrThrowArgs} args - Arguments to find a ModifierOption
+     * @example
+     * // Get one ModifierOption
+     * const modifierOption = await prisma.modifierOption.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ModifierOptionFindUniqueOrThrowArgs>(args: SelectSubset<T, ModifierOptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ModifierOptionClient<$Result.GetResult<Prisma.$ModifierOptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ModifierOption that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierOptionFindFirstArgs} args - Arguments to find a ModifierOption
+     * @example
+     * // Get one ModifierOption
+     * const modifierOption = await prisma.modifierOption.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ModifierOptionFindFirstArgs>(args?: SelectSubset<T, ModifierOptionFindFirstArgs<ExtArgs>>): Prisma__ModifierOptionClient<$Result.GetResult<Prisma.$ModifierOptionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ModifierOption that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierOptionFindFirstOrThrowArgs} args - Arguments to find a ModifierOption
+     * @example
+     * // Get one ModifierOption
+     * const modifierOption = await prisma.modifierOption.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ModifierOptionFindFirstOrThrowArgs>(args?: SelectSubset<T, ModifierOptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__ModifierOptionClient<$Result.GetResult<Prisma.$ModifierOptionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ModifierOptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierOptionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ModifierOptions
+     * const modifierOptions = await prisma.modifierOption.findMany()
+     * 
+     * // Get first 10 ModifierOptions
+     * const modifierOptions = await prisma.modifierOption.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const modifierOptionWithIdOnly = await prisma.modifierOption.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ModifierOptionFindManyArgs>(args?: SelectSubset<T, ModifierOptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModifierOptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ModifierOption.
+     * @param {ModifierOptionCreateArgs} args - Arguments to create a ModifierOption.
+     * @example
+     * // Create one ModifierOption
+     * const ModifierOption = await prisma.modifierOption.create({
+     *   data: {
+     *     // ... data to create a ModifierOption
+     *   }
+     * })
+     * 
+     */
+    create<T extends ModifierOptionCreateArgs>(args: SelectSubset<T, ModifierOptionCreateArgs<ExtArgs>>): Prisma__ModifierOptionClient<$Result.GetResult<Prisma.$ModifierOptionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ModifierOptions.
+     * @param {ModifierOptionCreateManyArgs} args - Arguments to create many ModifierOptions.
+     * @example
+     * // Create many ModifierOptions
+     * const modifierOption = await prisma.modifierOption.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ModifierOptionCreateManyArgs>(args?: SelectSubset<T, ModifierOptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ModifierOptions and returns the data saved in the database.
+     * @param {ModifierOptionCreateManyAndReturnArgs} args - Arguments to create many ModifierOptions.
+     * @example
+     * // Create many ModifierOptions
+     * const modifierOption = await prisma.modifierOption.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ModifierOptions and only return the `id`
+     * const modifierOptionWithIdOnly = await prisma.modifierOption.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ModifierOptionCreateManyAndReturnArgs>(args?: SelectSubset<T, ModifierOptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModifierOptionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ModifierOption.
+     * @param {ModifierOptionDeleteArgs} args - Arguments to delete one ModifierOption.
+     * @example
+     * // Delete one ModifierOption
+     * const ModifierOption = await prisma.modifierOption.delete({
+     *   where: {
+     *     // ... filter to delete one ModifierOption
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ModifierOptionDeleteArgs>(args: SelectSubset<T, ModifierOptionDeleteArgs<ExtArgs>>): Prisma__ModifierOptionClient<$Result.GetResult<Prisma.$ModifierOptionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ModifierOption.
+     * @param {ModifierOptionUpdateArgs} args - Arguments to update one ModifierOption.
+     * @example
+     * // Update one ModifierOption
+     * const modifierOption = await prisma.modifierOption.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ModifierOptionUpdateArgs>(args: SelectSubset<T, ModifierOptionUpdateArgs<ExtArgs>>): Prisma__ModifierOptionClient<$Result.GetResult<Prisma.$ModifierOptionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ModifierOptions.
+     * @param {ModifierOptionDeleteManyArgs} args - Arguments to filter ModifierOptions to delete.
+     * @example
+     * // Delete a few ModifierOptions
+     * const { count } = await prisma.modifierOption.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ModifierOptionDeleteManyArgs>(args?: SelectSubset<T, ModifierOptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ModifierOptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierOptionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ModifierOptions
+     * const modifierOption = await prisma.modifierOption.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ModifierOptionUpdateManyArgs>(args: SelectSubset<T, ModifierOptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ModifierOptions and returns the data updated in the database.
+     * @param {ModifierOptionUpdateManyAndReturnArgs} args - Arguments to update many ModifierOptions.
+     * @example
+     * // Update many ModifierOptions
+     * const modifierOption = await prisma.modifierOption.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ModifierOptions and only return the `id`
+     * const modifierOptionWithIdOnly = await prisma.modifierOption.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ModifierOptionUpdateManyAndReturnArgs>(args: SelectSubset<T, ModifierOptionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ModifierOptionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ModifierOption.
+     * @param {ModifierOptionUpsertArgs} args - Arguments to update or create a ModifierOption.
+     * @example
+     * // Update or create a ModifierOption
+     * const modifierOption = await prisma.modifierOption.upsert({
+     *   create: {
+     *     // ... data to create a ModifierOption
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ModifierOption we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ModifierOptionUpsertArgs>(args: SelectSubset<T, ModifierOptionUpsertArgs<ExtArgs>>): Prisma__ModifierOptionClient<$Result.GetResult<Prisma.$ModifierOptionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ModifierOptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierOptionCountArgs} args - Arguments to filter ModifierOptions to count.
+     * @example
+     * // Count the number of ModifierOptions
+     * const count = await prisma.modifierOption.count({
+     *   where: {
+     *     // ... the filter for the ModifierOptions we want to count
+     *   }
+     * })
+    **/
+    count<T extends ModifierOptionCountArgs>(
+      args?: Subset<T, ModifierOptionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ModifierOptionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ModifierOption.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierOptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ModifierOptionAggregateArgs>(args: Subset<T, ModifierOptionAggregateArgs>): Prisma.PrismaPromise<GetModifierOptionAggregateType<T>>
+
+    /**
+     * Group by ModifierOption.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ModifierOptionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ModifierOptionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ModifierOptionGroupByArgs['orderBy'] }
+        : { orderBy?: ModifierOptionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ModifierOptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetModifierOptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ModifierOption model
+   */
+  readonly fields: ModifierOptionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ModifierOption.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ModifierOptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    modifierGroup<T extends ModifierGroupDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ModifierGroupDefaultArgs<ExtArgs>>): Prisma__ModifierGroupClient<$Result.GetResult<Prisma.$ModifierGroupPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ModifierOption model
+   */
+  interface ModifierOptionFieldRefs {
+    readonly id: FieldRef<"ModifierOption", 'String'>
+    readonly modifierGroupId: FieldRef<"ModifierOption", 'String'>
+    readonly label: FieldRef<"ModifierOption", 'String'>
+    readonly priceAdjustment: FieldRef<"ModifierOption", 'Decimal'>
+    readonly isDefault: FieldRef<"ModifierOption", 'Boolean'>
+    readonly orderIndex: FieldRef<"ModifierOption", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ModifierOption findUnique
+   */
+  export type ModifierOptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionInclude<ExtArgs> | null
+    /**
+     * Filter, which ModifierOption to fetch.
+     */
+    where: ModifierOptionWhereUniqueInput
+  }
+
+  /**
+   * ModifierOption findUniqueOrThrow
+   */
+  export type ModifierOptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionInclude<ExtArgs> | null
+    /**
+     * Filter, which ModifierOption to fetch.
+     */
+    where: ModifierOptionWhereUniqueInput
+  }
+
+  /**
+   * ModifierOption findFirst
+   */
+  export type ModifierOptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionInclude<ExtArgs> | null
+    /**
+     * Filter, which ModifierOption to fetch.
+     */
+    where?: ModifierOptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModifierOptions to fetch.
+     */
+    orderBy?: ModifierOptionOrderByWithRelationInput | ModifierOptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ModifierOptions.
+     */
+    cursor?: ModifierOptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModifierOptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModifierOptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ModifierOptions.
+     */
+    distinct?: ModifierOptionScalarFieldEnum | ModifierOptionScalarFieldEnum[]
+  }
+
+  /**
+   * ModifierOption findFirstOrThrow
+   */
+  export type ModifierOptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionInclude<ExtArgs> | null
+    /**
+     * Filter, which ModifierOption to fetch.
+     */
+    where?: ModifierOptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModifierOptions to fetch.
+     */
+    orderBy?: ModifierOptionOrderByWithRelationInput | ModifierOptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ModifierOptions.
+     */
+    cursor?: ModifierOptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModifierOptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModifierOptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ModifierOptions.
+     */
+    distinct?: ModifierOptionScalarFieldEnum | ModifierOptionScalarFieldEnum[]
+  }
+
+  /**
+   * ModifierOption findMany
+   */
+  export type ModifierOptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionInclude<ExtArgs> | null
+    /**
+     * Filter, which ModifierOptions to fetch.
+     */
+    where?: ModifierOptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ModifierOptions to fetch.
+     */
+    orderBy?: ModifierOptionOrderByWithRelationInput | ModifierOptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ModifierOptions.
+     */
+    cursor?: ModifierOptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ModifierOptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ModifierOptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ModifierOptions.
+     */
+    distinct?: ModifierOptionScalarFieldEnum | ModifierOptionScalarFieldEnum[]
+  }
+
+  /**
+   * ModifierOption create
+   */
+  export type ModifierOptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ModifierOption.
+     */
+    data: XOR<ModifierOptionCreateInput, ModifierOptionUncheckedCreateInput>
+  }
+
+  /**
+   * ModifierOption createMany
+   */
+  export type ModifierOptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ModifierOptions.
+     */
+    data: ModifierOptionCreateManyInput | ModifierOptionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ModifierOption createManyAndReturn
+   */
+  export type ModifierOptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * The data used to create many ModifierOptions.
+     */
+    data: ModifierOptionCreateManyInput | ModifierOptionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ModifierOption update
+   */
+  export type ModifierOptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ModifierOption.
+     */
+    data: XOR<ModifierOptionUpdateInput, ModifierOptionUncheckedUpdateInput>
+    /**
+     * Choose, which ModifierOption to update.
+     */
+    where: ModifierOptionWhereUniqueInput
+  }
+
+  /**
+   * ModifierOption updateMany
+   */
+  export type ModifierOptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ModifierOptions.
+     */
+    data: XOR<ModifierOptionUpdateManyMutationInput, ModifierOptionUncheckedUpdateManyInput>
+    /**
+     * Filter which ModifierOptions to update
+     */
+    where?: ModifierOptionWhereInput
+    /**
+     * Limit how many ModifierOptions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ModifierOption updateManyAndReturn
+   */
+  export type ModifierOptionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * The data used to update ModifierOptions.
+     */
+    data: XOR<ModifierOptionUpdateManyMutationInput, ModifierOptionUncheckedUpdateManyInput>
+    /**
+     * Filter which ModifierOptions to update
+     */
+    where?: ModifierOptionWhereInput
+    /**
+     * Limit how many ModifierOptions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ModifierOption upsert
+   */
+  export type ModifierOptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ModifierOption to update in case it exists.
+     */
+    where: ModifierOptionWhereUniqueInput
+    /**
+     * In case the ModifierOption found by the `where` argument doesn't exist, create a new ModifierOption with this data.
+     */
+    create: XOR<ModifierOptionCreateInput, ModifierOptionUncheckedCreateInput>
+    /**
+     * In case the ModifierOption was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ModifierOptionUpdateInput, ModifierOptionUncheckedUpdateInput>
+  }
+
+  /**
+   * ModifierOption delete
+   */
+  export type ModifierOptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionInclude<ExtArgs> | null
+    /**
+     * Filter which ModifierOption to delete.
+     */
+    where: ModifierOptionWhereUniqueInput
+  }
+
+  /**
+   * ModifierOption deleteMany
+   */
+  export type ModifierOptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ModifierOptions to delete
+     */
+    where?: ModifierOptionWhereInput
+    /**
+     * Limit how many ModifierOptions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ModifierOption without action
+   */
+  export type ModifierOptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ModifierOption
+     */
+    select?: ModifierOptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ModifierOption
+     */
+    omit?: ModifierOptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ModifierOptionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Order
    */
 
@@ -13749,6 +16315,7 @@ export namespace Prisma {
     menuItemId: number
     quantity: number
     addOns: number
+    modifiers: number
     _all: number
   }
 
@@ -13784,6 +16351,7 @@ export namespace Prisma {
     menuItemId?: true
     quantity?: true
     addOns?: true
+    modifiers?: true
     _all?: true
   }
 
@@ -13880,6 +16448,7 @@ export namespace Prisma {
     menuItemId: string
     quantity: number
     addOns: JsonValue | null
+    modifiers: JsonValue | null
     _count: OrderItemCountAggregateOutputType | null
     _avg: OrderItemAvgAggregateOutputType | null
     _sum: OrderItemSumAggregateOutputType | null
@@ -13908,6 +16477,7 @@ export namespace Prisma {
     menuItemId?: boolean
     quantity?: boolean
     addOns?: boolean
+    modifiers?: boolean
     venue?: boolean | VenueDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
     menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
@@ -13920,6 +16490,7 @@ export namespace Prisma {
     menuItemId?: boolean
     quantity?: boolean
     addOns?: boolean
+    modifiers?: boolean
     venue?: boolean | VenueDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
     menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
@@ -13932,6 +16503,7 @@ export namespace Prisma {
     menuItemId?: boolean
     quantity?: boolean
     addOns?: boolean
+    modifiers?: boolean
     venue?: boolean | VenueDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
     menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
@@ -13944,9 +16516,10 @@ export namespace Prisma {
     menuItemId?: boolean
     quantity?: boolean
     addOns?: boolean
+    modifiers?: boolean
   }
 
-  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "venueId" | "orderId" | "menuItemId" | "quantity" | "addOns", ExtArgs["result"]["orderItem"]>
+  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "venueId" | "orderId" | "menuItemId" | "quantity" | "addOns" | "modifiers", ExtArgs["result"]["orderItem"]>
   export type OrderItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     venue?: boolean | VenueDefaultArgs<ExtArgs>
     order?: boolean | OrderDefaultArgs<ExtArgs>
@@ -13977,6 +16550,7 @@ export namespace Prisma {
       menuItemId: string
       quantity: number
       addOns: Prisma.JsonValue | null
+      modifiers: Prisma.JsonValue | null
     }, ExtArgs["result"]["orderItem"]>
     composites: {}
   }
@@ -14409,6 +16983,7 @@ export namespace Prisma {
     readonly menuItemId: FieldRef<"OrderItem", 'String'>
     readonly quantity: FieldRef<"OrderItem", 'Int'>
     readonly addOns: FieldRef<"OrderItem", 'Json'>
+    readonly modifiers: FieldRef<"OrderItem", 'Json'>
   }
     
 
@@ -14954,6 +17529,31 @@ export namespace Prisma {
   export type AddOnScalarFieldEnum = (typeof AddOnScalarFieldEnum)[keyof typeof AddOnScalarFieldEnum]
 
 
+  export const ModifierGroupScalarFieldEnum: {
+    id: 'id',
+    venueId: 'venueId',
+    menuItemId: 'menuItemId',
+    name: 'name',
+    required: 'required',
+    maxSelections: 'maxSelections',
+    orderIndex: 'orderIndex'
+  };
+
+  export type ModifierGroupScalarFieldEnum = (typeof ModifierGroupScalarFieldEnum)[keyof typeof ModifierGroupScalarFieldEnum]
+
+
+  export const ModifierOptionScalarFieldEnum: {
+    id: 'id',
+    modifierGroupId: 'modifierGroupId',
+    label: 'label',
+    priceAdjustment: 'priceAdjustment',
+    isDefault: 'isDefault',
+    orderIndex: 'orderIndex'
+  };
+
+  export type ModifierOptionScalarFieldEnum = (typeof ModifierOptionScalarFieldEnum)[keyof typeof ModifierOptionScalarFieldEnum]
+
+
   export const OrderScalarFieldEnum: {
     id: 'id',
     venueId: 'venueId',
@@ -14976,7 +17576,8 @@ export namespace Prisma {
     orderId: 'orderId',
     menuItemId: 'menuItemId',
     quantity: 'quantity',
-    addOns: 'addOns'
+    addOns: 'addOns',
+    modifiers: 'modifiers'
   };
 
   export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
@@ -15163,6 +17764,7 @@ export namespace Prisma {
     ingredients?: IngredientListRelationFilter
     recipeItems?: RecipeItemListRelationFilter
     addOns?: AddOnListRelationFilter
+    modifierGroups?: ModifierGroupListRelationFilter
     orders?: OrderListRelationFilter
     orderItems?: OrderItemListRelationFilter
   }
@@ -15184,6 +17786,7 @@ export namespace Prisma {
     ingredients?: IngredientOrderByRelationAggregateInput
     recipeItems?: RecipeItemOrderByRelationAggregateInput
     addOns?: AddOnOrderByRelationAggregateInput
+    modifierGroups?: ModifierGroupOrderByRelationAggregateInput
     orders?: OrderOrderByRelationAggregateInput
     orderItems?: OrderItemOrderByRelationAggregateInput
   }
@@ -15208,6 +17811,7 @@ export namespace Prisma {
     ingredients?: IngredientListRelationFilter
     recipeItems?: RecipeItemListRelationFilter
     addOns?: AddOnListRelationFilter
+    modifierGroups?: ModifierGroupListRelationFilter
     orders?: OrderListRelationFilter
     orderItems?: OrderItemListRelationFilter
   }, "id" | "slug">
@@ -15517,6 +18121,7 @@ export namespace Prisma {
     category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
     orderItems?: OrderItemListRelationFilter
     recipeItems?: RecipeItemListRelationFilter
+    modifierGroups?: ModifierGroupListRelationFilter
   }
 
   export type MenuItemOrderByWithRelationInput = {
@@ -15533,6 +18138,7 @@ export namespace Prisma {
     category?: CategoryOrderByWithRelationInput
     orderItems?: OrderItemOrderByRelationAggregateInput
     recipeItems?: RecipeItemOrderByRelationAggregateInput
+    modifierGroups?: ModifierGroupOrderByRelationAggregateInput
   }
 
   export type MenuItemWhereUniqueInput = Prisma.AtLeast<{
@@ -15552,6 +18158,7 @@ export namespace Prisma {
     category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
     orderItems?: OrderItemListRelationFilter
     recipeItems?: RecipeItemListRelationFilter
+    modifierGroups?: ModifierGroupListRelationFilter
   }, "id">
 
   export type MenuItemOrderByWithAggregationInput = {
@@ -15771,6 +18378,141 @@ export namespace Prisma {
     applicableItemIds?: StringNullableListFilter<"AddOn">
   }
 
+  export type ModifierGroupWhereInput = {
+    AND?: ModifierGroupWhereInput | ModifierGroupWhereInput[]
+    OR?: ModifierGroupWhereInput[]
+    NOT?: ModifierGroupWhereInput | ModifierGroupWhereInput[]
+    id?: StringFilter<"ModifierGroup"> | string
+    venueId?: StringFilter<"ModifierGroup"> | string
+    menuItemId?: StringFilter<"ModifierGroup"> | string
+    name?: StringFilter<"ModifierGroup"> | string
+    required?: BoolFilter<"ModifierGroup"> | boolean
+    maxSelections?: IntFilter<"ModifierGroup"> | number
+    orderIndex?: IntFilter<"ModifierGroup"> | number
+    venue?: XOR<VenueScalarRelationFilter, VenueWhereInput>
+    menuItem?: XOR<MenuItemScalarRelationFilter, MenuItemWhereInput>
+    options?: ModifierOptionListRelationFilter
+  }
+
+  export type ModifierGroupOrderByWithRelationInput = {
+    id?: SortOrder
+    venueId?: SortOrder
+    menuItemId?: SortOrder
+    name?: SortOrder
+    required?: SortOrder
+    maxSelections?: SortOrder
+    orderIndex?: SortOrder
+    venue?: VenueOrderByWithRelationInput
+    menuItem?: MenuItemOrderByWithRelationInput
+    options?: ModifierOptionOrderByRelationAggregateInput
+  }
+
+  export type ModifierGroupWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ModifierGroupWhereInput | ModifierGroupWhereInput[]
+    OR?: ModifierGroupWhereInput[]
+    NOT?: ModifierGroupWhereInput | ModifierGroupWhereInput[]
+    venueId?: StringFilter<"ModifierGroup"> | string
+    menuItemId?: StringFilter<"ModifierGroup"> | string
+    name?: StringFilter<"ModifierGroup"> | string
+    required?: BoolFilter<"ModifierGroup"> | boolean
+    maxSelections?: IntFilter<"ModifierGroup"> | number
+    orderIndex?: IntFilter<"ModifierGroup"> | number
+    venue?: XOR<VenueScalarRelationFilter, VenueWhereInput>
+    menuItem?: XOR<MenuItemScalarRelationFilter, MenuItemWhereInput>
+    options?: ModifierOptionListRelationFilter
+  }, "id">
+
+  export type ModifierGroupOrderByWithAggregationInput = {
+    id?: SortOrder
+    venueId?: SortOrder
+    menuItemId?: SortOrder
+    name?: SortOrder
+    required?: SortOrder
+    maxSelections?: SortOrder
+    orderIndex?: SortOrder
+    _count?: ModifierGroupCountOrderByAggregateInput
+    _avg?: ModifierGroupAvgOrderByAggregateInput
+    _max?: ModifierGroupMaxOrderByAggregateInput
+    _min?: ModifierGroupMinOrderByAggregateInput
+    _sum?: ModifierGroupSumOrderByAggregateInput
+  }
+
+  export type ModifierGroupScalarWhereWithAggregatesInput = {
+    AND?: ModifierGroupScalarWhereWithAggregatesInput | ModifierGroupScalarWhereWithAggregatesInput[]
+    OR?: ModifierGroupScalarWhereWithAggregatesInput[]
+    NOT?: ModifierGroupScalarWhereWithAggregatesInput | ModifierGroupScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ModifierGroup"> | string
+    venueId?: StringWithAggregatesFilter<"ModifierGroup"> | string
+    menuItemId?: StringWithAggregatesFilter<"ModifierGroup"> | string
+    name?: StringWithAggregatesFilter<"ModifierGroup"> | string
+    required?: BoolWithAggregatesFilter<"ModifierGroup"> | boolean
+    maxSelections?: IntWithAggregatesFilter<"ModifierGroup"> | number
+    orderIndex?: IntWithAggregatesFilter<"ModifierGroup"> | number
+  }
+
+  export type ModifierOptionWhereInput = {
+    AND?: ModifierOptionWhereInput | ModifierOptionWhereInput[]
+    OR?: ModifierOptionWhereInput[]
+    NOT?: ModifierOptionWhereInput | ModifierOptionWhereInput[]
+    id?: StringFilter<"ModifierOption"> | string
+    modifierGroupId?: StringFilter<"ModifierOption"> | string
+    label?: StringFilter<"ModifierOption"> | string
+    priceAdjustment?: DecimalFilter<"ModifierOption"> | Decimal | DecimalJsLike | number | string
+    isDefault?: BoolFilter<"ModifierOption"> | boolean
+    orderIndex?: IntFilter<"ModifierOption"> | number
+    modifierGroup?: XOR<ModifierGroupScalarRelationFilter, ModifierGroupWhereInput>
+  }
+
+  export type ModifierOptionOrderByWithRelationInput = {
+    id?: SortOrder
+    modifierGroupId?: SortOrder
+    label?: SortOrder
+    priceAdjustment?: SortOrder
+    isDefault?: SortOrder
+    orderIndex?: SortOrder
+    modifierGroup?: ModifierGroupOrderByWithRelationInput
+  }
+
+  export type ModifierOptionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ModifierOptionWhereInput | ModifierOptionWhereInput[]
+    OR?: ModifierOptionWhereInput[]
+    NOT?: ModifierOptionWhereInput | ModifierOptionWhereInput[]
+    modifierGroupId?: StringFilter<"ModifierOption"> | string
+    label?: StringFilter<"ModifierOption"> | string
+    priceAdjustment?: DecimalFilter<"ModifierOption"> | Decimal | DecimalJsLike | number | string
+    isDefault?: BoolFilter<"ModifierOption"> | boolean
+    orderIndex?: IntFilter<"ModifierOption"> | number
+    modifierGroup?: XOR<ModifierGroupScalarRelationFilter, ModifierGroupWhereInput>
+  }, "id">
+
+  export type ModifierOptionOrderByWithAggregationInput = {
+    id?: SortOrder
+    modifierGroupId?: SortOrder
+    label?: SortOrder
+    priceAdjustment?: SortOrder
+    isDefault?: SortOrder
+    orderIndex?: SortOrder
+    _count?: ModifierOptionCountOrderByAggregateInput
+    _avg?: ModifierOptionAvgOrderByAggregateInput
+    _max?: ModifierOptionMaxOrderByAggregateInput
+    _min?: ModifierOptionMinOrderByAggregateInput
+    _sum?: ModifierOptionSumOrderByAggregateInput
+  }
+
+  export type ModifierOptionScalarWhereWithAggregatesInput = {
+    AND?: ModifierOptionScalarWhereWithAggregatesInput | ModifierOptionScalarWhereWithAggregatesInput[]
+    OR?: ModifierOptionScalarWhereWithAggregatesInput[]
+    NOT?: ModifierOptionScalarWhereWithAggregatesInput | ModifierOptionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ModifierOption"> | string
+    modifierGroupId?: StringWithAggregatesFilter<"ModifierOption"> | string
+    label?: StringWithAggregatesFilter<"ModifierOption"> | string
+    priceAdjustment?: DecimalWithAggregatesFilter<"ModifierOption"> | Decimal | DecimalJsLike | number | string
+    isDefault?: BoolWithAggregatesFilter<"ModifierOption"> | boolean
+    orderIndex?: IntWithAggregatesFilter<"ModifierOption"> | number
+  }
+
   export type OrderWhereInput = {
     AND?: OrderWhereInput | OrderWhereInput[]
     OR?: OrderWhereInput[]
@@ -15869,6 +18611,7 @@ export namespace Prisma {
     menuItemId?: StringFilter<"OrderItem"> | string
     quantity?: IntFilter<"OrderItem"> | number
     addOns?: JsonNullableFilter<"OrderItem">
+    modifiers?: JsonNullableFilter<"OrderItem">
     venue?: XOR<VenueScalarRelationFilter, VenueWhereInput>
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
     menuItem?: XOR<MenuItemScalarRelationFilter, MenuItemWhereInput>
@@ -15881,6 +18624,7 @@ export namespace Prisma {
     menuItemId?: SortOrder
     quantity?: SortOrder
     addOns?: SortOrderInput | SortOrder
+    modifiers?: SortOrderInput | SortOrder
     venue?: VenueOrderByWithRelationInput
     order?: OrderOrderByWithRelationInput
     menuItem?: MenuItemOrderByWithRelationInput
@@ -15896,6 +18640,7 @@ export namespace Prisma {
     menuItemId?: StringFilter<"OrderItem"> | string
     quantity?: IntFilter<"OrderItem"> | number
     addOns?: JsonNullableFilter<"OrderItem">
+    modifiers?: JsonNullableFilter<"OrderItem">
     venue?: XOR<VenueScalarRelationFilter, VenueWhereInput>
     order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
     menuItem?: XOR<MenuItemScalarRelationFilter, MenuItemWhereInput>
@@ -15908,6 +18653,7 @@ export namespace Prisma {
     menuItemId?: SortOrder
     quantity?: SortOrder
     addOns?: SortOrderInput | SortOrder
+    modifiers?: SortOrderInput | SortOrder
     _count?: OrderItemCountOrderByAggregateInput
     _avg?: OrderItemAvgOrderByAggregateInput
     _max?: OrderItemMaxOrderByAggregateInput
@@ -15925,6 +18671,7 @@ export namespace Prisma {
     menuItemId?: StringWithAggregatesFilter<"OrderItem"> | string
     quantity?: IntWithAggregatesFilter<"OrderItem"> | number
     addOns?: JsonNullableWithAggregatesFilter<"OrderItem">
+    modifiers?: JsonNullableWithAggregatesFilter<"OrderItem">
   }
 
   export type VenueCreateInput = {
@@ -15944,6 +18691,7 @@ export namespace Prisma {
     ingredients?: IngredientCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemCreateNestedManyWithoutVenueInput
     addOns?: AddOnCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutVenueInput
     orders?: OrderCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemCreateNestedManyWithoutVenueInput
   }
@@ -15965,6 +18713,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutVenueInput
     addOns?: AddOnUncheckedCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutVenueInput
     orders?: OrderUncheckedCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVenueInput
   }
@@ -15986,6 +18735,7 @@ export namespace Prisma {
     ingredients?: IngredientUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutVenueNestedInput
     orders?: OrderUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUpdateManyWithoutVenueNestedInput
   }
@@ -16007,6 +18757,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUncheckedUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutVenueNestedInput
     orders?: OrderUncheckedUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutVenueNestedInput
   }
@@ -16322,6 +19073,7 @@ export namespace Prisma {
     category: CategoryCreateNestedOneWithoutItemsInput
     orderItems?: OrderItemCreateNestedManyWithoutMenuItemInput
     recipeItems?: RecipeItemCreateNestedManyWithoutMenuItemInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUncheckedCreateInput = {
@@ -16336,6 +19088,7 @@ export namespace Prisma {
     quizTags?: NullableJsonNullValueInput | InputJsonValue
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutMenuItemInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutMenuItemInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUpdateInput = {
@@ -16350,6 +19103,7 @@ export namespace Prisma {
     category?: CategoryUpdateOneRequiredWithoutItemsNestedInput
     orderItems?: OrderItemUpdateManyWithoutMenuItemNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutMenuItemNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateInput = {
@@ -16364,6 +19118,7 @@ export namespace Prisma {
     quizTags?: NullableJsonNullValueInput | InputJsonValue
     orderItems?: OrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutMenuItemNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemCreateManyInput = {
@@ -16574,6 +19329,140 @@ export namespace Prisma {
     applicableItemIds?: AddOnUpdateapplicableItemIdsInput | string[]
   }
 
+  export type ModifierGroupCreateInput = {
+    id?: string
+    name: string
+    required?: boolean
+    maxSelections?: number
+    orderIndex?: number
+    venue: VenueCreateNestedOneWithoutModifierGroupsInput
+    menuItem: MenuItemCreateNestedOneWithoutModifierGroupsInput
+    options?: ModifierOptionCreateNestedManyWithoutModifierGroupInput
+  }
+
+  export type ModifierGroupUncheckedCreateInput = {
+    id?: string
+    venueId: string
+    menuItemId: string
+    name: string
+    required?: boolean
+    maxSelections?: number
+    orderIndex?: number
+    options?: ModifierOptionUncheckedCreateNestedManyWithoutModifierGroupInput
+  }
+
+  export type ModifierGroupUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    maxSelections?: IntFieldUpdateOperationsInput | number
+    orderIndex?: IntFieldUpdateOperationsInput | number
+    venue?: VenueUpdateOneRequiredWithoutModifierGroupsNestedInput
+    menuItem?: MenuItemUpdateOneRequiredWithoutModifierGroupsNestedInput
+    options?: ModifierOptionUpdateManyWithoutModifierGroupNestedInput
+  }
+
+  export type ModifierGroupUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    venueId?: StringFieldUpdateOperationsInput | string
+    menuItemId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    maxSelections?: IntFieldUpdateOperationsInput | number
+    orderIndex?: IntFieldUpdateOperationsInput | number
+    options?: ModifierOptionUncheckedUpdateManyWithoutModifierGroupNestedInput
+  }
+
+  export type ModifierGroupCreateManyInput = {
+    id?: string
+    venueId: string
+    menuItemId: string
+    name: string
+    required?: boolean
+    maxSelections?: number
+    orderIndex?: number
+  }
+
+  export type ModifierGroupUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    maxSelections?: IntFieldUpdateOperationsInput | number
+    orderIndex?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ModifierGroupUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    venueId?: StringFieldUpdateOperationsInput | string
+    menuItemId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    maxSelections?: IntFieldUpdateOperationsInput | number
+    orderIndex?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ModifierOptionCreateInput = {
+    id?: string
+    label: string
+    priceAdjustment?: Decimal | DecimalJsLike | number | string
+    isDefault?: boolean
+    orderIndex?: number
+    modifierGroup: ModifierGroupCreateNestedOneWithoutOptionsInput
+  }
+
+  export type ModifierOptionUncheckedCreateInput = {
+    id?: string
+    modifierGroupId: string
+    label: string
+    priceAdjustment?: Decimal | DecimalJsLike | number | string
+    isDefault?: boolean
+    orderIndex?: number
+  }
+
+  export type ModifierOptionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    priceAdjustment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    orderIndex?: IntFieldUpdateOperationsInput | number
+    modifierGroup?: ModifierGroupUpdateOneRequiredWithoutOptionsNestedInput
+  }
+
+  export type ModifierOptionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modifierGroupId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    priceAdjustment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    orderIndex?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ModifierOptionCreateManyInput = {
+    id?: string
+    modifierGroupId: string
+    label: string
+    priceAdjustment?: Decimal | DecimalJsLike | number | string
+    isDefault?: boolean
+    orderIndex?: number
+  }
+
+  export type ModifierOptionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    priceAdjustment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    orderIndex?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ModifierOptionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    modifierGroupId?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    priceAdjustment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    orderIndex?: IntFieldUpdateOperationsInput | number
+  }
+
   export type OrderCreateInput = {
     id?: string
     customerName?: string | null
@@ -16671,6 +19560,7 @@ export namespace Prisma {
     id?: string
     quantity: number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
     venue: VenueCreateNestedOneWithoutOrderItemsInput
     order: OrderCreateNestedOneWithoutItemsInput
     menuItem: MenuItemCreateNestedOneWithoutOrderItemsInput
@@ -16683,12 +19573,14 @@ export namespace Prisma {
     menuItemId: string
     quantity: number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type OrderItemUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
     venue?: VenueUpdateOneRequiredWithoutOrderItemsNestedInput
     order?: OrderUpdateOneRequiredWithoutItemsNestedInput
     menuItem?: MenuItemUpdateOneRequiredWithoutOrderItemsNestedInput
@@ -16701,6 +19593,7 @@ export namespace Prisma {
     menuItemId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type OrderItemCreateManyInput = {
@@ -16710,12 +19603,14 @@ export namespace Prisma {
     menuItemId: string
     quantity: number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type OrderItemUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type OrderItemUncheckedUpdateManyInput = {
@@ -16725,6 +19620,7 @@ export namespace Prisma {
     menuItemId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -16829,6 +19725,12 @@ export namespace Prisma {
     none?: AddOnWhereInput
   }
 
+  export type ModifierGroupListRelationFilter = {
+    every?: ModifierGroupWhereInput
+    some?: ModifierGroupWhereInput
+    none?: ModifierGroupWhereInput
+  }
+
   export type OrderListRelationFilter = {
     every?: OrderWhereInput
     some?: OrderWhereInput
@@ -16870,6 +19772,10 @@ export namespace Prisma {
   }
 
   export type AddOnOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ModifierGroupOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17459,6 +20365,98 @@ export namespace Prisma {
     price?: SortOrder
   }
 
+  export type ModifierOptionListRelationFilter = {
+    every?: ModifierOptionWhereInput
+    some?: ModifierOptionWhereInput
+    none?: ModifierOptionWhereInput
+  }
+
+  export type ModifierOptionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ModifierGroupCountOrderByAggregateInput = {
+    id?: SortOrder
+    venueId?: SortOrder
+    menuItemId?: SortOrder
+    name?: SortOrder
+    required?: SortOrder
+    maxSelections?: SortOrder
+    orderIndex?: SortOrder
+  }
+
+  export type ModifierGroupAvgOrderByAggregateInput = {
+    maxSelections?: SortOrder
+    orderIndex?: SortOrder
+  }
+
+  export type ModifierGroupMaxOrderByAggregateInput = {
+    id?: SortOrder
+    venueId?: SortOrder
+    menuItemId?: SortOrder
+    name?: SortOrder
+    required?: SortOrder
+    maxSelections?: SortOrder
+    orderIndex?: SortOrder
+  }
+
+  export type ModifierGroupMinOrderByAggregateInput = {
+    id?: SortOrder
+    venueId?: SortOrder
+    menuItemId?: SortOrder
+    name?: SortOrder
+    required?: SortOrder
+    maxSelections?: SortOrder
+    orderIndex?: SortOrder
+  }
+
+  export type ModifierGroupSumOrderByAggregateInput = {
+    maxSelections?: SortOrder
+    orderIndex?: SortOrder
+  }
+
+  export type ModifierGroupScalarRelationFilter = {
+    is?: ModifierGroupWhereInput
+    isNot?: ModifierGroupWhereInput
+  }
+
+  export type ModifierOptionCountOrderByAggregateInput = {
+    id?: SortOrder
+    modifierGroupId?: SortOrder
+    label?: SortOrder
+    priceAdjustment?: SortOrder
+    isDefault?: SortOrder
+    orderIndex?: SortOrder
+  }
+
+  export type ModifierOptionAvgOrderByAggregateInput = {
+    priceAdjustment?: SortOrder
+    orderIndex?: SortOrder
+  }
+
+  export type ModifierOptionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    modifierGroupId?: SortOrder
+    label?: SortOrder
+    priceAdjustment?: SortOrder
+    isDefault?: SortOrder
+    orderIndex?: SortOrder
+  }
+
+  export type ModifierOptionMinOrderByAggregateInput = {
+    id?: SortOrder
+    modifierGroupId?: SortOrder
+    label?: SortOrder
+    priceAdjustment?: SortOrder
+    isDefault?: SortOrder
+    orderIndex?: SortOrder
+  }
+
+  export type ModifierOptionSumOrderByAggregateInput = {
+    priceAdjustment?: SortOrder
+    orderIndex?: SortOrder
+  }
+
   export type TableSessionScalarRelationFilter = {
     is?: TableSessionWhereInput
     isNot?: TableSessionWhereInput
@@ -17525,6 +20523,7 @@ export namespace Prisma {
     menuItemId?: SortOrder
     quantity?: SortOrder
     addOns?: SortOrder
+    modifiers?: SortOrder
   }
 
   export type OrderItemAvgOrderByAggregateInput = {
@@ -17607,6 +20606,13 @@ export namespace Prisma {
     connect?: AddOnWhereUniqueInput | AddOnWhereUniqueInput[]
   }
 
+  export type ModifierGroupCreateNestedManyWithoutVenueInput = {
+    create?: XOR<ModifierGroupCreateWithoutVenueInput, ModifierGroupUncheckedCreateWithoutVenueInput> | ModifierGroupCreateWithoutVenueInput[] | ModifierGroupUncheckedCreateWithoutVenueInput[]
+    connectOrCreate?: ModifierGroupCreateOrConnectWithoutVenueInput | ModifierGroupCreateOrConnectWithoutVenueInput[]
+    createMany?: ModifierGroupCreateManyVenueInputEnvelope
+    connect?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+  }
+
   export type OrderCreateNestedManyWithoutVenueInput = {
     create?: XOR<OrderCreateWithoutVenueInput, OrderUncheckedCreateWithoutVenueInput> | OrderCreateWithoutVenueInput[] | OrderUncheckedCreateWithoutVenueInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutVenueInput | OrderCreateOrConnectWithoutVenueInput[]
@@ -17675,6 +20681,13 @@ export namespace Prisma {
     connectOrCreate?: AddOnCreateOrConnectWithoutVenueInput | AddOnCreateOrConnectWithoutVenueInput[]
     createMany?: AddOnCreateManyVenueInputEnvelope
     connect?: AddOnWhereUniqueInput | AddOnWhereUniqueInput[]
+  }
+
+  export type ModifierGroupUncheckedCreateNestedManyWithoutVenueInput = {
+    create?: XOR<ModifierGroupCreateWithoutVenueInput, ModifierGroupUncheckedCreateWithoutVenueInput> | ModifierGroupCreateWithoutVenueInput[] | ModifierGroupUncheckedCreateWithoutVenueInput[]
+    connectOrCreate?: ModifierGroupCreateOrConnectWithoutVenueInput | ModifierGroupCreateOrConnectWithoutVenueInput[]
+    createMany?: ModifierGroupCreateManyVenueInputEnvelope
+    connect?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
   }
 
   export type OrderUncheckedCreateNestedManyWithoutVenueInput = {
@@ -17815,6 +20828,20 @@ export namespace Prisma {
     deleteMany?: AddOnScalarWhereInput | AddOnScalarWhereInput[]
   }
 
+  export type ModifierGroupUpdateManyWithoutVenueNestedInput = {
+    create?: XOR<ModifierGroupCreateWithoutVenueInput, ModifierGroupUncheckedCreateWithoutVenueInput> | ModifierGroupCreateWithoutVenueInput[] | ModifierGroupUncheckedCreateWithoutVenueInput[]
+    connectOrCreate?: ModifierGroupCreateOrConnectWithoutVenueInput | ModifierGroupCreateOrConnectWithoutVenueInput[]
+    upsert?: ModifierGroupUpsertWithWhereUniqueWithoutVenueInput | ModifierGroupUpsertWithWhereUniqueWithoutVenueInput[]
+    createMany?: ModifierGroupCreateManyVenueInputEnvelope
+    set?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    disconnect?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    delete?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    connect?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    update?: ModifierGroupUpdateWithWhereUniqueWithoutVenueInput | ModifierGroupUpdateWithWhereUniqueWithoutVenueInput[]
+    updateMany?: ModifierGroupUpdateManyWithWhereWithoutVenueInput | ModifierGroupUpdateManyWithWhereWithoutVenueInput[]
+    deleteMany?: ModifierGroupScalarWhereInput | ModifierGroupScalarWhereInput[]
+  }
+
   export type OrderUpdateManyWithoutVenueNestedInput = {
     create?: XOR<OrderCreateWithoutVenueInput, OrderUncheckedCreateWithoutVenueInput> | OrderCreateWithoutVenueInput[] | OrderUncheckedCreateWithoutVenueInput[]
     connectOrCreate?: OrderCreateOrConnectWithoutVenueInput | OrderCreateOrConnectWithoutVenueInput[]
@@ -17953,6 +20980,20 @@ export namespace Prisma {
     update?: AddOnUpdateWithWhereUniqueWithoutVenueInput | AddOnUpdateWithWhereUniqueWithoutVenueInput[]
     updateMany?: AddOnUpdateManyWithWhereWithoutVenueInput | AddOnUpdateManyWithWhereWithoutVenueInput[]
     deleteMany?: AddOnScalarWhereInput | AddOnScalarWhereInput[]
+  }
+
+  export type ModifierGroupUncheckedUpdateManyWithoutVenueNestedInput = {
+    create?: XOR<ModifierGroupCreateWithoutVenueInput, ModifierGroupUncheckedCreateWithoutVenueInput> | ModifierGroupCreateWithoutVenueInput[] | ModifierGroupUncheckedCreateWithoutVenueInput[]
+    connectOrCreate?: ModifierGroupCreateOrConnectWithoutVenueInput | ModifierGroupCreateOrConnectWithoutVenueInput[]
+    upsert?: ModifierGroupUpsertWithWhereUniqueWithoutVenueInput | ModifierGroupUpsertWithWhereUniqueWithoutVenueInput[]
+    createMany?: ModifierGroupCreateManyVenueInputEnvelope
+    set?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    disconnect?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    delete?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    connect?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    update?: ModifierGroupUpdateWithWhereUniqueWithoutVenueInput | ModifierGroupUpdateWithWhereUniqueWithoutVenueInput[]
+    updateMany?: ModifierGroupUpdateManyWithWhereWithoutVenueInput | ModifierGroupUpdateManyWithWhereWithoutVenueInput[]
+    deleteMany?: ModifierGroupScalarWhereInput | ModifierGroupScalarWhereInput[]
   }
 
   export type OrderUncheckedUpdateManyWithoutVenueNestedInput = {
@@ -18225,6 +21266,13 @@ export namespace Prisma {
     connect?: RecipeItemWhereUniqueInput | RecipeItemWhereUniqueInput[]
   }
 
+  export type ModifierGroupCreateNestedManyWithoutMenuItemInput = {
+    create?: XOR<ModifierGroupCreateWithoutMenuItemInput, ModifierGroupUncheckedCreateWithoutMenuItemInput> | ModifierGroupCreateWithoutMenuItemInput[] | ModifierGroupUncheckedCreateWithoutMenuItemInput[]
+    connectOrCreate?: ModifierGroupCreateOrConnectWithoutMenuItemInput | ModifierGroupCreateOrConnectWithoutMenuItemInput[]
+    createMany?: ModifierGroupCreateManyMenuItemInputEnvelope
+    connect?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+  }
+
   export type OrderItemUncheckedCreateNestedManyWithoutMenuItemInput = {
     create?: XOR<OrderItemCreateWithoutMenuItemInput, OrderItemUncheckedCreateWithoutMenuItemInput> | OrderItemCreateWithoutMenuItemInput[] | OrderItemUncheckedCreateWithoutMenuItemInput[]
     connectOrCreate?: OrderItemCreateOrConnectWithoutMenuItemInput | OrderItemCreateOrConnectWithoutMenuItemInput[]
@@ -18237,6 +21285,13 @@ export namespace Prisma {
     connectOrCreate?: RecipeItemCreateOrConnectWithoutMenuItemInput | RecipeItemCreateOrConnectWithoutMenuItemInput[]
     createMany?: RecipeItemCreateManyMenuItemInputEnvelope
     connect?: RecipeItemWhereUniqueInput | RecipeItemWhereUniqueInput[]
+  }
+
+  export type ModifierGroupUncheckedCreateNestedManyWithoutMenuItemInput = {
+    create?: XOR<ModifierGroupCreateWithoutMenuItemInput, ModifierGroupUncheckedCreateWithoutMenuItemInput> | ModifierGroupCreateWithoutMenuItemInput[] | ModifierGroupUncheckedCreateWithoutMenuItemInput[]
+    connectOrCreate?: ModifierGroupCreateOrConnectWithoutMenuItemInput | ModifierGroupCreateOrConnectWithoutMenuItemInput[]
+    createMany?: ModifierGroupCreateManyMenuItemInputEnvelope
+    connect?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
   }
 
   export type DecimalFieldUpdateOperationsInput = {
@@ -18291,6 +21346,20 @@ export namespace Prisma {
     deleteMany?: RecipeItemScalarWhereInput | RecipeItemScalarWhereInput[]
   }
 
+  export type ModifierGroupUpdateManyWithoutMenuItemNestedInput = {
+    create?: XOR<ModifierGroupCreateWithoutMenuItemInput, ModifierGroupUncheckedCreateWithoutMenuItemInput> | ModifierGroupCreateWithoutMenuItemInput[] | ModifierGroupUncheckedCreateWithoutMenuItemInput[]
+    connectOrCreate?: ModifierGroupCreateOrConnectWithoutMenuItemInput | ModifierGroupCreateOrConnectWithoutMenuItemInput[]
+    upsert?: ModifierGroupUpsertWithWhereUniqueWithoutMenuItemInput | ModifierGroupUpsertWithWhereUniqueWithoutMenuItemInput[]
+    createMany?: ModifierGroupCreateManyMenuItemInputEnvelope
+    set?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    disconnect?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    delete?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    connect?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    update?: ModifierGroupUpdateWithWhereUniqueWithoutMenuItemInput | ModifierGroupUpdateWithWhereUniqueWithoutMenuItemInput[]
+    updateMany?: ModifierGroupUpdateManyWithWhereWithoutMenuItemInput | ModifierGroupUpdateManyWithWhereWithoutMenuItemInput[]
+    deleteMany?: ModifierGroupScalarWhereInput | ModifierGroupScalarWhereInput[]
+  }
+
   export type OrderItemUncheckedUpdateManyWithoutMenuItemNestedInput = {
     create?: XOR<OrderItemCreateWithoutMenuItemInput, OrderItemUncheckedCreateWithoutMenuItemInput> | OrderItemCreateWithoutMenuItemInput[] | OrderItemUncheckedCreateWithoutMenuItemInput[]
     connectOrCreate?: OrderItemCreateOrConnectWithoutMenuItemInput | OrderItemCreateOrConnectWithoutMenuItemInput[]
@@ -18317,6 +21386,20 @@ export namespace Prisma {
     update?: RecipeItemUpdateWithWhereUniqueWithoutMenuItemInput | RecipeItemUpdateWithWhereUniqueWithoutMenuItemInput[]
     updateMany?: RecipeItemUpdateManyWithWhereWithoutMenuItemInput | RecipeItemUpdateManyWithWhereWithoutMenuItemInput[]
     deleteMany?: RecipeItemScalarWhereInput | RecipeItemScalarWhereInput[]
+  }
+
+  export type ModifierGroupUncheckedUpdateManyWithoutMenuItemNestedInput = {
+    create?: XOR<ModifierGroupCreateWithoutMenuItemInput, ModifierGroupUncheckedCreateWithoutMenuItemInput> | ModifierGroupCreateWithoutMenuItemInput[] | ModifierGroupUncheckedCreateWithoutMenuItemInput[]
+    connectOrCreate?: ModifierGroupCreateOrConnectWithoutMenuItemInput | ModifierGroupCreateOrConnectWithoutMenuItemInput[]
+    upsert?: ModifierGroupUpsertWithWhereUniqueWithoutMenuItemInput | ModifierGroupUpsertWithWhereUniqueWithoutMenuItemInput[]
+    createMany?: ModifierGroupCreateManyMenuItemInputEnvelope
+    set?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    disconnect?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    delete?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    connect?: ModifierGroupWhereUniqueInput | ModifierGroupWhereUniqueInput[]
+    update?: ModifierGroupUpdateWithWhereUniqueWithoutMenuItemInput | ModifierGroupUpdateWithWhereUniqueWithoutMenuItemInput[]
+    updateMany?: ModifierGroupUpdateManyWithWhereWithoutMenuItemInput | ModifierGroupUpdateManyWithWhereWithoutMenuItemInput[]
+    deleteMany?: ModifierGroupScalarWhereInput | ModifierGroupScalarWhereInput[]
   }
 
   export type VenueCreateNestedOneWithoutIngredientsInput = {
@@ -18438,6 +21521,90 @@ export namespace Prisma {
     upsert?: VenueUpsertWithoutAddOnsInput
     connect?: VenueWhereUniqueInput
     update?: XOR<XOR<VenueUpdateToOneWithWhereWithoutAddOnsInput, VenueUpdateWithoutAddOnsInput>, VenueUncheckedUpdateWithoutAddOnsInput>
+  }
+
+  export type VenueCreateNestedOneWithoutModifierGroupsInput = {
+    create?: XOR<VenueCreateWithoutModifierGroupsInput, VenueUncheckedCreateWithoutModifierGroupsInput>
+    connectOrCreate?: VenueCreateOrConnectWithoutModifierGroupsInput
+    connect?: VenueWhereUniqueInput
+  }
+
+  export type MenuItemCreateNestedOneWithoutModifierGroupsInput = {
+    create?: XOR<MenuItemCreateWithoutModifierGroupsInput, MenuItemUncheckedCreateWithoutModifierGroupsInput>
+    connectOrCreate?: MenuItemCreateOrConnectWithoutModifierGroupsInput
+    connect?: MenuItemWhereUniqueInput
+  }
+
+  export type ModifierOptionCreateNestedManyWithoutModifierGroupInput = {
+    create?: XOR<ModifierOptionCreateWithoutModifierGroupInput, ModifierOptionUncheckedCreateWithoutModifierGroupInput> | ModifierOptionCreateWithoutModifierGroupInput[] | ModifierOptionUncheckedCreateWithoutModifierGroupInput[]
+    connectOrCreate?: ModifierOptionCreateOrConnectWithoutModifierGroupInput | ModifierOptionCreateOrConnectWithoutModifierGroupInput[]
+    createMany?: ModifierOptionCreateManyModifierGroupInputEnvelope
+    connect?: ModifierOptionWhereUniqueInput | ModifierOptionWhereUniqueInput[]
+  }
+
+  export type ModifierOptionUncheckedCreateNestedManyWithoutModifierGroupInput = {
+    create?: XOR<ModifierOptionCreateWithoutModifierGroupInput, ModifierOptionUncheckedCreateWithoutModifierGroupInput> | ModifierOptionCreateWithoutModifierGroupInput[] | ModifierOptionUncheckedCreateWithoutModifierGroupInput[]
+    connectOrCreate?: ModifierOptionCreateOrConnectWithoutModifierGroupInput | ModifierOptionCreateOrConnectWithoutModifierGroupInput[]
+    createMany?: ModifierOptionCreateManyModifierGroupInputEnvelope
+    connect?: ModifierOptionWhereUniqueInput | ModifierOptionWhereUniqueInput[]
+  }
+
+  export type VenueUpdateOneRequiredWithoutModifierGroupsNestedInput = {
+    create?: XOR<VenueCreateWithoutModifierGroupsInput, VenueUncheckedCreateWithoutModifierGroupsInput>
+    connectOrCreate?: VenueCreateOrConnectWithoutModifierGroupsInput
+    upsert?: VenueUpsertWithoutModifierGroupsInput
+    connect?: VenueWhereUniqueInput
+    update?: XOR<XOR<VenueUpdateToOneWithWhereWithoutModifierGroupsInput, VenueUpdateWithoutModifierGroupsInput>, VenueUncheckedUpdateWithoutModifierGroupsInput>
+  }
+
+  export type MenuItemUpdateOneRequiredWithoutModifierGroupsNestedInput = {
+    create?: XOR<MenuItemCreateWithoutModifierGroupsInput, MenuItemUncheckedCreateWithoutModifierGroupsInput>
+    connectOrCreate?: MenuItemCreateOrConnectWithoutModifierGroupsInput
+    upsert?: MenuItemUpsertWithoutModifierGroupsInput
+    connect?: MenuItemWhereUniqueInput
+    update?: XOR<XOR<MenuItemUpdateToOneWithWhereWithoutModifierGroupsInput, MenuItemUpdateWithoutModifierGroupsInput>, MenuItemUncheckedUpdateWithoutModifierGroupsInput>
+  }
+
+  export type ModifierOptionUpdateManyWithoutModifierGroupNestedInput = {
+    create?: XOR<ModifierOptionCreateWithoutModifierGroupInput, ModifierOptionUncheckedCreateWithoutModifierGroupInput> | ModifierOptionCreateWithoutModifierGroupInput[] | ModifierOptionUncheckedCreateWithoutModifierGroupInput[]
+    connectOrCreate?: ModifierOptionCreateOrConnectWithoutModifierGroupInput | ModifierOptionCreateOrConnectWithoutModifierGroupInput[]
+    upsert?: ModifierOptionUpsertWithWhereUniqueWithoutModifierGroupInput | ModifierOptionUpsertWithWhereUniqueWithoutModifierGroupInput[]
+    createMany?: ModifierOptionCreateManyModifierGroupInputEnvelope
+    set?: ModifierOptionWhereUniqueInput | ModifierOptionWhereUniqueInput[]
+    disconnect?: ModifierOptionWhereUniqueInput | ModifierOptionWhereUniqueInput[]
+    delete?: ModifierOptionWhereUniqueInput | ModifierOptionWhereUniqueInput[]
+    connect?: ModifierOptionWhereUniqueInput | ModifierOptionWhereUniqueInput[]
+    update?: ModifierOptionUpdateWithWhereUniqueWithoutModifierGroupInput | ModifierOptionUpdateWithWhereUniqueWithoutModifierGroupInput[]
+    updateMany?: ModifierOptionUpdateManyWithWhereWithoutModifierGroupInput | ModifierOptionUpdateManyWithWhereWithoutModifierGroupInput[]
+    deleteMany?: ModifierOptionScalarWhereInput | ModifierOptionScalarWhereInput[]
+  }
+
+  export type ModifierOptionUncheckedUpdateManyWithoutModifierGroupNestedInput = {
+    create?: XOR<ModifierOptionCreateWithoutModifierGroupInput, ModifierOptionUncheckedCreateWithoutModifierGroupInput> | ModifierOptionCreateWithoutModifierGroupInput[] | ModifierOptionUncheckedCreateWithoutModifierGroupInput[]
+    connectOrCreate?: ModifierOptionCreateOrConnectWithoutModifierGroupInput | ModifierOptionCreateOrConnectWithoutModifierGroupInput[]
+    upsert?: ModifierOptionUpsertWithWhereUniqueWithoutModifierGroupInput | ModifierOptionUpsertWithWhereUniqueWithoutModifierGroupInput[]
+    createMany?: ModifierOptionCreateManyModifierGroupInputEnvelope
+    set?: ModifierOptionWhereUniqueInput | ModifierOptionWhereUniqueInput[]
+    disconnect?: ModifierOptionWhereUniqueInput | ModifierOptionWhereUniqueInput[]
+    delete?: ModifierOptionWhereUniqueInput | ModifierOptionWhereUniqueInput[]
+    connect?: ModifierOptionWhereUniqueInput | ModifierOptionWhereUniqueInput[]
+    update?: ModifierOptionUpdateWithWhereUniqueWithoutModifierGroupInput | ModifierOptionUpdateWithWhereUniqueWithoutModifierGroupInput[]
+    updateMany?: ModifierOptionUpdateManyWithWhereWithoutModifierGroupInput | ModifierOptionUpdateManyWithWhereWithoutModifierGroupInput[]
+    deleteMany?: ModifierOptionScalarWhereInput | ModifierOptionScalarWhereInput[]
+  }
+
+  export type ModifierGroupCreateNestedOneWithoutOptionsInput = {
+    create?: XOR<ModifierGroupCreateWithoutOptionsInput, ModifierGroupUncheckedCreateWithoutOptionsInput>
+    connectOrCreate?: ModifierGroupCreateOrConnectWithoutOptionsInput
+    connect?: ModifierGroupWhereUniqueInput
+  }
+
+  export type ModifierGroupUpdateOneRequiredWithoutOptionsNestedInput = {
+    create?: XOR<ModifierGroupCreateWithoutOptionsInput, ModifierGroupUncheckedCreateWithoutOptionsInput>
+    connectOrCreate?: ModifierGroupCreateOrConnectWithoutOptionsInput
+    upsert?: ModifierGroupUpsertWithoutOptionsInput
+    connect?: ModifierGroupWhereUniqueInput
+    update?: XOR<XOR<ModifierGroupUpdateToOneWithWhereWithoutOptionsInput, ModifierGroupUpdateWithoutOptionsInput>, ModifierGroupUncheckedUpdateWithoutOptionsInput>
   }
 
   export type VenueCreateNestedOneWithoutOrdersInput = {
@@ -18939,6 +22106,7 @@ export namespace Prisma {
     category: CategoryCreateNestedOneWithoutItemsInput
     orderItems?: OrderItemCreateNestedManyWithoutMenuItemInput
     recipeItems?: RecipeItemCreateNestedManyWithoutMenuItemInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUncheckedCreateWithoutVenueInput = {
@@ -18952,6 +22120,7 @@ export namespace Prisma {
     quizTags?: NullableJsonNullValueInput | InputJsonValue
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutMenuItemInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutMenuItemInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemCreateOrConnectWithoutVenueInput = {
@@ -19040,6 +22209,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ModifierGroupCreateWithoutVenueInput = {
+    id?: string
+    name: string
+    required?: boolean
+    maxSelections?: number
+    orderIndex?: number
+    menuItem: MenuItemCreateNestedOneWithoutModifierGroupsInput
+    options?: ModifierOptionCreateNestedManyWithoutModifierGroupInput
+  }
+
+  export type ModifierGroupUncheckedCreateWithoutVenueInput = {
+    id?: string
+    menuItemId: string
+    name: string
+    required?: boolean
+    maxSelections?: number
+    orderIndex?: number
+    options?: ModifierOptionUncheckedCreateNestedManyWithoutModifierGroupInput
+  }
+
+  export type ModifierGroupCreateOrConnectWithoutVenueInput = {
+    where: ModifierGroupWhereUniqueInput
+    create: XOR<ModifierGroupCreateWithoutVenueInput, ModifierGroupUncheckedCreateWithoutVenueInput>
+  }
+
+  export type ModifierGroupCreateManyVenueInputEnvelope = {
+    data: ModifierGroupCreateManyVenueInput | ModifierGroupCreateManyVenueInput[]
+    skipDuplicates?: boolean
+  }
+
   export type OrderCreateWithoutVenueInput = {
     id?: string
     customerName?: string | null
@@ -19080,6 +22279,7 @@ export namespace Prisma {
     id?: string
     quantity: number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
     order: OrderCreateNestedOneWithoutItemsInput
     menuItem: MenuItemCreateNestedOneWithoutOrderItemsInput
   }
@@ -19090,6 +22290,7 @@ export namespace Prisma {
     menuItemId: string
     quantity: number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type OrderItemCreateOrConnectWithoutVenueInput = {
@@ -19328,6 +22529,35 @@ export namespace Prisma {
     applicableItemIds?: StringNullableListFilter<"AddOn">
   }
 
+  export type ModifierGroupUpsertWithWhereUniqueWithoutVenueInput = {
+    where: ModifierGroupWhereUniqueInput
+    update: XOR<ModifierGroupUpdateWithoutVenueInput, ModifierGroupUncheckedUpdateWithoutVenueInput>
+    create: XOR<ModifierGroupCreateWithoutVenueInput, ModifierGroupUncheckedCreateWithoutVenueInput>
+  }
+
+  export type ModifierGroupUpdateWithWhereUniqueWithoutVenueInput = {
+    where: ModifierGroupWhereUniqueInput
+    data: XOR<ModifierGroupUpdateWithoutVenueInput, ModifierGroupUncheckedUpdateWithoutVenueInput>
+  }
+
+  export type ModifierGroupUpdateManyWithWhereWithoutVenueInput = {
+    where: ModifierGroupScalarWhereInput
+    data: XOR<ModifierGroupUpdateManyMutationInput, ModifierGroupUncheckedUpdateManyWithoutVenueInput>
+  }
+
+  export type ModifierGroupScalarWhereInput = {
+    AND?: ModifierGroupScalarWhereInput | ModifierGroupScalarWhereInput[]
+    OR?: ModifierGroupScalarWhereInput[]
+    NOT?: ModifierGroupScalarWhereInput | ModifierGroupScalarWhereInput[]
+    id?: StringFilter<"ModifierGroup"> | string
+    venueId?: StringFilter<"ModifierGroup"> | string
+    menuItemId?: StringFilter<"ModifierGroup"> | string
+    name?: StringFilter<"ModifierGroup"> | string
+    required?: BoolFilter<"ModifierGroup"> | boolean
+    maxSelections?: IntFilter<"ModifierGroup"> | number
+    orderIndex?: IntFilter<"ModifierGroup"> | number
+  }
+
   export type OrderUpsertWithWhereUniqueWithoutVenueInput = {
     where: OrderWhereUniqueInput
     update: XOR<OrderUpdateWithoutVenueInput, OrderUncheckedUpdateWithoutVenueInput>
@@ -19386,6 +22616,7 @@ export namespace Prisma {
     menuItemId?: StringFilter<"OrderItem"> | string
     quantity?: IntFilter<"OrderItem"> | number
     addOns?: JsonNullableFilter<"OrderItem">
+    modifiers?: JsonNullableFilter<"OrderItem">
   }
 
   export type VenueCreateWithoutStaffAccountsInput = {
@@ -19404,6 +22635,7 @@ export namespace Prisma {
     ingredients?: IngredientCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemCreateNestedManyWithoutVenueInput
     addOns?: AddOnCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutVenueInput
     orders?: OrderCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemCreateNestedManyWithoutVenueInput
   }
@@ -19424,6 +22656,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutVenueInput
     addOns?: AddOnUncheckedCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutVenueInput
     orders?: OrderUncheckedCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVenueInput
   }
@@ -19460,6 +22693,7 @@ export namespace Prisma {
     ingredients?: IngredientUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutVenueNestedInput
     orders?: OrderUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUpdateManyWithoutVenueNestedInput
   }
@@ -19480,6 +22714,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUncheckedUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutVenueNestedInput
     orders?: OrderUncheckedUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutVenueNestedInput
   }
@@ -19500,6 +22735,7 @@ export namespace Prisma {
     ingredients?: IngredientCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemCreateNestedManyWithoutVenueInput
     addOns?: AddOnCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutVenueInput
     orders?: OrderCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemCreateNestedManyWithoutVenueInput
   }
@@ -19520,6 +22756,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutVenueInput
     addOns?: AddOnUncheckedCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutVenueInput
     orders?: OrderUncheckedCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVenueInput
   }
@@ -19582,6 +22819,7 @@ export namespace Prisma {
     ingredients?: IngredientUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutVenueNestedInput
     orders?: OrderUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUpdateManyWithoutVenueNestedInput
   }
@@ -19602,6 +22840,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUncheckedUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutVenueNestedInput
     orders?: OrderUncheckedUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutVenueNestedInput
   }
@@ -19638,6 +22877,7 @@ export namespace Prisma {
     ingredients?: IngredientCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemCreateNestedManyWithoutVenueInput
     addOns?: AddOnCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutVenueInput
     orders?: OrderCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemCreateNestedManyWithoutVenueInput
   }
@@ -19658,6 +22898,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutVenueInput
     addOns?: AddOnUncheckedCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutVenueInput
     orders?: OrderUncheckedCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVenueInput
   }
@@ -19757,6 +22998,7 @@ export namespace Prisma {
     ingredients?: IngredientUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutVenueNestedInput
     orders?: OrderUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUpdateManyWithoutVenueNestedInput
   }
@@ -19777,6 +23019,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUncheckedUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutVenueNestedInput
     orders?: OrderUncheckedUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutVenueNestedInput
   }
@@ -19846,6 +23089,7 @@ export namespace Prisma {
     ingredients?: IngredientCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemCreateNestedManyWithoutVenueInput
     addOns?: AddOnCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutVenueInput
     orders?: OrderCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemCreateNestedManyWithoutVenueInput
   }
@@ -19866,6 +23110,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutVenueInput
     addOns?: AddOnUncheckedCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutVenueInput
     orders?: OrderUncheckedCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVenueInput
   }
@@ -19886,6 +23131,7 @@ export namespace Prisma {
     venue: VenueCreateNestedOneWithoutMenuItemsInput
     orderItems?: OrderItemCreateNestedManyWithoutMenuItemInput
     recipeItems?: RecipeItemCreateNestedManyWithoutMenuItemInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUncheckedCreateWithoutCategoryInput = {
@@ -19899,6 +23145,7 @@ export namespace Prisma {
     quizTags?: NullableJsonNullValueInput | InputJsonValue
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutMenuItemInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutMenuItemInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemCreateOrConnectWithoutCategoryInput = {
@@ -19938,6 +23185,7 @@ export namespace Prisma {
     ingredients?: IngredientUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutVenueNestedInput
     orders?: OrderUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUpdateManyWithoutVenueNestedInput
   }
@@ -19958,6 +23206,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUncheckedUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutVenueNestedInput
     orders?: OrderUncheckedUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutVenueNestedInput
   }
@@ -19994,6 +23243,7 @@ export namespace Prisma {
     ingredients?: IngredientCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemCreateNestedManyWithoutVenueInput
     addOns?: AddOnCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutVenueInput
     orders?: OrderCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemCreateNestedManyWithoutVenueInput
   }
@@ -20014,6 +23264,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutVenueInput
     addOns?: AddOnUncheckedCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutVenueInput
     orders?: OrderUncheckedCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVenueInput
   }
@@ -20046,6 +23297,7 @@ export namespace Prisma {
     id?: string
     quantity: number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
     venue: VenueCreateNestedOneWithoutOrderItemsInput
     order: OrderCreateNestedOneWithoutItemsInput
   }
@@ -20056,6 +23308,7 @@ export namespace Prisma {
     orderId: string
     quantity: number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type OrderItemCreateOrConnectWithoutMenuItemInput = {
@@ -20092,6 +23345,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ModifierGroupCreateWithoutMenuItemInput = {
+    id?: string
+    name: string
+    required?: boolean
+    maxSelections?: number
+    orderIndex?: number
+    venue: VenueCreateNestedOneWithoutModifierGroupsInput
+    options?: ModifierOptionCreateNestedManyWithoutModifierGroupInput
+  }
+
+  export type ModifierGroupUncheckedCreateWithoutMenuItemInput = {
+    id?: string
+    venueId: string
+    name: string
+    required?: boolean
+    maxSelections?: number
+    orderIndex?: number
+    options?: ModifierOptionUncheckedCreateNestedManyWithoutModifierGroupInput
+  }
+
+  export type ModifierGroupCreateOrConnectWithoutMenuItemInput = {
+    where: ModifierGroupWhereUniqueInput
+    create: XOR<ModifierGroupCreateWithoutMenuItemInput, ModifierGroupUncheckedCreateWithoutMenuItemInput>
+  }
+
+  export type ModifierGroupCreateManyMenuItemInputEnvelope = {
+    data: ModifierGroupCreateManyMenuItemInput | ModifierGroupCreateManyMenuItemInput[]
+    skipDuplicates?: boolean
+  }
+
   export type VenueUpsertWithoutMenuItemsInput = {
     update: XOR<VenueUpdateWithoutMenuItemsInput, VenueUncheckedUpdateWithoutMenuItemsInput>
     create: XOR<VenueCreateWithoutMenuItemsInput, VenueUncheckedCreateWithoutMenuItemsInput>
@@ -20119,6 +23402,7 @@ export namespace Prisma {
     ingredients?: IngredientUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutVenueNestedInput
     orders?: OrderUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUpdateManyWithoutVenueNestedInput
   }
@@ -20139,6 +23423,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUncheckedUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutVenueNestedInput
     orders?: OrderUncheckedUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutVenueNestedInput
   }
@@ -20200,6 +23485,22 @@ export namespace Prisma {
     data: XOR<RecipeItemUpdateManyMutationInput, RecipeItemUncheckedUpdateManyWithoutMenuItemInput>
   }
 
+  export type ModifierGroupUpsertWithWhereUniqueWithoutMenuItemInput = {
+    where: ModifierGroupWhereUniqueInput
+    update: XOR<ModifierGroupUpdateWithoutMenuItemInput, ModifierGroupUncheckedUpdateWithoutMenuItemInput>
+    create: XOR<ModifierGroupCreateWithoutMenuItemInput, ModifierGroupUncheckedCreateWithoutMenuItemInput>
+  }
+
+  export type ModifierGroupUpdateWithWhereUniqueWithoutMenuItemInput = {
+    where: ModifierGroupWhereUniqueInput
+    data: XOR<ModifierGroupUpdateWithoutMenuItemInput, ModifierGroupUncheckedUpdateWithoutMenuItemInput>
+  }
+
+  export type ModifierGroupUpdateManyWithWhereWithoutMenuItemInput = {
+    where: ModifierGroupScalarWhereInput
+    data: XOR<ModifierGroupUpdateManyMutationInput, ModifierGroupUncheckedUpdateManyWithoutMenuItemInput>
+  }
+
   export type VenueCreateWithoutIngredientsInput = {
     id?: string
     slug: string
@@ -20216,6 +23517,7 @@ export namespace Prisma {
     menuItems?: MenuItemCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemCreateNestedManyWithoutVenueInput
     addOns?: AddOnCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutVenueInput
     orders?: OrderCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemCreateNestedManyWithoutVenueInput
   }
@@ -20236,6 +23538,7 @@ export namespace Prisma {
     menuItems?: MenuItemUncheckedCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutVenueInput
     addOns?: AddOnUncheckedCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutVenueInput
     orders?: OrderUncheckedCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVenueInput
   }
@@ -20296,6 +23599,7 @@ export namespace Prisma {
     menuItems?: MenuItemUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutVenueNestedInput
     orders?: OrderUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUpdateManyWithoutVenueNestedInput
   }
@@ -20316,6 +23620,7 @@ export namespace Prisma {
     menuItems?: MenuItemUncheckedUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUncheckedUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutVenueNestedInput
     orders?: OrderUncheckedUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutVenueNestedInput
   }
@@ -20352,6 +23657,7 @@ export namespace Prisma {
     menuItems?: MenuItemCreateNestedManyWithoutVenueInput
     ingredients?: IngredientCreateNestedManyWithoutVenueInput
     addOns?: AddOnCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutVenueInput
     orders?: OrderCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemCreateNestedManyWithoutVenueInput
   }
@@ -20372,6 +23678,7 @@ export namespace Prisma {
     menuItems?: MenuItemUncheckedCreateNestedManyWithoutVenueInput
     ingredients?: IngredientUncheckedCreateNestedManyWithoutVenueInput
     addOns?: AddOnUncheckedCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutVenueInput
     orders?: OrderUncheckedCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVenueInput
   }
@@ -20392,6 +23699,7 @@ export namespace Prisma {
     venue: VenueCreateNestedOneWithoutMenuItemsInput
     category: CategoryCreateNestedOneWithoutItemsInput
     orderItems?: OrderItemCreateNestedManyWithoutMenuItemInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUncheckedCreateWithoutRecipeItemsInput = {
@@ -20405,6 +23713,7 @@ export namespace Prisma {
     outOfStock?: boolean
     quizTags?: NullableJsonNullValueInput | InputJsonValue
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutMenuItemInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemCreateOrConnectWithoutRecipeItemsInput = {
@@ -20462,6 +23771,7 @@ export namespace Prisma {
     menuItems?: MenuItemUpdateManyWithoutVenueNestedInput
     ingredients?: IngredientUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutVenueNestedInput
     orders?: OrderUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUpdateManyWithoutVenueNestedInput
   }
@@ -20482,6 +23792,7 @@ export namespace Prisma {
     menuItems?: MenuItemUncheckedUpdateManyWithoutVenueNestedInput
     ingredients?: IngredientUncheckedUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUncheckedUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutVenueNestedInput
     orders?: OrderUncheckedUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutVenueNestedInput
   }
@@ -20508,6 +23819,7 @@ export namespace Prisma {
     venue?: VenueUpdateOneRequiredWithoutMenuItemsNestedInput
     category?: CategoryUpdateOneRequiredWithoutItemsNestedInput
     orderItems?: OrderItemUpdateManyWithoutMenuItemNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateWithoutRecipeItemsInput = {
@@ -20521,6 +23833,7 @@ export namespace Prisma {
     outOfStock?: BoolFieldUpdateOperationsInput | boolean
     quizTags?: NullableJsonNullValueInput | InputJsonValue
     orderItems?: OrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type IngredientUpsertWithoutRecipeItemsInput = {
@@ -20568,6 +23881,7 @@ export namespace Prisma {
     menuItems?: MenuItemCreateNestedManyWithoutVenueInput
     ingredients?: IngredientCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutVenueInput
     orders?: OrderCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemCreateNestedManyWithoutVenueInput
   }
@@ -20588,6 +23902,7 @@ export namespace Prisma {
     menuItems?: MenuItemUncheckedCreateNestedManyWithoutVenueInput
     ingredients?: IngredientUncheckedCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutVenueInput
     orders?: OrderUncheckedCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVenueInput
   }
@@ -20624,6 +23939,7 @@ export namespace Prisma {
     menuItems?: MenuItemUpdateManyWithoutVenueNestedInput
     ingredients?: IngredientUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutVenueNestedInput
     orders?: OrderUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUpdateManyWithoutVenueNestedInput
   }
@@ -20644,8 +23960,291 @@ export namespace Prisma {
     menuItems?: MenuItemUncheckedUpdateManyWithoutVenueNestedInput
     ingredients?: IngredientUncheckedUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutVenueNestedInput
     orders?: OrderUncheckedUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutVenueNestedInput
+  }
+
+  export type VenueCreateWithoutModifierGroupsInput = {
+    id?: string
+    slug: string
+    name: string
+    theme: JsonNullValueInput | InputJsonValue
+    defaultLanguage?: string
+    planTier?: string
+    active?: boolean
+    createdAt?: Date | string
+    staffAccounts?: StaffAccountCreateNestedManyWithoutVenueInput
+    tables?: TableCreateNestedManyWithoutVenueInput
+    tableSessions?: TableSessionCreateNestedManyWithoutVenueInput
+    categories?: CategoryCreateNestedManyWithoutVenueInput
+    menuItems?: MenuItemCreateNestedManyWithoutVenueInput
+    ingredients?: IngredientCreateNestedManyWithoutVenueInput
+    recipeItems?: RecipeItemCreateNestedManyWithoutVenueInput
+    addOns?: AddOnCreateNestedManyWithoutVenueInput
+    orders?: OrderCreateNestedManyWithoutVenueInput
+    orderItems?: OrderItemCreateNestedManyWithoutVenueInput
+  }
+
+  export type VenueUncheckedCreateWithoutModifierGroupsInput = {
+    id?: string
+    slug: string
+    name: string
+    theme: JsonNullValueInput | InputJsonValue
+    defaultLanguage?: string
+    planTier?: string
+    active?: boolean
+    createdAt?: Date | string
+    staffAccounts?: StaffAccountUncheckedCreateNestedManyWithoutVenueInput
+    tables?: TableUncheckedCreateNestedManyWithoutVenueInput
+    tableSessions?: TableSessionUncheckedCreateNestedManyWithoutVenueInput
+    categories?: CategoryUncheckedCreateNestedManyWithoutVenueInput
+    menuItems?: MenuItemUncheckedCreateNestedManyWithoutVenueInput
+    ingredients?: IngredientUncheckedCreateNestedManyWithoutVenueInput
+    recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutVenueInput
+    addOns?: AddOnUncheckedCreateNestedManyWithoutVenueInput
+    orders?: OrderUncheckedCreateNestedManyWithoutVenueInput
+    orderItems?: OrderItemUncheckedCreateNestedManyWithoutVenueInput
+  }
+
+  export type VenueCreateOrConnectWithoutModifierGroupsInput = {
+    where: VenueWhereUniqueInput
+    create: XOR<VenueCreateWithoutModifierGroupsInput, VenueUncheckedCreateWithoutModifierGroupsInput>
+  }
+
+  export type MenuItemCreateWithoutModifierGroupsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    price: Decimal | DecimalJsLike | number | string
+    imageUrl?: string | null
+    outOfStock?: boolean
+    quizTags?: NullableJsonNullValueInput | InputJsonValue
+    venue: VenueCreateNestedOneWithoutMenuItemsInput
+    category: CategoryCreateNestedOneWithoutItemsInput
+    orderItems?: OrderItemCreateNestedManyWithoutMenuItemInput
+    recipeItems?: RecipeItemCreateNestedManyWithoutMenuItemInput
+  }
+
+  export type MenuItemUncheckedCreateWithoutModifierGroupsInput = {
+    id?: string
+    venueId: string
+    categoryId: string
+    name: string
+    description?: string | null
+    price: Decimal | DecimalJsLike | number | string
+    imageUrl?: string | null
+    outOfStock?: boolean
+    quizTags?: NullableJsonNullValueInput | InputJsonValue
+    orderItems?: OrderItemUncheckedCreateNestedManyWithoutMenuItemInput
+    recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutMenuItemInput
+  }
+
+  export type MenuItemCreateOrConnectWithoutModifierGroupsInput = {
+    where: MenuItemWhereUniqueInput
+    create: XOR<MenuItemCreateWithoutModifierGroupsInput, MenuItemUncheckedCreateWithoutModifierGroupsInput>
+  }
+
+  export type ModifierOptionCreateWithoutModifierGroupInput = {
+    id?: string
+    label: string
+    priceAdjustment?: Decimal | DecimalJsLike | number | string
+    isDefault?: boolean
+    orderIndex?: number
+  }
+
+  export type ModifierOptionUncheckedCreateWithoutModifierGroupInput = {
+    id?: string
+    label: string
+    priceAdjustment?: Decimal | DecimalJsLike | number | string
+    isDefault?: boolean
+    orderIndex?: number
+  }
+
+  export type ModifierOptionCreateOrConnectWithoutModifierGroupInput = {
+    where: ModifierOptionWhereUniqueInput
+    create: XOR<ModifierOptionCreateWithoutModifierGroupInput, ModifierOptionUncheckedCreateWithoutModifierGroupInput>
+  }
+
+  export type ModifierOptionCreateManyModifierGroupInputEnvelope = {
+    data: ModifierOptionCreateManyModifierGroupInput | ModifierOptionCreateManyModifierGroupInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VenueUpsertWithoutModifierGroupsInput = {
+    update: XOR<VenueUpdateWithoutModifierGroupsInput, VenueUncheckedUpdateWithoutModifierGroupsInput>
+    create: XOR<VenueCreateWithoutModifierGroupsInput, VenueUncheckedCreateWithoutModifierGroupsInput>
+    where?: VenueWhereInput
+  }
+
+  export type VenueUpdateToOneWithWhereWithoutModifierGroupsInput = {
+    where?: VenueWhereInput
+    data: XOR<VenueUpdateWithoutModifierGroupsInput, VenueUncheckedUpdateWithoutModifierGroupsInput>
+  }
+
+  export type VenueUpdateWithoutModifierGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    theme?: JsonNullValueInput | InputJsonValue
+    defaultLanguage?: StringFieldUpdateOperationsInput | string
+    planTier?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    staffAccounts?: StaffAccountUpdateManyWithoutVenueNestedInput
+    tables?: TableUpdateManyWithoutVenueNestedInput
+    tableSessions?: TableSessionUpdateManyWithoutVenueNestedInput
+    categories?: CategoryUpdateManyWithoutVenueNestedInput
+    menuItems?: MenuItemUpdateManyWithoutVenueNestedInput
+    ingredients?: IngredientUpdateManyWithoutVenueNestedInput
+    recipeItems?: RecipeItemUpdateManyWithoutVenueNestedInput
+    addOns?: AddOnUpdateManyWithoutVenueNestedInput
+    orders?: OrderUpdateManyWithoutVenueNestedInput
+    orderItems?: OrderItemUpdateManyWithoutVenueNestedInput
+  }
+
+  export type VenueUncheckedUpdateWithoutModifierGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    theme?: JsonNullValueInput | InputJsonValue
+    defaultLanguage?: StringFieldUpdateOperationsInput | string
+    planTier?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    staffAccounts?: StaffAccountUncheckedUpdateManyWithoutVenueNestedInput
+    tables?: TableUncheckedUpdateManyWithoutVenueNestedInput
+    tableSessions?: TableSessionUncheckedUpdateManyWithoutVenueNestedInput
+    categories?: CategoryUncheckedUpdateManyWithoutVenueNestedInput
+    menuItems?: MenuItemUncheckedUpdateManyWithoutVenueNestedInput
+    ingredients?: IngredientUncheckedUpdateManyWithoutVenueNestedInput
+    recipeItems?: RecipeItemUncheckedUpdateManyWithoutVenueNestedInput
+    addOns?: AddOnUncheckedUpdateManyWithoutVenueNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutVenueNestedInput
+    orderItems?: OrderItemUncheckedUpdateManyWithoutVenueNestedInput
+  }
+
+  export type MenuItemUpsertWithoutModifierGroupsInput = {
+    update: XOR<MenuItemUpdateWithoutModifierGroupsInput, MenuItemUncheckedUpdateWithoutModifierGroupsInput>
+    create: XOR<MenuItemCreateWithoutModifierGroupsInput, MenuItemUncheckedCreateWithoutModifierGroupsInput>
+    where?: MenuItemWhereInput
+  }
+
+  export type MenuItemUpdateToOneWithWhereWithoutModifierGroupsInput = {
+    where?: MenuItemWhereInput
+    data: XOR<MenuItemUpdateWithoutModifierGroupsInput, MenuItemUncheckedUpdateWithoutModifierGroupsInput>
+  }
+
+  export type MenuItemUpdateWithoutModifierGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    outOfStock?: BoolFieldUpdateOperationsInput | boolean
+    quizTags?: NullableJsonNullValueInput | InputJsonValue
+    venue?: VenueUpdateOneRequiredWithoutMenuItemsNestedInput
+    category?: CategoryUpdateOneRequiredWithoutItemsNestedInput
+    orderItems?: OrderItemUpdateManyWithoutMenuItemNestedInput
+    recipeItems?: RecipeItemUpdateManyWithoutMenuItemNestedInput
+  }
+
+  export type MenuItemUncheckedUpdateWithoutModifierGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    venueId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    outOfStock?: BoolFieldUpdateOperationsInput | boolean
+    quizTags?: NullableJsonNullValueInput | InputJsonValue
+    orderItems?: OrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
+    recipeItems?: RecipeItemUncheckedUpdateManyWithoutMenuItemNestedInput
+  }
+
+  export type ModifierOptionUpsertWithWhereUniqueWithoutModifierGroupInput = {
+    where: ModifierOptionWhereUniqueInput
+    update: XOR<ModifierOptionUpdateWithoutModifierGroupInput, ModifierOptionUncheckedUpdateWithoutModifierGroupInput>
+    create: XOR<ModifierOptionCreateWithoutModifierGroupInput, ModifierOptionUncheckedCreateWithoutModifierGroupInput>
+  }
+
+  export type ModifierOptionUpdateWithWhereUniqueWithoutModifierGroupInput = {
+    where: ModifierOptionWhereUniqueInput
+    data: XOR<ModifierOptionUpdateWithoutModifierGroupInput, ModifierOptionUncheckedUpdateWithoutModifierGroupInput>
+  }
+
+  export type ModifierOptionUpdateManyWithWhereWithoutModifierGroupInput = {
+    where: ModifierOptionScalarWhereInput
+    data: XOR<ModifierOptionUpdateManyMutationInput, ModifierOptionUncheckedUpdateManyWithoutModifierGroupInput>
+  }
+
+  export type ModifierOptionScalarWhereInput = {
+    AND?: ModifierOptionScalarWhereInput | ModifierOptionScalarWhereInput[]
+    OR?: ModifierOptionScalarWhereInput[]
+    NOT?: ModifierOptionScalarWhereInput | ModifierOptionScalarWhereInput[]
+    id?: StringFilter<"ModifierOption"> | string
+    modifierGroupId?: StringFilter<"ModifierOption"> | string
+    label?: StringFilter<"ModifierOption"> | string
+    priceAdjustment?: DecimalFilter<"ModifierOption"> | Decimal | DecimalJsLike | number | string
+    isDefault?: BoolFilter<"ModifierOption"> | boolean
+    orderIndex?: IntFilter<"ModifierOption"> | number
+  }
+
+  export type ModifierGroupCreateWithoutOptionsInput = {
+    id?: string
+    name: string
+    required?: boolean
+    maxSelections?: number
+    orderIndex?: number
+    venue: VenueCreateNestedOneWithoutModifierGroupsInput
+    menuItem: MenuItemCreateNestedOneWithoutModifierGroupsInput
+  }
+
+  export type ModifierGroupUncheckedCreateWithoutOptionsInput = {
+    id?: string
+    venueId: string
+    menuItemId: string
+    name: string
+    required?: boolean
+    maxSelections?: number
+    orderIndex?: number
+  }
+
+  export type ModifierGroupCreateOrConnectWithoutOptionsInput = {
+    where: ModifierGroupWhereUniqueInput
+    create: XOR<ModifierGroupCreateWithoutOptionsInput, ModifierGroupUncheckedCreateWithoutOptionsInput>
+  }
+
+  export type ModifierGroupUpsertWithoutOptionsInput = {
+    update: XOR<ModifierGroupUpdateWithoutOptionsInput, ModifierGroupUncheckedUpdateWithoutOptionsInput>
+    create: XOR<ModifierGroupCreateWithoutOptionsInput, ModifierGroupUncheckedCreateWithoutOptionsInput>
+    where?: ModifierGroupWhereInput
+  }
+
+  export type ModifierGroupUpdateToOneWithWhereWithoutOptionsInput = {
+    where?: ModifierGroupWhereInput
+    data: XOR<ModifierGroupUpdateWithoutOptionsInput, ModifierGroupUncheckedUpdateWithoutOptionsInput>
+  }
+
+  export type ModifierGroupUpdateWithoutOptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    maxSelections?: IntFieldUpdateOperationsInput | number
+    orderIndex?: IntFieldUpdateOperationsInput | number
+    venue?: VenueUpdateOneRequiredWithoutModifierGroupsNestedInput
+    menuItem?: MenuItemUpdateOneRequiredWithoutModifierGroupsNestedInput
+  }
+
+  export type ModifierGroupUncheckedUpdateWithoutOptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    venueId?: StringFieldUpdateOperationsInput | string
+    menuItemId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    maxSelections?: IntFieldUpdateOperationsInput | number
+    orderIndex?: IntFieldUpdateOperationsInput | number
   }
 
   export type VenueCreateWithoutOrdersInput = {
@@ -20665,6 +24264,7 @@ export namespace Prisma {
     ingredients?: IngredientCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemCreateNestedManyWithoutVenueInput
     addOns?: AddOnCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemCreateNestedManyWithoutVenueInput
   }
 
@@ -20685,6 +24285,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutVenueInput
     addOns?: AddOnUncheckedCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutVenueInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVenueInput
   }
 
@@ -20718,6 +24319,7 @@ export namespace Prisma {
     id?: string
     quantity: number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
     venue: VenueCreateNestedOneWithoutOrderItemsInput
     menuItem: MenuItemCreateNestedOneWithoutOrderItemsInput
   }
@@ -20728,6 +24330,7 @@ export namespace Prisma {
     menuItemId: string
     quantity: number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type OrderItemCreateOrConnectWithoutOrderInput = {
@@ -20768,6 +24371,7 @@ export namespace Prisma {
     ingredients?: IngredientUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUpdateManyWithoutVenueNestedInput
   }
 
@@ -20788,6 +24392,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUncheckedUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutVenueNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutVenueNestedInput
   }
 
@@ -20851,6 +24456,7 @@ export namespace Prisma {
     ingredients?: IngredientCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemCreateNestedManyWithoutVenueInput
     addOns?: AddOnCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutVenueInput
     orders?: OrderCreateNestedManyWithoutVenueInput
   }
 
@@ -20871,6 +24477,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedCreateNestedManyWithoutVenueInput
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutVenueInput
     addOns?: AddOnUncheckedCreateNestedManyWithoutVenueInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutVenueInput
     orders?: OrderUncheckedCreateNestedManyWithoutVenueInput
   }
 
@@ -20921,6 +24528,7 @@ export namespace Prisma {
     venue: VenueCreateNestedOneWithoutMenuItemsInput
     category: CategoryCreateNestedOneWithoutItemsInput
     recipeItems?: RecipeItemCreateNestedManyWithoutMenuItemInput
+    modifierGroups?: ModifierGroupCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUncheckedCreateWithoutOrderItemsInput = {
@@ -20934,6 +24542,7 @@ export namespace Prisma {
     outOfStock?: boolean
     quizTags?: NullableJsonNullValueInput | InputJsonValue
     recipeItems?: RecipeItemUncheckedCreateNestedManyWithoutMenuItemInput
+    modifierGroups?: ModifierGroupUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemCreateOrConnectWithoutOrderItemsInput = {
@@ -20969,6 +24578,7 @@ export namespace Prisma {
     ingredients?: IngredientUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutVenueNestedInput
     orders?: OrderUpdateManyWithoutVenueNestedInput
   }
 
@@ -20989,6 +24599,7 @@ export namespace Prisma {
     ingredients?: IngredientUncheckedUpdateManyWithoutVenueNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutVenueNestedInput
     addOns?: AddOnUncheckedUpdateManyWithoutVenueNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutVenueNestedInput
     orders?: OrderUncheckedUpdateManyWithoutVenueNestedInput
   }
 
@@ -21051,6 +24662,7 @@ export namespace Prisma {
     venue?: VenueUpdateOneRequiredWithoutMenuItemsNestedInput
     category?: CategoryUpdateOneRequiredWithoutItemsNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutMenuItemNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateWithoutOrderItemsInput = {
@@ -21064,6 +24676,7 @@ export namespace Prisma {
     outOfStock?: BoolFieldUpdateOperationsInput | boolean
     quizTags?: NullableJsonNullValueInput | InputJsonValue
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutMenuItemNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type StaffAccountCreateManyVenueInput = {
@@ -21132,6 +24745,15 @@ export namespace Prisma {
     applicableItemIds?: AddOnCreateapplicableItemIdsInput | string[]
   }
 
+  export type ModifierGroupCreateManyVenueInput = {
+    id?: string
+    menuItemId: string
+    name: string
+    required?: boolean
+    maxSelections?: number
+    orderIndex?: number
+  }
+
   export type OrderCreateManyVenueInput = {
     id?: string
     tableSessionId: string
@@ -21150,6 +24772,7 @@ export namespace Prisma {
     menuItemId: string
     quantity: number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type StaffAccountUpdateWithoutVenueInput = {
@@ -21268,6 +24891,7 @@ export namespace Prisma {
     category?: CategoryUpdateOneRequiredWithoutItemsNestedInput
     orderItems?: OrderItemUpdateManyWithoutMenuItemNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutMenuItemNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateWithoutVenueInput = {
@@ -21281,6 +24905,7 @@ export namespace Prisma {
     quizTags?: NullableJsonNullValueInput | InputJsonValue
     orderItems?: OrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutMenuItemNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateManyWithoutVenueInput = {
@@ -21362,6 +24987,35 @@ export namespace Prisma {
     applicableItemIds?: AddOnUpdateapplicableItemIdsInput | string[]
   }
 
+  export type ModifierGroupUpdateWithoutVenueInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    maxSelections?: IntFieldUpdateOperationsInput | number
+    orderIndex?: IntFieldUpdateOperationsInput | number
+    menuItem?: MenuItemUpdateOneRequiredWithoutModifierGroupsNestedInput
+    options?: ModifierOptionUpdateManyWithoutModifierGroupNestedInput
+  }
+
+  export type ModifierGroupUncheckedUpdateWithoutVenueInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    menuItemId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    maxSelections?: IntFieldUpdateOperationsInput | number
+    orderIndex?: IntFieldUpdateOperationsInput | number
+    options?: ModifierOptionUncheckedUpdateManyWithoutModifierGroupNestedInput
+  }
+
+  export type ModifierGroupUncheckedUpdateManyWithoutVenueInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    menuItemId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    maxSelections?: IntFieldUpdateOperationsInput | number
+    orderIndex?: IntFieldUpdateOperationsInput | number
+  }
+
   export type OrderUpdateWithoutVenueInput = {
     id?: StringFieldUpdateOperationsInput | string
     customerName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -21404,6 +25058,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
     order?: OrderUpdateOneRequiredWithoutItemsNestedInput
     menuItem?: MenuItemUpdateOneRequiredWithoutOrderItemsNestedInput
   }
@@ -21414,6 +25069,7 @@ export namespace Prisma {
     menuItemId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type OrderItemUncheckedUpdateManyWithoutVenueInput = {
@@ -21422,6 +25078,7 @@ export namespace Prisma {
     menuItemId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type TableSessionCreateManyTableInput = {
@@ -21526,6 +25183,7 @@ export namespace Prisma {
     venue?: VenueUpdateOneRequiredWithoutMenuItemsNestedInput
     orderItems?: OrderItemUpdateManyWithoutMenuItemNestedInput
     recipeItems?: RecipeItemUpdateManyWithoutMenuItemNestedInput
+    modifierGroups?: ModifierGroupUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateWithoutCategoryInput = {
@@ -21539,6 +25197,7 @@ export namespace Prisma {
     quizTags?: NullableJsonNullValueInput | InputJsonValue
     orderItems?: OrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
     recipeItems?: RecipeItemUncheckedUpdateManyWithoutMenuItemNestedInput
+    modifierGroups?: ModifierGroupUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateManyWithoutCategoryInput = {
@@ -21558,6 +25217,7 @@ export namespace Prisma {
     orderId: string
     quantity: number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type RecipeItemCreateManyMenuItemInput = {
@@ -21567,10 +25227,20 @@ export namespace Prisma {
     quantityUsed: Decimal | DecimalJsLike | number | string
   }
 
+  export type ModifierGroupCreateManyMenuItemInput = {
+    id?: string
+    venueId: string
+    name: string
+    required?: boolean
+    maxSelections?: number
+    orderIndex?: number
+  }
+
   export type OrderItemUpdateWithoutMenuItemInput = {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
     venue?: VenueUpdateOneRequiredWithoutOrderItemsNestedInput
     order?: OrderUpdateOneRequiredWithoutItemsNestedInput
   }
@@ -21581,6 +25251,7 @@ export namespace Prisma {
     orderId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type OrderItemUncheckedUpdateManyWithoutMenuItemInput = {
@@ -21589,6 +25260,7 @@ export namespace Prisma {
     orderId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type RecipeItemUpdateWithoutMenuItemInput = {
@@ -21610,6 +25282,35 @@ export namespace Prisma {
     venueId?: StringFieldUpdateOperationsInput | string
     ingredientId?: StringFieldUpdateOperationsInput | string
     quantityUsed?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type ModifierGroupUpdateWithoutMenuItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    maxSelections?: IntFieldUpdateOperationsInput | number
+    orderIndex?: IntFieldUpdateOperationsInput | number
+    venue?: VenueUpdateOneRequiredWithoutModifierGroupsNestedInput
+    options?: ModifierOptionUpdateManyWithoutModifierGroupNestedInput
+  }
+
+  export type ModifierGroupUncheckedUpdateWithoutMenuItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    venueId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    maxSelections?: IntFieldUpdateOperationsInput | number
+    orderIndex?: IntFieldUpdateOperationsInput | number
+    options?: ModifierOptionUncheckedUpdateManyWithoutModifierGroupNestedInput
+  }
+
+  export type ModifierGroupUncheckedUpdateManyWithoutMenuItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    venueId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    required?: BoolFieldUpdateOperationsInput | boolean
+    maxSelections?: IntFieldUpdateOperationsInput | number
+    orderIndex?: IntFieldUpdateOperationsInput | number
   }
 
   export type RecipeItemCreateManyIngredientInput = {
@@ -21640,18 +25341,52 @@ export namespace Prisma {
     quantityUsed?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
   }
 
+  export type ModifierOptionCreateManyModifierGroupInput = {
+    id?: string
+    label: string
+    priceAdjustment?: Decimal | DecimalJsLike | number | string
+    isDefault?: boolean
+    orderIndex?: number
+  }
+
+  export type ModifierOptionUpdateWithoutModifierGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    priceAdjustment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    orderIndex?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ModifierOptionUncheckedUpdateWithoutModifierGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    priceAdjustment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    orderIndex?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ModifierOptionUncheckedUpdateManyWithoutModifierGroupInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    priceAdjustment?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isDefault?: BoolFieldUpdateOperationsInput | boolean
+    orderIndex?: IntFieldUpdateOperationsInput | number
+  }
+
   export type OrderItemCreateManyOrderInput = {
     id?: string
     venueId: string
     menuItemId: string
     quantity: number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type OrderItemUpdateWithoutOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
     venue?: VenueUpdateOneRequiredWithoutOrderItemsNestedInput
     menuItem?: MenuItemUpdateOneRequiredWithoutOrderItemsNestedInput
   }
@@ -21662,6 +25397,7 @@ export namespace Prisma {
     menuItemId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type OrderItemUncheckedUpdateManyWithoutOrderInput = {
@@ -21670,6 +25406,7 @@ export namespace Prisma {
     menuItemId?: StringFieldUpdateOperationsInput | string
     quantity?: IntFieldUpdateOperationsInput | number
     addOns?: NullableJsonNullValueInput | InputJsonValue
+    modifiers?: NullableJsonNullValueInput | InputJsonValue
   }
 
 

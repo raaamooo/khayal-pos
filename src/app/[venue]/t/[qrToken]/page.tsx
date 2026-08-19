@@ -49,6 +49,13 @@ export default async function TableRoutingPage({
 
   const menuItems = await prisma.menuItem.findMany({
     where: { venueId: venue.id },
+    include: {
+      modifierGroups: {
+        include: {
+          options: true,
+        },
+      },
+    },
   });
 
   const addOns = await prisma.addOn.findMany({

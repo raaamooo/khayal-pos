@@ -17,6 +17,7 @@ export async function submitOrder(data: {
     menuItemId: string;
     quantity: number;
     addOns: Array<{ id: string; name: string; price: number }>;
+    modifiers?: Array<{ groupId: string; groupName: string; optionId: string; optionLabel: string; priceAdjustment: number }>;
   }>;
 }) {
   const { venueId, tableSessionId, tableId, customerName, notes, paymentMethod, tipAmount, totalAmount, items } = data;
@@ -47,6 +48,7 @@ export async function submitOrder(data: {
           menuItemId: item.menuItemId,
           quantity: item.quantity,
           addOns: item.addOns,
+          modifiers: item.modifiers || [],
         })),
       },
     },

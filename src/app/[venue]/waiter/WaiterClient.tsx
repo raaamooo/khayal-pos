@@ -235,8 +235,13 @@ export default function WaiterClient({
                     {order.items.map((item: any) => (
                       <div key={item.id} className={styles.orderItem}>
                         <div className={styles.itemQty}>{item.quantity}x</div>
-                        <div className={styles.itemNameWrapper}>
+                        <div className={styles.itemInfo}>
                           <span className={styles.itemName}>{item.menuItem.name}</span>
+                          {item.modifiers && (item.modifiers as any[]).length > 0 && (
+                            <span className={styles.addOnSummary} style={{ color: "var(--primary-color)", fontWeight: 600 }}>
+                              {(item.modifiers as any[]).map((m: any) => m.optionLabel || m.label).join(" • ")}
+                            </span>
+                          )}
                           {item.addOns && (item.addOns as any[]).length > 0 && (
                             <span className={styles.addOnSummary}>
                               {(item.addOns as any[]).map((a: any) => `+${a.name}`).join(", ")}

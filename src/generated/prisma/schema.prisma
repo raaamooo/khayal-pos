@@ -25,16 +25,17 @@ model Venue {
   createdAt       DateTime @default(now()) @map("created_at")
 
   // ── Relations (every tenant-scoped table references back here) ──
-  staffAccounts StaffAccount[]
-  tables        Table[]
-  tableSessions TableSession[]
-  categories    Category[]
-  menuItems     MenuItem[]
-  ingredients   Ingredient[]
-  recipeItems   RecipeItem[]
-  addOns        AddOn[]
-  orders        Order[]
-  orderItems    OrderItem[]
+  staffAccounts  StaffAccount[]
+  tables         Table[]
+  tableSessions  TableSession[]
+  categories     Category[]
+  menuItems      MenuItem[]
+  ingredients    Ingredient[]
+  recipeItems    RecipeItem[]
+  addOns         AddOn[]
+  modifierGroups ModifierGroup[]
+  orders         Order[]
+  orderItems     OrderItem[]
 
   @@map("venues")
 }
@@ -119,19 +120,20 @@ model Category {
 }
 
 model MenuItem {
-  id          String       @id @default(cuid())
-  venueId     String       @map("venue_id")
-  venue       Venue        @relation(fields: [venueId], references: [id])
-  categoryId  String       @map("category_id")
-  category    Category     @relation(fields: [categoryId], references: [id])
-  name        String
-  description String?
-  price       Decimal
-  imageUrl    String?      @map("image_url")
-  outOfStock  Boolean      @default(false) @map("out_of_stock")
-  quizTags    Json?        @map("quiz_tags") // e.g. ["cold", "sweet", "fruity"]
-  orderItems  OrderItem[]
-  recipeItems RecipeItem[]
+  id             String          @id @default(cuid())
+  venueId        String          @map("venue_id")
+  venue          Venue           @relation(fields: [venueId], references: [id])
+  categoryId     String          @map("category_id")
+  category       Category        @relation(fields: [categoryId], references: [id])
+  name           String
+  description    String?
+  price          Decimal
+  imageUrl       String?         @map("image_url")
+  outOfStock     Boolean         @default(false) @map("out_of_stock")
+  quizTags       Json?           @map("quiz_tags") // e.g. ["cold", "sweet", "fruity"]
+  orderItems     OrderItem[]
+  recipeItems    RecipeItem[]
+  modifierGroups ModifierGroup[]
 
   @@index([venueId])
   @@index([categoryId])
@@ -181,6 +183,40 @@ model AddOn {
 }
 
 // ─────────────────────────────────────────────
+// Modifier Engine — data-driven item customization
+// ─────────────────────────────────────────────
+
+model ModifierGroup {
+  id            String           @id @default(cuid())
+  venueId       String           @map("venue_id")
+  venue         Venue            @relation(fields: [venueId], references: [id])
+  menuItemId    String           @map("menu_item_id")
+  menuItem      MenuItem         @relation(fields: [menuItemId], references: [id])
+  name          String // e.g. "Size", "Milk Type", "Sweetness", "Ice Level"
+  required      Boolean          @default(false) // Must the customer pick at least one?
+  maxSelections Int              @default(1) @map("max_selections") // 1 = radio, N = checkboxes
+  orderIndex    Int              @default(0) @map("order_index")
+  options       ModifierOption[]
+
+  @@index([venueId])
+  @@index([menuItemId])
+  @@map("modifier_groups")
+}
+
+model ModifierOption {
+  id              String        @id @default(cuid())
+  modifierGroupId String        @map("modifier_group_id")
+  modifierGroup   ModifierGroup @relation(fields: [modifierGroupId], references: [id], onDelete: Cascade)
+  label           String // e.g. "Oat Milk", "Large", "50%"
+  priceAdjustment Decimal       @default(0) @map("price_adjustment") // +15 EGP for Large
+  isDefault       Boolean       @default(false) @map("is_default")
+  orderIndex      Int           @default(0) @map("order_index")
+
+  @@index([modifierGroupId])
+  @@map("modifier_options")
+}
+
+// ─────────────────────────────────────────────
 // Orders
 // ─────────────────────────────────────────────
 
@@ -214,6 +250,7 @@ model OrderItem {
   menuItem   MenuItem @relation(fields: [menuItemId], references: [id])
   quantity   Int
   addOns     Json?    @map("add_ons") // Array of { id, name, price }
+  modifiers  Json? // Array of { groupName, optionLabel, priceAdjustment }
 
   @@index([venueId])
   @@index([orderId])

@@ -98,17 +98,23 @@ export default function CashierClient({
               totalTips += order.tipAmount || 0;
               order.items.forEach((item: any) => {
                 const addOns = (item.addOns as any[]) || [];
-                const addOnTotal = addOns.reduce(
-                  (sum: number, a: any) => sum + Number(a.price),
+                const modifiers = (item.modifiers as any[]) || [];
+                const modTotal = modifiers.reduce(
+                  (sum: number, m: any) => sum + Number(m.priceAdjustment || 0),
                   0
                 );
-                const lineTotal = (Number(item.menuItem.price) + addOnTotal) * item.quantity;
+                const addOnTotal = addOns.reduce(
+                  (sum: number, a: any) => sum + Number(a.price || 0),
+                  0
+                );
+                const lineTotal = (Number(item.menuItem.price) + modTotal + addOnTotal) * item.quantity;
                 grandTotal += lineTotal;
 
                 allItems.push({
                   ...item,
                   lineTotal,
                   addOnsArr: addOns,
+                  modifiersArr: modifiers,
                 });
               });
             });
@@ -124,9 +130,10 @@ export default function CashierClient({
                   aria-expanded={isExpanded}
                 >
                   <div className={styles.sessionHeaderLeft}>
-                    <span className={styles.sessionTableLabel}>
-                      {session.table.label}
-                    </span>
+                    <div className={styles.tableBadgeIcon}>
+                      <Receipt size={20} weight="bold" />
+                    </div>
+                    <span className={styles.tableLabel}>{session.table.label}</span>
                     <Badge variant="primary" size="sm">
                       {allOrders.length} order{allOrders.length !== 1 ? "s" : ""}
                     </Badge>
@@ -163,6 +170,11 @@ export default function CashierClient({
                           <tr key={idx}>
                             <td>
                               <span className={styles.receiptItemName}>{item.menuItem.name}</span>
+                              {item.modifiersArr && item.modifiersArr.length > 0 && (
+                                <div className={styles.receiptAddOns} style={{ color: "var(--primary-color)", fontWeight: 600 }}>
+                                  {item.modifiersArr.map((m: any) => m.optionLabel || m.label).join(" • ")}
+                                </div>
+                              )}
                               {item.addOnsArr.length > 0 && (
                                 <div className={styles.receiptAddOns}>
                                   {item.addOnsArr.map((a: any) => `+${a.name}`).join(", ")}

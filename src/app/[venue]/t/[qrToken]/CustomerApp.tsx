@@ -15,7 +15,8 @@ import {
   Clock,
   ShoppingBag,
   CheckCircle,
-  Sparkle
+  Sparkle,
+  SlidersHorizontal
 } from "@phosphor-icons/react";
 import styles from "./customer.module.css";
 import { useTheme } from "@/components/ThemeProvider";
@@ -25,6 +26,8 @@ import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { EmptyState } from "@/components/ui/EmptyState";
+import ItemCustomizerSheet, { SelectedModifier } from "@/components/menu/ItemCustomizerSheet";
+import { playTick, playPop, playSuccess } from "@/lib/sound";
 
 // --- Motion Seeds ---
 const silk: any = {
@@ -79,6 +82,7 @@ interface CartItem {
   menuItem: MenuItem;
   quantity: number;
   addOns: AddOn[];
+  modifiers: SelectedModifier[];
 }
 
 export default function CustomerApp({
@@ -105,6 +109,7 @@ export default function CustomerApp({
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isCallingWaiter, setIsCallingWaiter] = useState(false);
   const [waiterCalledSuccess, setWaiterCalledSuccess] = useState(false);
+  const [customizingItem, setCustomizingItem] = useState<MenuItem | null>(null);
 
   // SSE Listener for live out-of-stock updates
   useEffect(() => {
@@ -128,27 +133,49 @@ export default function CustomerApp({
     return () => eventSource.close();
   }, [venue.slug]);
 
+  // Open customizer sheet or add directly
+  const handleItemClick = (menuItem: MenuItem) => {
+    if (menuItem.outOfStock) return;
+    if (menuItem.modifierGroups && menuItem.modifierGroups.length > 0) {
+      setCustomizingItem(menuItem);
+    } else {
+      addToCart(menuItem, 1, []);
+    }
+  };
+
   // Cart Management
-  const addToCart = (menuItem: MenuItem) => {
+  const addToCart = (menuItem: MenuItem, quantity: number = 1, modifiers: SelectedModifier[] = []) => {
+    playPop();
     setCart((prev) => [
       ...prev,
       {
         cartItemId: Math.random().toString(36).substring(2, 11),
         menuItem,
-        quantity: 1,
+        quantity,
         addOns: [],
+        modifiers,
       },
     ]);
-    const label = language === "ar" ? `تمت إضافة ${menuItem.name}` : `Added ${menuItem.name} to order`;
+    const label = language === "ar" 
+      ? `تمت إضافة ${menuItem.name} (${quantity})` 
+      : `Added ${menuItem.name} (${quantity}) to order`;
     setToastMessage(label);
     setTimeout(() => setToastMessage(null), 2200);
   };
 
+  // Add pairing item directly from modal
+  const handleAddPairing = (pairing: any) => {
+    const fullItem = menuItems.find((i: any) => i.id === pairing.id) || pairing;
+    addToCart(fullItem, 1, []);
+  };
+
   const removeFromCart = (cartItemId: string) => {
+    playTick();
     setCart((prev) => prev.filter((item) => item.cartItemId !== cartItemId));
   };
 
   const toggleAddOnInCart = (addOn: AddOn) => {
+    playTick();
     setCart((prev) =>
       prev.map((item) => {
         if (addOn.applicableItemIds.includes(item.menuItem.id)) {
@@ -259,7 +286,7 @@ export default function CustomerApp({
             menuItems={menuItems}
             activeCategoryId={activeCategoryId}
             setActiveCategoryId={setActiveCategoryId}
-            addToCart={addToCart}
+            onItemClick={handleItemClick}
             language={language}
           />
         )}
@@ -280,6 +307,33 @@ export default function CustomerApp({
           />
         )}
       </main>
+
+      {/* ── Item Customizer Sheet Modal ── */}
+      <AnimatePresence>
+        {customizingItem && (
+          <ItemCustomizerSheet
+            item={customizingItem}
+            pairings={(() => {
+              const tags = (customizingItem.quizTags as string[]) || [];
+              const pairedIds = tags
+                .filter((t: string) => t.startsWith("pairs:"))
+                .map((t: string) => t.replace("pairs:", ""));
+              
+              const matched = menuItems.filter((i: any) => pairedIds.includes(i.id) && !i.outOfStock);
+              if (matched.length > 0) return matched;
+              // Fallback: items from other categories (e.g. desserts)
+              return menuItems.filter((i: any) => i.categoryId !== customizingItem.categoryId && !i.outOfStock).slice(0, 2);
+            })()}
+            language={language as "en" | "ar"}
+            onAddToCart={(item, qty, mods) => {
+              addToCart(item, qty, mods);
+              setCustomizingItem(null);
+            }}
+            onAddPairing={handleAddPairing}
+            onClose={() => setCustomizingItem(null)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* ── Bottom Cart Drawer ── */}
       <CartDrawer
@@ -315,7 +369,7 @@ export default function CustomerApp({
   );
 }
 
-function MenuTab({ categories, menuItems, activeCategoryId, setActiveCategoryId, addToCart, language }: any) {
+function MenuTab({ categories, menuItems, activeCategoryId, setActiveCategoryId, onItemClick, language }: any) {
   const visibleItems = menuItems.filter((i: any) => i.categoryId === activeCategoryId);
 
   return (
@@ -348,54 +402,65 @@ function MenuTab({ categories, menuItems, activeCategoryId, setActiveCategoryId,
           animate="show"
           key={activeCategoryId}
         >
-          {visibleItems.map((item: any) => (
-            <motion.div key={item.id} variants={staggerItem}>
-              <Card className={styles.menuItemCard}>
-                <div className={styles.itemImagePlaceholder}>
-                  {item.name.charAt(0)}
-                </div>
-                
-                <div className={styles.itemInfo}>
-                  <div className={styles.itemHeader}>
-                    <h3 className={styles.itemName}>{item.name}</h3>
-                    <div className={styles.itemTime}>
-                      <Clock size={13} weight="bold" /> 8-10m
-                    </div>
+          {visibleItems.map((item: any) => {
+            const hasModifiers = item.modifierGroups && item.modifierGroups.length > 0;
+            return (
+              <motion.div key={item.id} variants={staggerItem}>
+                <Card 
+                  className={styles.menuItemCard}
+                  onClick={() => onItemClick(item)}
+                  style={{ cursor: item.outOfStock ? "default" : "pointer" }}
+                >
+                  <div className={styles.itemImagePlaceholder}>
+                    {item.name.charAt(0)}
                   </div>
                   
-                  {item.description && (
-                    <p className={styles.itemDesc}>{item.description}</p>
-                  )}
-                  
-                  <div className={styles.itemFooter}>
-                    <div className={styles.priceTag}>
-                      <span className={styles.currency}>{language === "ar" ? "ج.م" : "EGP"}</span>
-                      <span className={styles.itemPrice}>{Number(item.price).toFixed(0)}</span>
+                  <div className={styles.itemInfo}>
+                    <div className={styles.itemHeader}>
+                      <h3 className={styles.itemName}>{item.name}</h3>
+                      <div className={styles.itemTime}>
+                        <Clock size={13} weight="bold" /> 8-10m
+                      </div>
                     </div>
+                    
+                    {item.description && (
+                      <p className={styles.itemDesc}>{item.description}</p>
+                    )}
+                    
+                    <div className={styles.itemFooter}>
+                      <div className={styles.priceTag}>
+                        <span className={styles.currency}>{language === "ar" ? "ج.م" : "EGP"}</span>
+                        <span className={styles.itemPrice}>{Number(item.price).toFixed(0)}</span>
+                      </div>
 
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      onClick={() => addToCart(item)}
-                      disabled={item.outOfStock}
-                      className={styles.addToCartBtn}
-                      leftIcon={<Plus size={16} weight="bold" />}
-                    >
-                      {item.outOfStock 
-                        ? (language === "ar" ? "نفذ" : "Sold Out") 
-                        : (language === "ar" ? "إضافة" : "Add")}
-                    </Button>
+                      <Button
+                        variant={hasModifiers ? "outline" : "primary"}
+                        size="sm"
+                        onClick={(e: any) => {
+                          e.stopPropagation();
+                          onItemClick(item);
+                        }}
+                        disabled={item.outOfStock}
+                        className={styles.addToCartBtn}
+                        leftIcon={hasModifiers ? <SlidersHorizontal size={14} weight="bold" /> : <Plus size={16} weight="bold" />}
+                      >
+                        {item.outOfStock 
+                          ? (language === "ar" ? "نفذ" : "Sold Out") 
+                          : hasModifiers
+                            ? (language === "ar" ? "تخصيص" : "Customize")
+                            : (language === "ar" ? "إضافة" : "Add")}
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
+                </Card>
+              </motion.div>
+            );
+          })}
         </motion.div>
       )}
     </div>
   );
 }
-
 function AddOnsTab({ addOns, menuItems, cart, toggleAddOnInCart, language }: any) {
   if (!addOns || addOns.length === 0) {
     return (
@@ -602,7 +667,8 @@ function CartDrawer({
 
   const subtotal = cart.reduce((acc: number, item: any) => {
     let itemTotal = Number(item.menuItem.price);
-    item.addOns.forEach((a: any) => itemTotal += Number(a.price));
+    (item.modifiers || []).forEach((m: any) => itemTotal += Number(m.priceAdjustment || 0));
+    (item.addOns || []).forEach((a: any) => itemTotal += Number(a.price || 0));
     return acc + (itemTotal * item.quantity);
   }, 0);
 
@@ -624,9 +690,17 @@ function CartDrawer({
         items: cart.map((c: any) => ({
           menuItemId: c.menuItem.id,
           quantity: c.quantity,
-          addOns: c.addOns.map((a: any) => ({ id: a.id, name: a.name, price: Number(a.price) })),
+          addOns: (c.addOns || []).map((a: any) => ({ id: a.id, name: a.name, price: Number(a.price) })),
+          modifiers: (c.modifiers || []).map((m: any) => ({
+            groupId: m.groupId,
+            groupName: m.groupName,
+            optionId: m.optionId,
+            optionLabel: m.optionLabel,
+            priceAdjustment: Number(m.priceAdjustment),
+          })),
         })),
       });
+      playSuccess();
       setOrderSubmittedSuccess(true);
       setCart([]);
       setTip(0);
@@ -704,31 +778,52 @@ function CartDrawer({
               />
             ) : (
               <div className={styles.cartItemList}>
-                {cart.map((item: any) => (
-                  <div key={item.cartItemId} className={styles.cartItem}>
-                    <div className={styles.cartItemInfo}>
-                      <h4>{item.menuItem.name}</h4>
-                      {item.addOns.map((a: any) => (
-                        <span key={a.id} className={styles.cartItemAddOnBadge}>
-                          + {a.name} ({Number(a.price)} {language === "ar" ? "ج.م" : "EGP"})
+                {cart.map((item: any) => {
+                  const modifierTotal = (item.modifiers || []).reduce((sum: number, m: any) => sum + Number(m.priceAdjustment || 0), 0);
+                  const addOnTotal = (item.addOns || []).reduce((sum: number, a: any) => sum + Number(a.price || 0), 0);
+                  const itemUnitPrice = Number(item.menuItem.price) + modifierTotal + addOnTotal;
+
+                  return (
+                    <div key={item.cartItemId} className={styles.cartItem}>
+                      <div className={styles.cartItemInfo}>
+                        <h4>{item.menuItem.name} {item.quantity > 1 && <span style={{ opacity: 0.7 }}>×{item.quantity}</span>}</h4>
+                        
+                        {/* Selected Modifiers */}
+                        {item.modifiers && item.modifiers.length > 0 && (
+                          <div style={{ display: "flex", flexWrap: "wrap", gap: "4px", marginTop: "4px" }}>
+                            {item.modifiers.map((m: any, idx: number) => (
+                              <span key={idx} className={styles.cartItemAddOnBadge}>
+                                {m.optionLabel}
+                                {Number(m.priceAdjustment) > 0 && ` (+${Number(m.priceAdjustment)} ${language === "ar" ? "ج.م" : "EGP"})`}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* Selected Add-ons */}
+                        {item.addOns && item.addOns.map((a: any) => (
+                          <span key={a.id} className={styles.cartItemAddOnBadge}>
+                            + {a.name} ({Number(a.price)} {language === "ar" ? "ج.م" : "EGP"})
+                          </span>
+                        ))}
+                      </div>
+                      
+                      <div className={styles.cartItemRight}>
+                        <span className={styles.cartItemPrice}>
+                          {itemUnitPrice * item.quantity} {language === "ar" ? "ج.م" : "EGP"}
                         </span>
-                      ))}
+                        <button
+                          className={styles.removeBtn} 
+                          onClick={() => removeFromCart(item.cartItemId)}
+                          aria-label="Remove item"
+                        >
+                          <Trash size={16} />
+                          <span>{language === "ar" ? "حذف" : "Remove"}</span>
+                        </button>
+                      </div>
                     </div>
-                    <div className={styles.cartItemRight}>
-                      <span className={styles.cartItemPrice}>
-                        {(Number(item.menuItem.price) + item.addOns.reduce((sum: number, a: any) => sum + Number(a.price), 0)) * item.quantity} {language === "ar" ? "ج.م" : "EGP"}
-                      </span>
-                      <button
-                        className={styles.removeBtn} 
-                        onClick={() => removeFromCart(item.cartItemId)}
-                        aria-label="Remove item"
-                      >
-                        <Trash size={16} />
-                        <span>{language === "ar" ? "حذف" : "Remove"}</span>
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
 
                 <div className={styles.cartForm}>
                   {/* Tip Selection */}

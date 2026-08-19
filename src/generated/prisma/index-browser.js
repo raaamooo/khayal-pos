@@ -205,6 +205,25 @@ exports.Prisma.AddOnScalarFieldEnum = {
   applicableItemIds: 'applicableItemIds'
 };
 
+exports.Prisma.ModifierGroupScalarFieldEnum = {
+  id: 'id',
+  venueId: 'venueId',
+  menuItemId: 'menuItemId',
+  name: 'name',
+  required: 'required',
+  maxSelections: 'maxSelections',
+  orderIndex: 'orderIndex'
+};
+
+exports.Prisma.ModifierOptionScalarFieldEnum = {
+  id: 'id',
+  modifierGroupId: 'modifierGroupId',
+  label: 'label',
+  priceAdjustment: 'priceAdjustment',
+  isDefault: 'isDefault',
+  orderIndex: 'orderIndex'
+};
+
 exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
   venueId: 'venueId',
@@ -224,7 +243,8 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   orderId: 'orderId',
   menuItemId: 'menuItemId',
   quantity: 'quantity',
-  addOns: 'addOns'
+  addOns: 'addOns',
+  modifiers: 'modifiers'
 };
 
 exports.Prisma.SortOrder = {
@@ -274,6 +294,8 @@ exports.Prisma.ModelName = {
   Ingredient: 'Ingredient',
   RecipeItem: 'RecipeItem',
   AddOn: 'AddOn',
+  ModifierGroup: 'ModifierGroup',
+  ModifierOption: 'ModifierOption',
   Order: 'Order',
   OrderItem: 'OrderItem'
 };

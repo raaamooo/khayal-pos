@@ -161,48 +161,127 @@ async function main() {
     create: { id: "addon-extra-shot", venueId: venue.id, name: "Extra Shot", price: 15.0, applicableItemIds: ["item-flat-white", "item-iced-latte"] },
   });
 
-  // ── Seed Ingredients ──
-  const espressoBeans = await prisma.ingredient.upsert({
-    where: { id: "ing-espresso" },
-    update: { venueId: venue.id, name: "Espresso Beans", unit: "g", stock: 1000, lowThreshold: 200 },
-    create: { id: "ing-espresso", venueId: venue.id, name: "Espresso Beans", unit: "g", stock: 1000, lowThreshold: 200 },
+  // ── Seed Modifier Groups & Options ──
+  // Helper to upsert a modifier group with its options
+  async function seedModifierGroup(
+    groupId: string,
+    menuItemId: string,
+    name: string,
+    required: boolean,
+    maxSelections: number,
+    orderIdx: number,
+    options: Array<{ id: string; label: string; priceAdjustment: number; isDefault: boolean; orderIndex: number }>
+  ) {
+    await prisma.modifierGroup.upsert({
+      where: { id: groupId },
+      update: { venueId: venue.id, menuItemId, name, required, maxSelections, orderIndex: orderIdx },
+      create: { id: groupId, venueId: venue.id, menuItemId, name, required, maxSelections, orderIndex: orderIdx },
+    });
+    for (const opt of options) {
+      await prisma.modifierOption.upsert({
+        where: { id: opt.id },
+        update: { modifierGroupId: groupId, label: opt.label, priceAdjustment: opt.priceAdjustment, isDefault: opt.isDefault, orderIndex: opt.orderIndex },
+        create: { id: opt.id, modifierGroupId: groupId, label: opt.label, priceAdjustment: opt.priceAdjustment, isDefault: opt.isDefault, orderIndex: opt.orderIndex },
+      });
+    }
+  }
+
+  // -- Flat White modifiers --
+  await seedModifierGroup("mod-fw-size", "item-flat-white", "Size", true, 1, 0, [
+    { id: "opt-fw-size-regular", label: "Regular", priceAdjustment: 0, isDefault: true, orderIndex: 0 },
+    { id: "opt-fw-size-large", label: "Large", priceAdjustment: 15, isDefault: false, orderIndex: 1 },
+  ]);
+  await seedModifierGroup("mod-fw-milk", "item-flat-white", "Milk Type", false, 1, 1, [
+    { id: "opt-fw-milk-whole", label: "Whole Milk", priceAdjustment: 0, isDefault: true, orderIndex: 0 },
+    { id: "opt-fw-milk-oat", label: "Oat Milk", priceAdjustment: 20, isDefault: false, orderIndex: 1 },
+    { id: "opt-fw-milk-almond", label: "Almond Milk", priceAdjustment: 20, isDefault: false, orderIndex: 2 },
+    { id: "opt-fw-milk-skim", label: "Skim Milk", priceAdjustment: 0, isDefault: false, orderIndex: 3 },
+  ]);
+  await seedModifierGroup("mod-fw-sweet", "item-flat-white", "Sweetness", false, 1, 2, [
+    { id: "opt-fw-sweet-none", label: "No Sugar", priceAdjustment: 0, isDefault: true, orderIndex: 0 },
+    { id: "opt-fw-sweet-half", label: "50% Sugar", priceAdjustment: 0, isDefault: false, orderIndex: 1 },
+    { id: "opt-fw-sweet-full", label: "100% Sugar", priceAdjustment: 0, isDefault: false, orderIndex: 2 },
+  ]);
+
+  // -- Iced Latte modifiers --
+  await seedModifierGroup("mod-il-size", "item-iced-latte", "Size", true, 1, 0, [
+    { id: "opt-il-size-regular", label: "Regular", priceAdjustment: 0, isDefault: true, orderIndex: 0 },
+    { id: "opt-il-size-large", label: "Large", priceAdjustment: 15, isDefault: false, orderIndex: 1 },
+  ]);
+  await seedModifierGroup("mod-il-milk", "item-iced-latte", "Milk Type", false, 1, 1, [
+    { id: "opt-il-milk-whole", label: "Whole Milk", priceAdjustment: 0, isDefault: true, orderIndex: 0 },
+    { id: "opt-il-milk-oat", label: "Oat Milk", priceAdjustment: 20, isDefault: false, orderIndex: 1 },
+    { id: "opt-il-milk-almond", label: "Almond Milk", priceAdjustment: 20, isDefault: false, orderIndex: 2 },
+    { id: "opt-il-milk-skim", label: "Skim Milk", priceAdjustment: 0, isDefault: false, orderIndex: 3 },
+  ]);
+  await seedModifierGroup("mod-il-sweet", "item-iced-latte", "Sweetness", false, 1, 2, [
+    { id: "opt-il-sweet-none", label: "No Sugar", priceAdjustment: 0, isDefault: true, orderIndex: 0 },
+    { id: "opt-il-sweet-half", label: "50% Sugar", priceAdjustment: 0, isDefault: false, orderIndex: 1 },
+    { id: "opt-il-sweet-full", label: "100% Sugar", priceAdjustment: 0, isDefault: false, orderIndex: 2 },
+  ]);
+  await seedModifierGroup("mod-il-ice", "item-iced-latte", "Ice Level", false, 1, 3, [
+    { id: "opt-il-ice-regular", label: "Regular Ice", priceAdjustment: 0, isDefault: true, orderIndex: 0 },
+    { id: "opt-il-ice-less", label: "Less Ice", priceAdjustment: 0, isDefault: false, orderIndex: 1 },
+    { id: "opt-il-ice-none", label: "No Ice", priceAdjustment: 0, isDefault: false, orderIndex: 2 },
+  ]);
+
+  // -- Iced Matcha Latte modifiers --
+  await seedModifierGroup("mod-ml-size", "item-matcha", "Size", true, 1, 0, [
+    { id: "opt-ml-size-regular", label: "Regular", priceAdjustment: 0, isDefault: true, orderIndex: 0 },
+    { id: "opt-ml-size-large", label: "Large", priceAdjustment: 15, isDefault: false, orderIndex: 1 },
+  ]);
+  await seedModifierGroup("mod-ml-milk", "item-matcha", "Milk Type", false, 1, 1, [
+    { id: "opt-ml-milk-whole", label: "Whole Milk", priceAdjustment: 0, isDefault: true, orderIndex: 0 },
+    { id: "opt-ml-milk-oat", label: "Oat Milk", priceAdjustment: 20, isDefault: false, orderIndex: 1 },
+    { id: "opt-ml-milk-almond", label: "Almond Milk", priceAdjustment: 20, isDefault: false, orderIndex: 2 },
+  ]);
+  await seedModifierGroup("mod-ml-sweet", "item-matcha", "Sweetness", false, 1, 2, [
+    { id: "opt-ml-sweet-none", label: "No Sugar", priceAdjustment: 0, isDefault: true, orderIndex: 0 },
+    { id: "opt-ml-sweet-half", label: "50% Sugar", priceAdjustment: 0, isDefault: false, orderIndex: 1 },
+    { id: "opt-ml-sweet-full", label: "100% Sugar", priceAdjustment: 0, isDefault: false, orderIndex: 2 },
+  ]);
+  await seedModifierGroup("mod-ml-ice", "item-matcha", "Ice Level", false, 1, 3, [
+    { id: "opt-ml-ice-regular", label: "Regular Ice", priceAdjustment: 0, isDefault: true, orderIndex: 0 },
+    { id: "opt-ml-ice-less", label: "Less Ice", priceAdjustment: 0, isDefault: false, orderIndex: 1 },
+    { id: "opt-ml-ice-none", label: "No Ice", priceAdjustment: 0, isDefault: false, orderIndex: 2 },
+  ]);
+
+  // -- V60 modifiers (just size, black coffee has no milk/ice) --
+  await seedModifierGroup("mod-v60-size", "item-v60", "Size", true, 1, 0, [
+    { id: "opt-v60-size-regular", label: "Regular", priceAdjustment: 0, isDefault: true, orderIndex: 0 },
+    { id: "opt-v60-size-large", label: "Large", priceAdjustment: 20, isDefault: false, orderIndex: 1 },
+  ]);
+
+  console.log("  Modifier groups seeded for drinks.");
+
+  // ── Update menu items with dietary tags and pairing suggestions ──
+  await prisma.menuItem.update({
+    where: { id: "item-flat-white" },
+    data: { quizTags: ["hot", "creamy", "caffeine", "milk", "pairs:item-brownie"] },
+  });
+  await prisma.menuItem.update({
+    where: { id: "item-iced-latte" },
+    data: { quizTags: ["cold", "creamy", "caffeine", "milk", "pairs:item-brownie", "pairs:item-tiramisu"] },
+  });
+  await prisma.menuItem.update({
+    where: { id: "item-matcha" },
+    data: { quizTags: ["cold", "creamy", "tea", "earthy", "vegan-friendly", "pairs:item-brownie"] },
+  });
+  await prisma.menuItem.update({
+    where: { id: "item-v60" },
+    data: { quizTags: ["hot", "black", "caffeine", "fruity", "vegan", "gluten-free", "pairs:item-tiramisu"] },
+  });
+  await prisma.menuItem.update({
+    where: { id: "item-brownie" },
+    data: { quizTags: ["dessert", "chocolate", "heavy", "sweet", "gluten-free"] },
+  });
+  await prisma.menuItem.update({
+    where: { id: "item-tiramisu" },
+    data: { quizTags: ["dessert", "creamy", "coffee", "sweet"] },
   });
 
-  const milk = await prisma.ingredient.upsert({
-    where: { id: "ing-milk" },
-    update: { venueId: venue.id, name: "Whole Milk", unit: "ml", stock: 5000, lowThreshold: 1000 },
-    create: { id: "ing-milk", venueId: venue.id, name: "Whole Milk", unit: "ml", stock: 5000, lowThreshold: 1000 },
-  });
+  console.log("  Dietary tags and pairings updated.");
 
-  // ── Seed Recipe Items ──
-  // Flat White: 18g espresso, 150ml milk
-  await prisma.recipeItem.upsert({
-    where: { id: "recipe-flat-white-espresso" },
-    update: { venueId: venue.id, menuItemId: "item-flat-white", ingredientId: espressoBeans.id, quantityUsed: 18 },
-    create: { id: "recipe-flat-white-espresso", venueId: venue.id, menuItemId: "item-flat-white", ingredientId: espressoBeans.id, quantityUsed: 18 },
-  });
-  await prisma.recipeItem.upsert({
-    where: { id: "recipe-flat-white-milk" },
-    update: { venueId: venue.id, menuItemId: "item-flat-white", ingredientId: milk.id, quantityUsed: 150 },
-    create: { id: "recipe-flat-white-milk", venueId: venue.id, menuItemId: "item-flat-white", ingredientId: milk.id, quantityUsed: 150 },
-  });
-
-  // Iced Latte: 18g espresso, 200ml milk (to test out-of-stock easily, let's set a low stock for espresso)
-  await prisma.ingredient.update({
-    where: { id: espressoBeans.id },
-    data: { stock: 36 } // Only enough for 2 drinks!
-  });
-
-  await prisma.recipeItem.upsert({
-    where: { id: "recipe-iced-latte-espresso" },
-    update: { venueId: venue.id, menuItemId: "item-iced-latte", ingredientId: espressoBeans.id, quantityUsed: 18 },
-    create: { id: "recipe-iced-latte-espresso", venueId: venue.id, menuItemId: "item-iced-latte", ingredientId: espressoBeans.id, quantityUsed: 18 },
-  });
-  await prisma.recipeItem.upsert({
-    where: { id: "recipe-iced-latte-milk" },
-    update: { venueId: venue.id, menuItemId: "item-iced-latte", ingredientId: milk.id, quantityUsed: 200 },
-    create: { id: "recipe-iced-latte-milk", venueId: venue.id, menuItemId: "item-iced-latte", ingredientId: milk.id, quantityUsed: 200 },
-  });
 
   // ── Seed a test Table and Session ──
   const table = await prisma.table.upsert({
