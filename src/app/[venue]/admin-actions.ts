@@ -161,7 +161,7 @@ export async function closeSessionAndCheckout(venueId: string, sessionId: string
 
 export async function getBaristaOrders(venueId: string) {
   const orders = await prisma.order.findMany({
-    where: { venueId, status: "PENDING" },
+    where: { venueId, status: { in: ["PENDING", "PREPARING"] } },
     include: {
       items: { include: { menuItem: true } },
       tableSession: { include: { table: true } },
