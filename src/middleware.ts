@@ -38,17 +38,26 @@ export function middleware(request: NextRequest) {
   }
 
   // ── 1. Try subdomain resolution ──
-  const hostname = request.headers.get("host") || "";
+  const hostname = (request.headers.get("host") || "").toLowerCase().split(":")[0];
   const hostParts = hostname.split(".");
+
+  let isPlatformDomain = false;
+  if (
+    hostname === "localhost" ||
+    hostname === "127.0.0.1" ||
+    (hostname.endsWith(".vercel.app") && hostParts.length <= 3) ||
+    (hostname.endsWith(".railway.app") && hostParts.length <= 3)
+  ) {
+    isPlatformDomain = true;
+  }
 
   let venueSlug: string | null = null;
 
-  // Subdomain pattern: khayal.example.com or khayal.localhost:3000
-  // Must have 2+ parts and the first part isn't "www" or "localhost"
+  // Subdomain pattern for multi-tenant custom domains (e.g., khayal.example.com)
   if (
+    !isPlatformDomain &&
     hostParts.length >= 2 &&
-    hostParts[0] !== "www" &&
-    hostParts[0] !== "localhost"
+    hostParts[0] !== "www"
   ) {
     venueSlug = hostParts[0];
 
