@@ -283,25 +283,39 @@ async function main() {
   console.log("  Dietary tags and pairings updated.");
 
 
-  // ── Seed a test Table and Session ──
-  const table = await prisma.table.upsert({
-    where: { qrToken: "test-qr" },
-    update: { venueId: venue.id, label: "Table 5" },
-    create: { venueId: venue.id, label: "Table 5", qrToken: "test-qr" },
-  });
+  // ── Seed Venue Tables ──
+  const venueTables = [
+    { label: "Table 1", qrToken: "table-1", zone: "Main Hall" },
+    { label: "Table 2", qrToken: "table-2", zone: "Main Hall" },
+    { label: "Table 3", qrToken: "table-3", zone: "Main Hall" },
+    { label: "Table 4", qrToken: "table-4", zone: "Main Hall" },
+    { label: "Table 5", qrToken: "test-qr", zone: "Window Bar" },
+    { label: "Table 6", qrToken: "table-6", zone: "Window Bar" },
+    { label: "Terrace 1", qrToken: "terrace-1", zone: "Outdoor Terrace" },
+    { label: "Terrace 2", qrToken: "terrace-2", zone: "Outdoor Terrace" },
+    { label: "VIP Lounge", qrToken: "vip-lounge", zone: "Private Lounge" },
+  ];
 
-  // Create an active session if one doesn't exist for this table
-  if (!table.activeSessionId) {
-    const session = await prisma.tableSession.create({
-      data: { venueId: venue.id, tableId: table.id },
+  for (const t of venueTables) {
+    const createdTable = await prisma.table.upsert({
+      where: { qrToken: t.qrToken },
+      update: { venueId: venue.id, label: t.label },
+      create: { venueId: venue.id, label: t.label, qrToken: t.qrToken },
     });
-    await prisma.table.update({
-      where: { id: table.id },
-      data: { activeSessionId: session.id },
-    });
-    console.log(`  Table 5 activated with session ${session.id}`);
-  } else {
-    console.log(`  Table 5 already active with session ${table.activeSessionId}`);
+
+    // Make Table 5 (test-qr) and Table 2 active
+    if (t.qrToken === "test-qr" || t.qrToken === "table-2") {
+      if (!createdTable.activeSessionId) {
+        const session = await prisma.tableSession.create({
+          data: { venueId: venue.id, tableId: createdTable.id },
+        });
+        await prisma.table.update({
+          where: { id: createdTable.id },
+          data: { activeSessionId: session.id },
+        });
+        console.log(`  ${t.label} activated with session ${session.id}`);
+      }
+    }
   }
 
   console.log("Seeding complete.");

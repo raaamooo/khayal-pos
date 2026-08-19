@@ -186,6 +186,20 @@ export async function getWaiterOrders(venueId: string) {
 export async function getVenueTables(venueId: string) {
   const tables = await prisma.table.findMany({
     where: { venueId },
+    include: {
+      sessions: {
+        where: { endedAt: null },
+        include: {
+          orders: {
+            where: { status: { not: "CANCELLED" } },
+            include: {
+              items: { include: { menuItem: true } },
+            },
+          },
+        },
+        take: 1,
+      },
+    },
     orderBy: { label: "asc" },
   });
   return JSON.parse(JSON.stringify(tables));

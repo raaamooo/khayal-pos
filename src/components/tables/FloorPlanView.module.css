@@ -1,0 +1,273 @@
+/* ── Interactive Floor Plan & Waiter Station ─────────── */
+
+.floorPlanContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* ── Zone Section ── */
+.zoneSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.zoneHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.zoneTitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: 800;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  letter-spacing: -0.01em;
+}
+
+.zoneStats {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+/* ── Tables Grid ── */
+.tablesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-4);
+}
+
+/* ── Table Card ── */
+.tableCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) !important;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg) !important;
+  cursor: pointer;
+  position: relative;
+  transition: all var(--transition-normal);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tableCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-border-hover);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Status Glows ── */
+.tableCard.calling {
+  border-color: #ef4444 !important;
+  background: color-mix(in srgb, #ef4444 8%, var(--color-surface)) !important;
+  box-shadow: 0 0 24px -2px color-mix(in srgb, #ef4444 40%, transparent);
+  animation: callGlow 1.8s infinite;
+}
+
+@keyframes callGlow {
+  0%, 100% { box-shadow: 0 0 16px -2px color-mix(in srgb, #ef4444 35%, transparent); }
+  50% { box-shadow: 0 0 30px 2px color-mix(in srgb, #ef4444 60%, transparent); }
+}
+
+.tableCard.hasDelivery {
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 0 18px -2px color-mix(in srgb, var(--accent-color) 35%, transparent);
+}
+
+.tableCard.occupied {
+  border-color: color-mix(in srgb, #22c55e 35%, var(--color-border));
+}
+
+.tableCard.available {
+  border-style: dashed;
+  opacity: 0.9;
+}
+
+/* ── Top Card Row ── */
+.cardTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tableLabelGroup {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.tableNumber {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.tableCard.calling .tableNumber {
+  color: #ef4444;
+}
+
+.tableCard.hasDelivery .tableNumber {
+  color: var(--accent-color);
+}
+
+/* ── Service Calling Badge ── */
+.callingAlertTag {
+  background: #ef4444;
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: k-pulse-scale 1.2s infinite;
+}
+
+/* ── Table Info Details ── */
+.tableInfoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  padding: var(--space-2) 0;
+  border-top: 1px dashed var(--color-border);
+}
+
+.tableSeatedTime {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+}
+
+.tableBillSubtotal {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  color: var(--primary-color);
+  font-size: var(--text-sm);
+}
+
+/* ── Delivery Ready Alert Inside Table ── */
+.deliveryAlertPill {
+  background: color-mix(in srgb, var(--accent-color) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-color) 35%, transparent);
+  color: var(--accent-color);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 800;
+  font-family: var(--font-heading);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── Bottom Card Actions ── */
+.cardActionRow {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: auto;
+}
+
+/* ── Table Detail Modal / Drawer ── */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: var(--z-modal);
+}
+
+.detailModal {
+  position: fixed;
+  bottom: 0;
+  inset-inline: 0;
+  z-index: calc(var(--z-modal) + 1);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  box-shadow: 0 -16px 48px -8px rgba(0, 0, 0, 0.5);
+  max-height: 90vh;
+  max-height: 90dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.modalTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.modalTableBigLabel {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--accent-color);
+}
+
+.modalBody {
+  padding: var(--space-5);
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.modalOrdersList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.modalOrderItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.modalFooter {
+  padding: var(--space-4) var(--space-5);
+  padding-bottom: max(var(--space-4), env(safe-area-inset-bottom));
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface-glass);
+  display: flex;
+  gap: var(--space-3);
+}
+
+@media (min-width: 680px) {
+  .detailModal {
+    max-width: 540px;
+    inset-inline-start: auto;
+    inset-inline-end: var(--space-6);
+    bottom: var(--space-6);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    max-height: 80vh;
+  }
+}
