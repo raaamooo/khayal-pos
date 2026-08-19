@@ -125,3 +125,22 @@ export async function callWaiter(venueId: string, tableId: string) {
 
   return { success: true };
 }
+
+export async function fetchTableOrders(venueId: string, sessionId: string) {
+  const orders = await prisma.order.findMany({
+    where: {
+      venueId,
+      tableSessionId: sessionId,
+    },
+    include: {
+      items: {
+        include: {
+          menuItem: true,
+        },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return JSON.parse(JSON.stringify(orders));
+}

@@ -4,6 +4,8 @@ import { prisma } from "@/lib/db";
 import { requireApiAuth } from "@/lib/access";
 import type { Role } from "@/generated/prisma";
 
+import { eventBus } from "@/lib/events";
+
 // ─────────────────────────────────────────────
 // Order Status Transitions
 // ─────────────────────────────────────────────
@@ -16,12 +18,43 @@ export async function updateOrderStatus(
 ) {
   await requireApiAuth(allowedRoles, venueId);
 
-  await prisma.order.update({
+  const order = await prisma.order.update({
     where: { id: orderId },
     data: { status: newStatus },
+    include: {
+      tableSession: true,
+    },
+  });
+
+  // Emit SSE order status update
+  eventBus.emit(`order-update:${venueId}`, {
+    type: "order-status-change",
+    orderId: order.id,
+    status: newStatus,
+    tableSessionId: order.tableSessionId,
   });
 
   return { success: true };
+}
+
+export async function getSessionOrders(venueId: string, sessionId: string) {
+  const orders = await prisma.order.findMany({
+    where: {
+      venueId,
+      tableSessionId: sessionId,
+      status: { not: "CANCELLED" },
+    },
+    include: {
+      items: {
+        include: {
+          menuItem: true,
+        },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return JSON.parse(JSON.stringify(orders));
 }
 
 // ─────────────────────────────────────────────

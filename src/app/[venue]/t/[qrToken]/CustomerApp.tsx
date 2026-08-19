@@ -20,13 +20,14 @@ import {
 } from "@phosphor-icons/react";
 import styles from "./customer.module.css";
 import { useTheme } from "@/components/ThemeProvider";
-import { submitOrder, callWaiter } from "./actions";
+import { submitOrder, callWaiter, fetchTableOrders } from "./actions";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import { EmptyState } from "@/components/ui/EmptyState";
 import ItemCustomizerSheet, { SelectedModifier } from "@/components/menu/ItemCustomizerSheet";
+import LiveOrderTracker, { TrackerOrder } from "@/components/menu/LiveOrderTracker";
 import { playTick, playPop, playSuccess } from "@/lib/sound";
 
 // --- Motion Seeds ---
@@ -92,6 +93,7 @@ export default function CustomerApp({
   categories,
   menuItems: initialMenuItems,
   addOns,
+  initialOrders = [],
 }: {
   venue: Venue;
   table: Table;
@@ -99,6 +101,7 @@ export default function CustomerApp({
   categories: Category[];
   menuItems: MenuItem[];
   addOns: AddOn[];
+  initialOrders?: TrackerOrder[];
 }) {
   const { toggleMode, toggleLanguage, language, isDark, isRtl } = useTheme();
   const [activeTab, setActiveTab] = useState<"menu" | "addons" | "quiz">("menu");
@@ -106,12 +109,23 @@ export default function CustomerApp({
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [menuItems, setMenuItems] = useState(initialMenuItems);
+  const [orders, setOrders] = useState<TrackerOrder[]>(initialOrders);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isCallingWaiter, setIsCallingWaiter] = useState(false);
   const [waiterCalledSuccess, setWaiterCalledSuccess] = useState(false);
   const [customizingItem, setCustomizingItem] = useState<MenuItem | null>(null);
 
-  // SSE Listener for live out-of-stock updates
+  // Refresh active orders for table
+  const refreshTableOrders = async () => {
+    try {
+      const latest = await fetchTableOrders(venue.id, sessionId);
+      setOrders(latest);
+    } catch (e) {
+      console.error("Failed to refresh orders", e);
+    }
+  };
+
+  // SSE Listener for live out-of-stock and order status updates
   useEffect(() => {
     const eventSource = new EventSource(`/api/venues/${venue.slug}/stream`);
 
@@ -124,6 +138,8 @@ export default function CustomerApp({
               data.itemIds.includes(item.id) ? { ...item, outOfStock: true } : item
             )
           );
+        } else if (data.type === "order-status-change" || data.type === "new-order") {
+          refreshTableOrders();
         }
       } catch (e) {
         console.error("Failed to parse SSE event", e);
@@ -131,7 +147,7 @@ export default function CustomerApp({
     };
 
     return () => eventSource.close();
-  }, [venue.slug]);
+  }, [venue.slug, venue.id, sessionId]);
 
   // Open customizer sheet or add directly
   const handleItemClick = (menuItem: MenuItem) => {
@@ -280,6 +296,14 @@ export default function CustomerApp({
 
       {/* ── Main Content Area ── */}
       <main className={styles.content}>
+        {/* ── Live Real-Time Order Tracker ── */}
+        <LiveOrderTracker
+          orders={orders}
+          language={language as "en" | "ar"}
+          venueSlug={venue.slug}
+          onRefreshOrders={refreshTableOrders}
+        />
+
         {activeTab === "menu" && (
           <MenuTab
             categories={categories}
@@ -347,6 +371,7 @@ export default function CustomerApp({
         setCart={setCart}
         language={language}
         totalCartCount={totalCartCount}
+        onOrderPlaced={refreshTableOrders}
       />
 
       {/* ── Floating Notification Toast ── */}
@@ -656,7 +681,8 @@ function CartDrawer({
   removeFromCart, 
   setCart,
   language,
-  totalCartCount
+  totalCartCount,
+  onOrderPlaced,
 }: any) {
   const [tip, setTip] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("CASH");
@@ -706,6 +732,9 @@ function CartDrawer({
       setTip(0);
       setCustomerName("");
       setNotes("");
+      if (onOrderPlaced) {
+        onOrderPlaced();
+      }
       setTimeout(() => {
         setOrderSubmittedSuccess(false);
         setIsCartOpen(false);

@@ -62,6 +62,22 @@ export default async function TableRoutingPage({
     where: { venueId: venue.id },
   });
 
+  const initialOrders = await prisma.order.findMany({
+    where: {
+      venueId: venue.id,
+      tableSessionId: table.activeSessionId,
+      status: { not: "CANCELLED" },
+    },
+    include: {
+      items: {
+        include: {
+          menuItem: true,
+        },
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
   return (
     <CustomerApp
       venue={JSON.parse(JSON.stringify(venue))}
@@ -70,6 +86,7 @@ export default async function TableRoutingPage({
       categories={JSON.parse(JSON.stringify(categories))}
       menuItems={JSON.parse(JSON.stringify(menuItems))}
       addOns={JSON.parse(JSON.stringify(addOns))}
+      initialOrders={JSON.parse(JSON.stringify(initialOrders))}
     />
   );
 }
