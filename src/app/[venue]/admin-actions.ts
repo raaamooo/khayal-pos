@@ -234,14 +234,54 @@ export async function getInventoryData(venueId: string) {
 }
 
 export async function getManagerData(venueId: string) {
-  const [orders, staff, tables, totalRevenue] = await Promise.all([
-    prisma.order.findMany({ where: { venueId }, orderBy: { createdAt: "desc" }, include: { items: { include: { menuItem: true } } } }),
+  const [orders, staff, tables, totalRevenue, ingredients, categories] = await Promise.all([
+    prisma.order.findMany({ 
+      where: { venueId }, 
+      orderBy: { createdAt: "desc" }, 
+      include: { items: { include: { menuItem: true } } } 
+    }),
     prisma.staffAccount.findMany({ where: { venueId }, orderBy: { name: "asc" } }),
     prisma.table.findMany({ where: { venueId }, orderBy: { label: "asc" } }),
     prisma.order.aggregate({
-      where: { venueId, status: "CLOSED" },
+      where: { venueId, status: { in: ["CLOSED", "SERVED"] } },
       _sum: { totalAmount: true, tipAmount: true },
-    })
+      _count: { id: true },
+    }),
+    prisma.ingredient.findMany({ where: { venueId }, orderBy: { stock: "asc" } }),
+    prisma.category.findMany({ where: { venueId }, orderBy: { orderIndex: "asc" } }),
   ]);
-  return JSON.parse(JSON.stringify({ orders, staff, tables, revenue: totalRevenue._sum }));
+
+  return JSON.parse(JSON.stringify({ 
+    orders, 
+    staff, 
+    tables, 
+    revenue: totalRevenue._sum,
+    totalClosedOrdersCount: totalRevenue._count.id,
+    ingredients,
+    categories
+  }));
+}
+
+export async function quickRestockIngredient(venueId: string, ingredientId: string, addAmount: number) {
+  await requireApiAuth(["MANAGER", "INVENTORY"], venueId);
+
+  const updated = await prisma.ingredient.update({
+    where: { id: ingredientId },
+    data: { stock: { increment: addAmount } },
+  });
+
+  // If stock is now positive, mark dependent recipes in-stock
+  if (Number(updated.stock) > 0) {
+    const dependentRecipes = await prisma.recipeItem.findMany({
+      where: { ingredientId: updated.id },
+    });
+    for (const dep of dependentRecipes) {
+      await prisma.menuItem.update({
+        where: { id: dep.menuItemId },
+        data: { outOfStock: false },
+      });
+    }
+  }
+
+  return { success: true };
 }

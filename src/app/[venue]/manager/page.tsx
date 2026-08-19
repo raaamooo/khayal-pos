@@ -15,7 +15,10 @@ export default async function ManagerPage() {
       initialOrders={JSON.parse(JSON.stringify(data.orders))}
       initialStaff={JSON.parse(JSON.stringify(data.staff))}
       initialTables={JSON.parse(JSON.stringify(data.tables))}
+      initialIngredients={JSON.parse(JSON.stringify(data.ingredients || []))}
+      initialCategories={JSON.parse(JSON.stringify(data.categories || []))}
       revenue={data.revenue}
+      totalClosedOrdersCount={data.totalClosedOrdersCount || 0}
     />
   );
 }
