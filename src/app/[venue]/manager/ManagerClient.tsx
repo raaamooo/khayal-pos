@@ -22,6 +22,7 @@ import {
 } from "@phosphor-icons/react";
 import ManagerAnalyticsCharts from "@/components/manager/ManagerAnalyticsCharts";
 import LowStockAlerts, { IngredientItem } from "@/components/manager/LowStockAlerts";
+import LanguageToggle from "@/components/ui/LanguageToggle";
 import { getManagerData } from "../admin-actions";
 import { playTick } from "@/lib/sound";
 
@@ -134,7 +135,8 @@ export default function ManagerClient({
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: "10px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <LanguageToggle />
           <Button 
             variant="secondary" 
             size="md" 

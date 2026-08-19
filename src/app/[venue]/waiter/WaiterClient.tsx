@@ -22,6 +22,7 @@ import {
   SquaresFour
 } from "@phosphor-icons/react";
 import FloorPlanView from "@/components/tables/FloorPlanView";
+import LanguageToggle from "@/components/ui/LanguageToggle";
 import { playBell, playTick, playSuccess } from "@/lib/sound";
 import styles from "./waiter.module.css";
 
@@ -170,15 +171,18 @@ export default function WaiterClient({
           </div>
         </div>
 
-        <Button 
-          variant="secondary" 
-          size="md"
-          onClick={() => refreshData(false)}
-          isLoading={isRefreshing}
-          leftIcon={<ArrowsClockwise weight="bold" size={18} />}
-        >
-          Refresh Station
-        </Button>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <LanguageToggle />
+          <Button 
+            variant="secondary" 
+            size="md"
+            onClick={() => refreshData(false)}
+            isLoading={isRefreshing}
+            leftIcon={<ArrowsClockwise weight="bold" size={18} />}
+          >
+            Refresh Station
+          </Button>
+        </div>
       </header>
 
       {/* ── Section Navigation ── */}

@@ -220,11 +220,32 @@ textarea:focus-visible {
 
 
 /* ═══════════════════════════════════════════════════
-   6. RTL BIDIRECTIONAL FOUNDATIONS
+   6. RTL BIDIRECTIONAL FOUNDATIONS & ARABIC TYPOGRAPHY
    ═══════════════════════════════════════════════════ */
 
 [dir="rtl"] {
   text-align: start;
+  --font-heading: 'Cairo', 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Tajawal', 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: 0em !important;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6 {
+  font-family: var(--font-heading) !important;
+  letter-spacing: -0.01em !important;
+}
+
+[dir="rtl"] body,
+[dir="rtl"] input,
+[dir="rtl"] button,
+[dir="rtl"] select,
+[dir="rtl"] textarea {
+  font-family: var(--font-body) !important;
 }
 
 [dir="rtl"] .flip-in-rtl {

@@ -20,6 +20,8 @@ import {
   Funnel
 } from "@phosphor-icons/react";
 import { playBell, playTick, playSuccess } from "@/lib/sound";
+import LanguageToggle from "@/components/ui/LanguageToggle";
+import { useLanguage } from "@/context/LanguageContext";
 import styles from "./barista.module.css";
 
 // Urgency calculation
@@ -51,6 +53,7 @@ export default function BaristaClient({
   venueSlug: string;
   initialOrders: any[];
 }) {
+  const { t } = useLanguage();
   const [orders, setOrders] = useState(initialOrders);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [processingId, setProcessingId] = useState<string | null>(null);
@@ -202,6 +205,7 @@ export default function BaristaClient({
         </div>
 
         <div className={styles.headerActions}>
+          <LanguageToggle />
           <Button 
             variant="secondary" 
             size="md"

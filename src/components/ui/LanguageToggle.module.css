@@ -1,0 +1,38 @@
+/* ── Language Switcher Toggle ── */
+
+.toggleContainer {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-surface-hover);
+  border: 1px solid var(--color-border);
+  padding: 3px;
+  border-radius: var(--radius-full);
+  gap: 2px;
+  user-select: none;
+}
+
+.toggleBtn {
+  background: transparent;
+  border: none;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all var(--transition-fast);
+}
+
+.toggleBtn.active {
+  background: var(--primary-color);
+  color: var(--primary-contrast, #FAFAFA);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--primary-color) 35%, transparent);
+}
+
+.flagEmoji {
+  font-size: 13px;
+}

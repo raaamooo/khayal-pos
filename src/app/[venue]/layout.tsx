@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getVenueBySlug } from "@/lib/venue";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { LanguageProvider } from "@/context/LanguageContext";
 import Background3D from "@/components/Background3D";
 
 /**
@@ -11,7 +12,7 @@ import Background3D from "@/components/Background3D";
  * extracts the slug — it can't query Prisma at the edge).
  *
  * If the venue is not found or inactive → 404.
- * Otherwise, load its Google Fonts and wrap children in ThemeProvider.
+ * Otherwise, load its Google Fonts and wrap children in ThemeProvider & LanguageProvider.
  */
 export default async function VenueLayout({
   children,
@@ -27,24 +28,26 @@ export default async function VenueLayout({
     notFound();
   }
 
-  // Build Google Fonts URL from venue theme
-  const fonts = [venue.theme.fontHeading, venue.theme.fontBody];
+  // Build Google Fonts URL from venue theme including Arabic fonts (Cairo, Tajawal)
+  const fonts = [venue.theme.fontHeading, venue.theme.fontBody, "Cairo", "Tajawal"];
   const uniqueFonts = [...new Set(fonts)];
   const googleFontsUrl = `https://fonts.googleapis.com/css2?${uniqueFonts
-    .map((f) => `family=${encodeURIComponent(f)}:wght@300;400;500;600;700`)
+    .map((f) => `family=${encodeURIComponent(f)}:wght@300;400;500;600;700;800`)
     .join("&")}&display=swap`;
 
   return (
     <>
       {/* eslint-disable-next-line @next/next/no-page-custom-font */}
       <link rel="stylesheet" href={googleFontsUrl} />
-      <ThemeProvider
-        theme={venue.theme}
-        defaultLanguage={venue.defaultLanguage}
-      >
-        <Background3D />
-        {children}
-      </ThemeProvider>
+      <LanguageProvider>
+        <ThemeProvider
+          theme={venue.theme}
+          defaultLanguage={venue.defaultLanguage}
+        >
+          <Background3D />
+          {children}
+        </ThemeProvider>
+      </LanguageProvider>
     </>
   );
 }

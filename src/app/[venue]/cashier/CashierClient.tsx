@@ -17,6 +17,7 @@ import {
   CreditCard
 } from "@phosphor-icons/react";
 import ThermalReceiptModal, { CashierSessionData } from "@/components/pos/ThermalReceiptModal";
+import LanguageToggle from "@/components/ui/LanguageToggle";
 import { playTick, playSuccess } from "@/lib/sound";
 import styles from "./cashier.module.css";
 
@@ -89,15 +90,18 @@ export default function CashierClient({
           </div>
         </div>
 
-        <Button 
-          variant="secondary" 
-          size="md"
-          onClick={() => refreshSessions(false)}
-          isLoading={isRefreshing}
-          leftIcon={<ArrowsClockwise weight="bold" size={18} />}
-        >
-          Refresh Bills
-        </Button>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <LanguageToggle />
+          <Button 
+            variant="secondary" 
+            size="md"
+            onClick={() => refreshSessions(false)}
+            isLoading={isRefreshing}
+            leftIcon={<ArrowsClockwise weight="bold" size={18} />}
+          >
+            Refresh Bills
+          </Button>
+        </div>
       </header>
 
       {sessions.length === 0 ? (
