@@ -40,8 +40,8 @@
   flex: 1;
   overflow-y: auto;
   overscroll-behavior-y: contain;
-  padding: 0 var(--space-5) var(--space-5);
-  padding-bottom: max(var(--space-5), env(safe-area-inset-bottom));
+  padding: 0 var(--space-4) var(--space-4);
+  padding-bottom: max(var(--space-4), env(safe-area-inset-bottom));
 }
 
 /* ── Item Header ── */
@@ -55,9 +55,9 @@
 }
 
 .heroImage {
-  width: 72px;
-  height: 72px;
-  min-width: 72px;
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
   border-radius: var(--radius-lg);
   background: linear-gradient(135deg, var(--color-surface-hover), color-mix(in srgb, var(--primary-color) 12%, var(--color-surface)));
   border: 1px solid color-mix(in srgb, var(--primary-color) 25%, var(--color-border));
@@ -70,6 +70,8 @@
   font-weight: 800;
   box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   text-shadow: 0 2px 8px color-mix(in srgb, var(--primary-color) 30%, transparent);
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .heroInfo {
@@ -325,8 +327,8 @@
 
 /* ── Sticky Bottom CTA ── */
 .sheetFooter {
-  padding: var(--space-4) var(--space-5);
-  padding-bottom: max(var(--space-4), env(safe-area-inset-bottom));
+  padding: var(--space-3) var(--space-4);
+  padding-bottom: max(var(--space-3), env(safe-area-inset-bottom));
   border-top: 1px solid var(--color-border);
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
