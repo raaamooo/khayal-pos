@@ -39,6 +39,7 @@ interface MenuItem {
   name: string;
   description?: string;
   price: number;
+  imageUrl?: string;
   outOfStock: boolean;
   quizTags?: string[];
   modifierGroups?: ModifierGroup[];
@@ -214,7 +215,20 @@ export default function ItemCustomizerSheet({
         <div className={styles.sheetScrollArea}>
           {/* ── Item Hero ── */}
           <div className={styles.itemHero}>
-            <div className={styles.heroImage}>{item.name.charAt(0)}</div>
+            <div className={styles.heroImage}>
+              {item.imageUrl ? (
+                <img
+                  src={item.imageUrl}
+                  alt={item.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "inherit" }}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLElement).style.display = "none";
+                  }}
+                />
+              ) : (
+                item.name.charAt(0)
+              )}
+            </div>
             <div className={styles.heroInfo}>
               <h2 className={styles.heroName}>{item.name}</h2>
               {item.description && (

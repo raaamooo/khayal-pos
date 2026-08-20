@@ -436,9 +436,23 @@ function MenuTab({ categories, menuItems, activeCategoryId, setActiveCategoryId,
                   onClick={() => onItemClick(item)}
                   style={{ cursor: item.outOfStock ? "default" : "pointer" }}
                 >
-                  <div className={styles.itemImagePlaceholder}>
-                    {item.name.charAt(0)}
-                  </div>
+                  {item.imageUrl ? (
+                    <div className={styles.itemImageContainer}>
+                      <img
+                        src={item.imageUrl}
+                        alt={item.name}
+                        className={styles.itemImage}
+                        loading="lazy"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLElement).style.display = "none";
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className={styles.itemImagePlaceholder}>
+                      {item.name.charAt(0)}
+                    </div>
+                  )}
                   
                   <div className={styles.itemInfo}>
                     <div className={styles.itemHeader}>
@@ -634,9 +648,23 @@ function PlayWithUsTab({ menuItems, addToCart, language }: any) {
       <div className={styles.menuGrid}>
         {scoredItems.map(({ item }: any) => (
           <Card key={item.id} className={styles.menuItemCard}>
-            <div className={styles.itemImagePlaceholder}>
-              {item.name.charAt(0)}
-            </div>
+            {item.imageUrl ? (
+              <div className={styles.itemImageContainer}>
+                <img
+                  src={item.imageUrl}
+                  alt={item.name}
+                  className={styles.itemImage}
+                  loading="lazy"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLElement).style.display = "none";
+                  }}
+                />
+              </div>
+            ) : (
+              <div className={styles.itemImagePlaceholder}>
+                {item.name.charAt(0)}
+              </div>
+            )}
             <div className={styles.itemInfo}>
               <div className={styles.itemHeader}>
                 <h3 className={styles.itemName}>{item.name}</h3>

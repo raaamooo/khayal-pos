@@ -239,10 +239,34 @@
   transform: translateY(-2px);
 }
 
+.itemImageContainer {
+  width: 68px;
+  height: 68px;
+  min-width: 68px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  background: var(--color-surface-hover);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-xs);
+  flex-shrink: 0;
+}
+
+.itemImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-fast);
+}
+
+.menuItemCard:hover .itemImage {
+  transform: scale(1.06);
+}
+
 .itemImagePlaceholder {
-  width: 64px;
-  height: 64px;
-  min-width: 64px;
+  width: 68px;
+  height: 68px;
+  min-width: 68px;
   border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--color-surface-hover), color-mix(in srgb, var(--primary-color) 12%, var(--color-surface)));
   border: 1px solid color-mix(in srgb, var(--primary-color) 20%, var(--color-border));
