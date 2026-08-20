@@ -20,8 +20,8 @@ const khayalTheme = {
   backgroundLight: "#F5F5F5",
   textDark: "#FAFAFA",
   textLight: "#111111",
-  fontHeading: "Syne",
-  fontBody: "Tajawal",
+  fontHeading: "Plus Jakarta Sans",
+  fontBody: "Plus Jakarta Sans",
   logoUrl: "/logos/khayal.svg",
 };
 

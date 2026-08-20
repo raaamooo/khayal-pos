@@ -161,9 +161,12 @@ export function ThemeProvider({
     root.style.setProperty("--secondary-contrast", getContrastTextColor(safeSecondary));
     root.style.setProperty("--accent-contrast", getContrastTextColor(safeAccent));
 
-    // Fonts with robust fallback
-    root.style.setProperty("--font-heading", `'${theme.fontHeading || "Syne"}', sans-serif`);
-    root.style.setProperty("--font-body", `'${theme.fontBody || "Tajawal"}', sans-serif`);
+    // Fonts with robust fallback - prioritizing crisp Plus Jakarta Sans & Cairo
+    const headingFont = theme.fontHeading && theme.fontHeading !== "Syne" ? theme.fontHeading : "Plus Jakarta Sans";
+    const bodyFont = theme.fontBody && theme.fontBody !== "Tajawal" && theme.fontBody !== "Syne" ? theme.fontBody : "Plus Jakarta Sans";
+
+    root.style.setProperty("--font-heading", `var(--font-jakarta), '${headingFont}', var(--font-cairo), 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`);
+    root.style.setProperty("--font-body", `var(--font-jakarta), '${bodyFont}', var(--font-cairo), 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`);
 
     // Surface backgrounds & text
     root.style.setProperty("--background", bg);

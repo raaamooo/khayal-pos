@@ -18,9 +18,9 @@
   --background: #0A0A0B;
   --text: #FAFAFA;
 
-  /* ── Fonts (driven by ThemeProvider) ── */
-  --font-heading: 'Syne', sans-serif;
-  --font-body: 'Tajawal', sans-serif;
+  /* ── Fonts (driven by ThemeProvider & next/font) ── */
+  --font-heading: var(--font-jakarta), 'Plus Jakarta Sans', var(--font-cairo), 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: var(--font-jakarta), 'Plus Jakarta Sans', var(--font-cairo), 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* ── Spacing Scale (8-point harmonic base) ── */
   --space-1:  0.25rem;  /*  4px */

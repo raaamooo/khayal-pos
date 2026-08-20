@@ -27,11 +27,17 @@ export default async function VenueLayout({
     notFound();
   }
 
-  // Build Google Fonts URL from venue theme including Arabic fonts (Cairo, Tajawal)
-  const fonts = [venue.theme.fontHeading, venue.theme.fontBody, "Cairo", "Tajawal"];
-  const uniqueFonts = [...new Set(fonts)];
+  // Build Google Fonts URL from venue theme including modern primary fonts (Plus Jakarta Sans, Cairo)
+  const fonts = [
+    venue.theme.fontHeading && venue.theme.fontHeading !== "Syne" ? venue.theme.fontHeading : "Plus Jakarta Sans",
+    venue.theme.fontBody && venue.theme.fontBody !== "Tajawal" && venue.theme.fontBody !== "Syne" ? venue.theme.fontBody : "Plus Jakarta Sans",
+    "Plus Jakarta Sans",
+    "Cairo",
+    "Outfit",
+  ];
+  const uniqueFonts = [...new Set(fonts.filter(Boolean))];
   const googleFontsUrl = `https://fonts.googleapis.com/css2?${uniqueFonts
-    .map((f) => `family=${encodeURIComponent(f)}:wght@300;400;500;600;700;800`)
+    .map((f) => `family=${encodeURIComponent(f)}:wght@300;400;500;600;700;800;900`)
     .join("&")}&display=swap`;
 
   return (
