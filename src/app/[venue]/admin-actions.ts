@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/db";
 import { requireApiAuth } from "@/lib/access";
-import type { Role } from "@/generated/prisma";
+import { Prisma, type Role } from "@/generated/prisma";
 
 import { eventBus } from "@/lib/events";
 
@@ -282,6 +282,316 @@ export async function quickRestockIngredient(venueId: string, ingredientId: stri
       });
     }
   }
+
+  return { success: true };
+}
+
+// ─────────────────────────────────────────────
+// Menu Item CRUD & Stock Toggle Actions
+// ─────────────────────────────────────────────
+
+export async function createMenuItem(
+  venueId: string,
+  data: {
+    name: string;
+    description?: string;
+    price: number;
+    categoryId: string;
+    imageUrl?: string;
+    outOfStock?: boolean;
+    quizTags?: string[];
+    recipeItems?: Array<{ ingredientId: string; quantityUsed: number }>;
+  }
+) {
+  await requireApiAuth(["MANAGER", "INVENTORY"], venueId);
+
+  const { name, description, price, categoryId, imageUrl, outOfStock, quizTags, recipeItems } = data;
+
+  const menuItem = await prisma.menuItem.create({
+    data: {
+      venueId,
+      name,
+      description: description || null,
+      price: price,
+      categoryId,
+      imageUrl: imageUrl || null,
+      outOfStock: outOfStock ?? false,
+      quizTags: quizTags && quizTags.length > 0 ? quizTags : Prisma.DbNull,
+      recipeItems: recipeItems && recipeItems.length > 0 ? {
+        create: recipeItems.map((r) => ({
+          venueId,
+          ingredientId: r.ingredientId,
+          quantityUsed: r.quantityUsed,
+        })),
+      } : undefined,
+    },
+    include: {
+      category: true,
+      recipeItems: { include: { ingredient: true } },
+    },
+  });
+
+  // Emit SSE update for menu
+  eventBus.emit(`menu-update:${venueId}`, {
+    type: "menu-item-created",
+    menuItemId: menuItem.id,
+  });
+
+  return { success: true, item: JSON.parse(JSON.stringify(menuItem)) };
+}
+
+export async function updateMenuItem(
+  venueId: string,
+  menuItemId: string,
+  data: {
+    name?: string;
+    description?: string;
+    price?: number;
+    categoryId?: string;
+    imageUrl?: string;
+    outOfStock?: boolean;
+    quizTags?: string[];
+    recipeItems?: Array<{ ingredientId: string; quantityUsed: number }>;
+  }
+) {
+  await requireApiAuth(["MANAGER", "INVENTORY"], venueId);
+
+  const { name, description, price, categoryId, imageUrl, outOfStock, quizTags, recipeItems } = data;
+
+  await prisma.$transaction(async (tx) => {
+    await tx.menuItem.update({
+      where: { id: menuItemId },
+      data: {
+        ...(name !== undefined && { name }),
+        ...(description !== undefined && { description: description || null }),
+        ...(price !== undefined && { price }),
+        ...(categoryId !== undefined && { category: { connect: { id: categoryId } } }),
+        ...(imageUrl !== undefined && { imageUrl: imageUrl || null }),
+        ...(outOfStock !== undefined && { outOfStock }),
+        ...(quizTags !== undefined && { quizTags: quizTags.length > 0 ? quizTags : Prisma.DbNull }),
+      },
+    });
+
+    if (recipeItems !== undefined) {
+      await tx.recipeItem.deleteMany({
+        where: { menuItemId },
+      });
+      if (recipeItems.length > 0) {
+        await tx.recipeItem.createMany({
+          data: recipeItems.map((r) => ({
+            venueId,
+            menuItemId,
+            ingredientId: r.ingredientId,
+            quantityUsed: r.quantityUsed,
+          })),
+        });
+      }
+    }
+  });
+
+  const updatedItem = await prisma.menuItem.findUnique({
+    where: { id: menuItemId },
+    include: {
+      category: true,
+      recipeItems: { include: { ingredient: true } },
+    },
+  });
+
+  eventBus.emit(`menu-update:${venueId}`, {
+    type: "menu-item-updated",
+    menuItemId,
+  });
+
+  return { success: true, item: JSON.parse(JSON.stringify(updatedItem)) };
+}
+
+export async function deleteMenuItem(venueId: string, menuItemId: string) {
+  await requireApiAuth(["MANAGER", "INVENTORY"], venueId);
+
+  await prisma.$transaction(async (tx) => {
+    await tx.recipeItem.deleteMany({ where: { menuItemId } });
+    await tx.modifierOption.deleteMany({
+      where: { modifierGroup: { menuItemId } },
+    });
+    await tx.modifierGroup.deleteMany({ where: { menuItemId } });
+    await tx.orderItem.deleteMany({ where: { menuItemId } });
+    await tx.menuItem.delete({ where: { id: menuItemId } });
+  });
+
+  eventBus.emit(`menu-update:${venueId}`, {
+    type: "menu-item-deleted",
+    menuItemId,
+  });
+
+  return { success: true };
+}
+
+export async function toggleMenuItemStock(venueId: string, menuItemId: string, outOfStock: boolean) {
+  await requireApiAuth(["MANAGER", "INVENTORY"], venueId);
+
+  const updated = await prisma.menuItem.update({
+    where: { id: menuItemId },
+    data: { outOfStock },
+    include: {
+      category: true,
+      recipeItems: { include: { ingredient: true } },
+    },
+  });
+
+  eventBus.emit(`menu-update:${venueId}`, {
+    type: outOfStock ? "out-of-stock" : "in-stock",
+    itemIds: [menuItemId],
+  });
+
+  return { success: true, item: JSON.parse(JSON.stringify(updated)) };
+}
+
+// ─────────────────────────────────────────────
+// Category Management Actions
+// ─────────────────────────────────────────────
+
+export async function createCategory(venueId: string, data: { name: string; orderIndex?: number }) {
+  await requireApiAuth(["MANAGER", "INVENTORY"], venueId);
+
+  const maxOrder = await prisma.category.findFirst({
+    where: { venueId },
+    orderBy: { orderIndex: "desc" },
+    select: { orderIndex: true },
+  });
+
+  const category = await prisma.category.create({
+    data: {
+      venueId,
+      name: data.name,
+      orderIndex: data.orderIndex ?? (maxOrder ? maxOrder.orderIndex + 1 : 0),
+    },
+  });
+
+  eventBus.emit(`menu-update:${venueId}`, {
+    type: "category-created",
+    categoryId: category.id,
+  });
+
+  return { success: true, category: JSON.parse(JSON.stringify(category)) };
+}
+
+export async function updateCategory(
+  venueId: string,
+  categoryId: string,
+  data: { name?: string; orderIndex?: number }
+) {
+  await requireApiAuth(["MANAGER", "INVENTORY"], venueId);
+
+  const category = await prisma.category.update({
+    where: { id: categoryId },
+    data,
+  });
+
+  eventBus.emit(`menu-update:${venueId}`, {
+    type: "category-updated",
+    categoryId: category.id,
+  });
+
+  return { success: true, category: JSON.parse(JSON.stringify(category)) };
+}
+
+export async function deleteCategory(venueId: string, categoryId: string) {
+  await requireApiAuth(["MANAGER", "INVENTORY"], venueId);
+
+  const count = await prisma.menuItem.count({
+    where: { categoryId },
+  });
+
+  if (count > 0) {
+    throw new Error(`Cannot delete category with ${count} menu item(s). Please reassign or delete items first.`);
+  }
+
+  await prisma.category.delete({
+    where: { id: categoryId },
+  });
+
+  eventBus.emit(`menu-update:${venueId}`, {
+    type: "category-deleted",
+    categoryId,
+  });
+
+  return { success: true };
+}
+
+// ─────────────────────────────────────────────
+// Raw Ingredient Management Actions
+// ─────────────────────────────────────────────
+
+export async function createIngredient(
+  venueId: string,
+  data: {
+    name: string;
+    unit: string;
+    stock: number;
+    lowThreshold: number;
+  }
+) {
+  await requireApiAuth(["MANAGER", "INVENTORY"], venueId);
+
+  const ingredient = await prisma.ingredient.create({
+    data: {
+      venueId,
+      name: data.name,
+      unit: data.unit,
+      stock: data.stock,
+      lowThreshold: data.lowThreshold,
+    },
+  });
+
+  return { success: true, ingredient: JSON.parse(JSON.stringify(ingredient)) };
+}
+
+export async function updateIngredient(
+  venueId: string,
+  ingredientId: string,
+  data: {
+    name?: string;
+    unit?: string;
+    stock?: number;
+    lowThreshold?: number;
+  }
+) {
+  await requireApiAuth(["MANAGER", "INVENTORY"], venueId);
+
+  const ingredient = await prisma.ingredient.update({
+    where: { id: ingredientId },
+    data,
+  });
+
+  if (data.stock !== undefined && data.stock > 0) {
+    const dependentRecipes = await prisma.recipeItem.findMany({
+      where: { ingredientId },
+    });
+    for (const dep of dependentRecipes) {
+      await prisma.menuItem.update({
+        where: { id: dep.menuItemId },
+        data: { outOfStock: false },
+      });
+    }
+  }
+
+  return { success: true, ingredient: JSON.parse(JSON.stringify(ingredient)) };
+}
+
+export async function deleteIngredient(venueId: string, ingredientId: string) {
+  await requireApiAuth(["MANAGER", "INVENTORY"], venueId);
+
+  const count = await prisma.recipeItem.count({
+    where: { ingredientId },
+  });
+
+  if (count > 0) {
+    throw new Error(`Cannot delete ingredient used in ${count} recipe(s). Please remove from recipes first.`);
+  }
+
+  await prisma.ingredient.delete({
+    where: { id: ingredientId },
+  });
 
   return { success: true };
 }
